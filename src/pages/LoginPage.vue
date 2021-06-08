@@ -93,13 +93,14 @@ export default {
     },
     async Login() {
       try {
-        const response = await this.axios.post(
-          "https://localhost:3000/user/Login",
-          {
-            username: this.form.username,
-            password: this.form.password
-          }
-        );
+        console.log(this.form.username);
+        // const response = await this.axios.post(
+        //   "https://localhost:3000/user/login",
+        //   {
+        //     username: this.form.username,
+        //     password: this.form.password
+        //   }
+        // );
         // console.log(response);
         // this.$root.loggedIn = true;
         console.log(this.$root.store.login);

@@ -3,6 +3,7 @@
     <h1 class="title">Main Page</h1>
     <LoginPage v-if="!$root.store.username"></LoginPage>
     <FavoriteGames v-else></FavoriteGames>
+    <FavoritePlayers></FavoritePlayers>
     <LeagueInfo></LeagueInfo>
   </div>
 </template>
@@ -10,12 +11,14 @@
 <script>
 import LeagueInfo from "../components/LeagueInfo";
 import FavoriteGames from "../components/FavoriteGames";
+import FavoritePlayers from "../components/FavoritePlayers";
 import LoginPage from "../pages/LoginPage";
 export default {
   components: {
     LeagueInfo, 
     LoginPage, 
-    FavoriteGames
+    FavoriteGames,
+    FavoritePlayers
   }
 };
 </script>
