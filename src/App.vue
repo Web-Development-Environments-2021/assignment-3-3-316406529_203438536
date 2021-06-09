@@ -4,29 +4,30 @@
       <b-navbar-brand :to="{ name: 'main' }">Superliga Vue</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-        <b-nav-item :to="{ name: 'main' }">Main</b-nav-item>
-        <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
-        <b-nav-item :to="{ name: 'curStageGames' }">Currect stage games</b-nav-item>
-        <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
+          <b-nav-item :to="{ name: 'main' }">Main</b-nav-item>
+          <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
+          <b-nav-item :to="{ name: 'curStageGames' }"
+            >Currect stage games</b-nav-item
+          >
+          <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
-            <b-nav-item>{{username}}</b-nav-item>
+          <b-nav-item>{{ username }}</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
           <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
           <b-nav-item :to="{ name: 'register' }">Register</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-else>
-        <b-nav-item @click="Logout()" >Log out</b-nav-item>
-        <b-nav-item-dropdown right>
-          <template #button-content>
-            My Account
-          </template>
-          <b-dropdown-item >Favorites Games</b-dropdown-item>
-          <b-dropdown-item >Favorites Teams</b-dropdown-item>
-          <b-dropdown-item >Favorites Players</b-dropdown-item>
-
-        </b-nav-item-dropdown>
+          <b-nav-item @click="Logout()">Log out</b-nav-item>
+          <b-nav-item-dropdown right>
+            <template #button-content>
+              My Account
+            </template>
+            <b-dropdown-item @click="showFavoriteGames()">Favorites Games</b-dropdown-item>
+            <b-dropdown-item @click="showFavoriteTeams()">Favorites Teams</b-dropdown-item>
+            <b-dropdown-item @click="showFavoritePlayers()">Favorites Players</b-dropdown-item>
+          </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -42,25 +43,35 @@ export default {
   name: "App",
   methods: {
     async Logout() {
-      console.log("log out method")
+      console.log("log out method");
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
       const response = await this.axios.post(
-          "https://localhost:3000/user/logOut");
+        "https://localhost:3000/user/logOut"
+      );
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
-    }
+    },
+    showFavoriteGames() {
+      this.$router.push("/users/FavoriteGames");
+    },
+    showFavoriteTeams() {
+      this.$router.push("/users/FavoriteTeams");
+    },
+    showFavoritePlayers() {
+      console.log("enter show fav. players");
+      this.$router.push("/users​/FavoritePlayers");
+    },
   },
   component: {
-    LoginPage
+    LoginPage,
   },
   computed: {
     username() {
-      return `to be computed user name`
-    }
-  }
-
+      return `to be computed user name`;
+    },
+  },
 };
 </script>
 

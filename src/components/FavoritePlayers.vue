@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Favorite Players</h1>
     <PlayerShow
       v-for="p in players"
       :PlayerID="p.PlayerID" 

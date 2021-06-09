@@ -60,6 +60,7 @@ export default {
       require: false,
     },
   },
+  
   mounted() {
     console.log("team preview mounted");
   },
