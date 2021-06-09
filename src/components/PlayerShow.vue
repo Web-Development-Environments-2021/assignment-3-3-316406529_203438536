@@ -4,10 +4,10 @@
       <b>Player Name:</b> {{ fullname }}
     </div>
     <ul class="player-content">
-      <li> Full Name: {{ fullname }}</li>
-      <li> Team Name: {{ teamName }}</li>
-      <li> Photo: {{ photoPath }}</li>
-      <li> PositionID: {{ PositionID }}</li>
+      <li>Full Name: {{ fullname }}</li>
+      <li>Team Name: {{ teamName }}</li>
+      <li>Photo: {{ photoPath }}</li>
+      <li>PositionID: {{ PositionID }}</li>
     </ul>
   </div>
 </template>
@@ -16,34 +16,34 @@
 export default {
   name: "PlayerShow",
   props: {
-      PlayerID: {
-        type: Number,
-        required: true
-      },
-      fullname: {
-        type: String,
-        required: true
-      },
-      teamName: {
-        type: String,
-        required: true
-      },
-      teamID: {
-        type: Number,
-        required: true
-      },
-      photoPath: {
-        type: String,
-        required: true
-      },
-      PositionID: {
-        type: String,
-        required: true
-      }
-  }, 
-  mounted(){
-    console.log("Player show mounted")
-  } 
+    PlayerID: {
+      type: Number,
+      required: true,
+    },
+    fullname: {
+      type: String,
+      required: true,
+    },
+    teamName: {
+      type: String,
+      required: true,
+    },
+    teamID: {
+      type: Number,
+      required: true,
+    },
+    photoPath: {
+      type: String,
+      required: true,
+    },
+    PositionID: {
+      type: String,
+      required: true,
+    },
+  },
+  mounted() {
+    console.log("Player show mounted");
+  },
 };
 </script>
 
@@ -57,20 +57,17 @@ export default {
   border-style: solid;
   border-radius: 10px;
   border-width: 5px;
-  border-color:cadetblue;
+  border-color: cadetblue;
 }
 
 .player-preview .player-title {
   text-align: center;
   text-transform: uppercase;
-  color:  rgb(111, 197, 157);
+  color: rgb(111, 197, 157);
 }
 
 .player-preview .player-content {
   width: 100%;
   overflow: hidden;
 }
-
-
-
 </style>
