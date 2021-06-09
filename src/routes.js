@@ -23,6 +23,16 @@ const routes = [
     component: () => import("./pages/SearchPage")
   },
   {
+    path: "/curStageGames",
+    name: "curStageGames",
+    component: () => import("./pages/curStagePage")
+  },
+  {
+    path: "/about",
+    name: "about",
+    component: () => import("./pages/AboutPage")
+  },
+  {
     path: "*",
     name: "notFound",
     component: NotFound
