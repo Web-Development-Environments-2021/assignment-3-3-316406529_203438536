@@ -16,8 +16,8 @@
           <template #button-content>
             User
           </template>
-          <b-dropdown-item href="#">Favorites</b-dropdown-item>
-          <b-dropdown-item href="#">Log Out</b-dropdown-item>
+          <b-dropdown-item >Favorites</b-dropdown-item>
+          <b-dropdown-item @click="Logout()" >Log out</b-dropdown-item>
         </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -33,10 +33,12 @@ import LoginPage from "./pages/LoginPage";
 export default {
   name: "App",
   methods: {
-    Logout() {
+    async Logout() {
+      console.log("log out method")
       this.$root.store.logout();
       this.$root.toast("Logout", "User logged out successfully", "success");
-
+      const response = await this.axios.post(
+          "https://localhost:3000/user/logOut");
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });

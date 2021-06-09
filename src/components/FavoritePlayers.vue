@@ -41,13 +41,13 @@ export default {
       ]
     };
   },
-    methods: {
+  methods: {
     async updatePlayers(){
       console.log("response");
       try {
+        console.log(this.$root.store.username);
         const response = await this.axios.get(
-          "http://localhost:3000/users/FavoritePlayers",
-        );
+          "http://localhost:3000/users/FavoritePlayers");
         const players = response.data.players;
         this.players = [];
         this.players.push(...players);
@@ -62,6 +62,7 @@ export default {
     console.log("favorite players mounted");
     this.updatePlayers(); 
   }
+
 };
 
 </script>
