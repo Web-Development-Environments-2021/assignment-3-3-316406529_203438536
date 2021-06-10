@@ -67,13 +67,20 @@
       :teamID="p.team_id"
       :photoPath="p.image_path" 
       :key="p.PlayerID"></playersShow>
+    <teamsShow
+      v-for="t in teams"
+      :Team_id="t.team_id"
+      :team_players="t.team_players"
+      :team_games="t.team_games"
+      :key="t.team_id"
+    ></teamsShow>
   </div>
 </template>
 
 
 <script>
 import playersShow from "../components/PlayerShow.vue";
-// import teamsShow from "../components/FavoriteTeams.vue";
+import teamsShow from "../components/TeamPreview.vue";
 
 export default {
  data() {
@@ -86,15 +93,20 @@ export default {
       teamsList:[],
       LocationsList: [],
 
-      teams: [],
-      players: []
+      teams: this.$root.store.players,
+      players: this.$root.store.teams
     };
   },
+
   components:{
     playersShow,
-    // teamsShow
+    teamsShow
   },
   methods: {
+    setStoredData(){
+      this.$root.store.setStoredData(this.searchQuery,
+        this.searchTeam,this.searchLocation,this.players,this.teams);
+    },
     playerSearch(){this.searchAtribute='player'},
     teamSearch(){this.searchAtribute='team'},
     async getAutoCompleteData(){
@@ -130,11 +142,20 @@ export default {
           console.log(response);
           if(this.searchTeam ==`{team}`){this.searchTeam =''};
           if(this.searchLocation== `{location}`){this.searchLocation =''};
-          if(!response.data.data){
+          if(response.status == 201){
             console.log("No result");
+            this.setStoredData();
             return
           }
-          this.showPlayers(response);
+          if(response.status == 400){
+            console.log("API search error");
+            this.setStoredData();
+            return
+          }
+          if(response.status ==200){
+            this.showPlayers(response);
+            this.setStoredData();
+          }
         } catch (error) {
           console.log("error in search keyword player")
           console.log(error);
@@ -149,7 +170,10 @@ export default {
             console.log("No result");
             return
           }
-          this.showteams(response);
+          if(response.status ==200){
+            this.showteams(response);
+            this.setStoredData();
+          }
         } catch (error) {
           console.log("error in search keyword team")
           console.log(error);

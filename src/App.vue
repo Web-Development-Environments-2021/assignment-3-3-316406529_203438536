@@ -12,7 +12,7 @@
           <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
-          <text>{{ userInUse }}</text>
+          <b-nav-item>{{ userInUse }}</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
           <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
@@ -86,7 +86,7 @@ export default {
   },
   mounted() {
     // this.setSearchAutoCompleteData();
-    this.$root.store.setSeachParameters();
+    this.$root.store.setStoredData("","","","","");
   },
 };
 </script>

@@ -71,10 +71,11 @@ Vue.config.productionTip = false;
 const shared_data = {
   username: localStorage.username,
   AutoCompleteSearchData: localStorage.autoCompleteSearchData,
-  searchQuery: "",
-  searchTeam: "",
-  searchLocation: "",
-  // username: "noam",
+  searchQuery: localStorage.searchQuery,
+  searchTeam: localStorage.searchTeam,
+  searchLocation: localStorage.searchLocation,
+  teams: localStorage.teams,
+  players: localStorage.players,
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -89,12 +90,20 @@ const shared_data = {
     localStorage.setItem("autoCompleteSearchData", data);
     this.AutoCompleteSearchData= data;
   },
-  setSeachParameters(){
-    localStorage.setItem("searchQuery", "");
-    localStorage.setItem("searchTeam", "");
-    localStorage.setItem("searchLocation", "");
-  }
+  setStoredData(searchQuery,searchTeam,searchLocation,players,teams){
+    localStorage.setItem("searchQuery", searchQuery);
+    localStorage.setItem("searchTeam", searchTeam);
+    localStorage.setItem("searchLocation", searchLocation);
+    localStorage.setItem("searchLocation", players);
+    localStorage.setItem("searchLocation", teams);
+    this.searchQuery= searchQuery;
+    this.searchTeam= searchTeam;
+    this.searchLocation= searchLocation;
+    this.players= players;
+    this.teams= teams;
 
+
+  }
 };
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
