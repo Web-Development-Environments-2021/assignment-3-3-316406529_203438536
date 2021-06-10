@@ -35,7 +35,9 @@
 </template>
 
 <script>
+// import { component } from './components';
 // import { component } from 'vue/types/umd';
+
 import LoginPage from "./pages/LoginPage";
 
 export default {
