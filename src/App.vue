@@ -85,7 +85,7 @@ export default {
     }
   },
   mounted() {
-    this.setSearchAutoCompleteData();
+    // this.setSearchAutoCompleteData();
     this.$root.store.setStoredData("","","","","");
   },
 };
