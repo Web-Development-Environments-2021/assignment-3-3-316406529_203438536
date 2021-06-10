@@ -5,38 +5,53 @@ const routes = [
   {
     path: "/",
     name: "main",
-    component: Main
+    component: Main,
   },
   {
     path: "/register",
     name: "register",
-    component: () => import("./pages/RegisterPage")
+    component: () => import("./pages/RegisterPage"),
   },
   {
     path: "/login",
     name: "login",
-    component: () => import("./pages/LoginPage")
+    component: () => import("./pages/LoginPage"),
   },
   {
     path: "/search",
     name: "search",
-    component: () => import("./pages/SearchPage")
+    component: () => import("./pages/SearchPage"),
   },
   {
     path: "/curStageGames",
     name: "curStageGames",
-    component: () => import("./pages/curStagePage")
+    component: () => import("./pages/curStagePage"),
   },
   {
     path: "/about",
     name: "about",
-    component: () => import("./pages/AboutPage")
+    component: () => import("./pages/AboutPage"),
+  },
+  {
+    path: "/users/FavoriteGames",
+    name: "favoriteGames",
+    component: () => import("./components/FavoriteGames"),
+  },
+  {
+    path: "/users/FavoriteTeams",
+    name: "favoriteTeams",
+    component: () => import("./components/FavoriteTeams"),
+  },
+  {
+    path: "/users​/FavoritePlayers",
+    name: "favoritePlayers",
+    component: () => import("./components/FavoritePlayers"),
   },
   {
     path: "*",
     name: "notFound",
-    component: NotFound
-  }
+    component: NotFound,
+  },
 ];
 
 export default routes;
