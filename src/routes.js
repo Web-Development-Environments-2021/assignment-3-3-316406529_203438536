@@ -48,9 +48,15 @@ const routes = [
     component: () => import("./components/FavoritePlayers"),
   },
   {
-    path: "/PlayerPage",
+    path: "/PlayerPage/:id",
     name: "PlayerPage",
     component: () => import("./pages/PlayerPage"), 
+      // props: {id: 84658}
+  }, 
+  {
+    path: "/TeamPage",
+    name: "TeamPage",
+    component: () => import("./pages/TeamPage"), 
       props: {id: 84658}
   }, 
   {

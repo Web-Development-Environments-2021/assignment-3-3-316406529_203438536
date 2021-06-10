@@ -70,6 +70,10 @@ Vue.config.productionTip = false;
 
 const shared_data = {
   username: localStorage.username,
+  AutoCompleteSearchData: localStorage.autoCompleteSearchData,
+  searchQuery: "",
+  searchTeam: "",
+  searchLocation: "",
   // username: "noam",
   login(username) {
     localStorage.setItem("username", username);
@@ -80,7 +84,17 @@ const shared_data = {
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
+  },
+  setAutoCompleteSearchData(data){
+    localStorage.setItem("autoCompleteSearchData", data);
+    this.AutoCompleteSearchData= data;
+  },
+  setSeachParameters(){
+    localStorage.setItem("searchQuery", "");
+    localStorage.setItem("searchTeam", "");
+    localStorage.setItem("searchLocation", "");
   }
+
 };
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;

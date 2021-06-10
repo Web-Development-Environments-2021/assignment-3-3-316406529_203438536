@@ -10,7 +10,7 @@
 export default {
   name: "PlayerShow",
   props: {
-    PlayerID: {
+    id: {
       type: Number,
       required: true,
     },
