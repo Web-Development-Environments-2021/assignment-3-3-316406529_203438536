@@ -33,6 +33,12 @@ const routes = [
     component: () => import("./pages/AboutPage")
   },
   {
+    path: "/PlayerPage",
+    name: "PlayerPage",
+    component: () => import("./pages/PlayerPage"), 
+      props: {id: 84658}
+  }, 
+  {
     path: "*",
     name: "notFound",
     component: NotFound
