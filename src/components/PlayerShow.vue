@@ -1,4 +1,22 @@
 <template>
+  <!-- <div>
+    <b-card
+      :title="fullname"
+      :img-src="photoPath"
+      img-alt="Image"
+      :sub-title="common_name"
+      img-top
+      style="max-width: 20rem;"
+      class="mb-2"
+    >
+      <b-card-text>
+        Some quick example text to build on the card title and make up the bulk
+        of the card's content.
+      </b-card-text>
+
+      <b-button href="#" variant="primary">Go somewhere</b-button>
+    </b-card>
+  </div> -->
   <div class="player-preview">
     <div :title="PlayerID" class="player-title">
       <b>Player Name:</b> {{ fullname }}
@@ -7,42 +25,24 @@
       <li>Full Name: {{ fullname }}</li>
       <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
       <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
-      <li @click="ClickTeam()" style="Bold"> Team Name: {{ teamName }}</li>
+      <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li>
 
       <li>Photo: {{ photoPath }}</li>
       <li>PositionID: {{ PositionID }}</li>
-      <li>nationality: {{nationality}}</li>
-    <div v-if="showMore==true">
-      <li>birthdate: {{birthdate}}</li>
-      <li>birthplace: {{birthplace}}</li>
-      <li>height: {{height}}</li>
-      <li v-if="weight != null">weight: {{weight}}</li>
-      <li>playerPosition: {{playerPosition}}</li>
-      <li>common_name: {{common_name}}</li>
-    </div>
-    <b-button id="b" @click="showMoreFunc()" variant="success">show More</b-button>
-
-
-
+      <li>nationality: {{ nationality }}</li>
+      <div v-if="showMore == true">
+        <li>birthdate: {{ birthdate }}</li>
+        <li v-if="birthplace != null">birthplace: {{ birthplace }}</li>
+        <li v-if="height != null">height: {{ height }}</li>
+        <li v-if="weight != null">weight: {{ weight }}</li>
+        <li>playerPosition: {{ playerPosition }}</li>
+        <li>common_name: {{ common_name }}</li>
+      </div>
+      <b-button id="b" @click="showMoreFunc()" variant="success"
+        >show More</b-button
+      >
     </ul>
   </div>
-  <!-- <div>
-  <b-card
-    title= 'v-bind:{{fullname}}'
-    img-src="https://picsum.photos/600/300/?image=25"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 20rem;"
-    class="mb-2"
-  >
-    <b-card-text>
-      Some quick example text to build on the card title and make up the bulk of the card's content.
-    </b-card-text>
-
-    <b-button href="#" variant="primary">Go somewhere</b-button>
-  </b-card>
-</div> -->
 </template>
 
 <script>
@@ -87,11 +87,11 @@ export default {
     },
     birthplace: {
       type: String,
-      required: true,
+      required: false,
     },
     height: {
       type: String,
-      required: true,
+      required: false,
     },
     weight: {
       type: String,
@@ -99,22 +99,29 @@ export default {
     },
     playerPosition: {
       type: String,
-      required: false
+      required: false,
     },
     image_path: {
       type: String,
-      required: false
+      required: false,
     },
-    
   },
-  data(){
-    return{
-      showMore: false
-    }
+  data() {
+    return {
+      showMore: false,
+    };
   },
-  methods:{
-    showMoreFunc(){if(this.showMore){this.showMore =false;}else{this.showMore=true;}},
-    ClickTeam(){this.$router.push('/TeamPage');},
+  methods: {
+    showMoreFunc() {
+      if (this.showMore) {
+        this.showMore = false;
+      } else {
+        this.showMore = true;
+      }
+    },
+    ClickTeam() {
+      this.$router.push("/TeamPage");
+    },
   },
   mounted() {
     console.log("Player show mounted");
@@ -135,7 +142,7 @@ export default {
   border-color: cadetblue;
   margin-top: 20px;
 }
-#b{
+#b {
   margin-top: 10px;
 }
 
@@ -148,6 +155,5 @@ export default {
 .player-preview .player-content {
   width: 100%;
   overflow: hidden;
-  
 }
 </style>
