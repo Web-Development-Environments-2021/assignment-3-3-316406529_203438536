@@ -5,7 +5,10 @@
     </div>
     <ul class="player-content">
       <li>Full Name: {{ fullname }}</li>
-      <li v-on:click="PlayerPage">Team Name: {{ teamName }}</li>
+      <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
+      <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
+      <li @click="ClickTeam()" style="Bold"> Team Name: {{ teamName }}</li>
+
       <li>Photo: {{ photoPath }}</li>
       <li>PositionID: {{ PositionID }}</li>
       <li>nationality: {{nationality}}</li>
@@ -13,7 +16,7 @@
       <li>birthdate: {{birthdate}}</li>
       <li>birthplace: {{birthplace}}</li>
       <li>height: {{height}}</li>
-      <li>weight: {{weight}}</li>
+      <li v-if="weight != null">weight: {{weight}}</li>
       <li>playerPosition: {{playerPosition}}</li>
       <li>common_name: {{common_name}}</li>
     </div>
@@ -92,7 +95,7 @@ export default {
     },
     weight: {
       type: String,
-      required: true,
+      required: false,
     },
     playerPosition: {
       type: String,
@@ -110,7 +113,8 @@ export default {
     }
   },
   methods:{
-    showMoreFunc(){if(this.showMore){this.showMore =false;}else{this.showMore=true;}}
+    showMoreFunc(){if(this.showMore){this.showMore =false;}else{this.showMore=true;}},
+    ClickTeam(){this.$router.push('/TeamPage');},
   },
   mounted() {
     console.log("Player show mounted");

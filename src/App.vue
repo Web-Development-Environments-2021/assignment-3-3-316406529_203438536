@@ -12,7 +12,7 @@
           <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
-          <b-nav-item>{{ username }}</b-nav-item>
+          <text>{{ userInUse }}</text>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
           <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
@@ -65,14 +65,28 @@ export default {
       console.log("enter show fav. players");
       this.$router.push("/users​/FavoritePlayers");
     },
+    async setSearchAutoCompleteData(){
+      console.log("enter get aouto complete data");
+      const searchAutoComlateData = await this.axios.get(
+        "http://localhost:3000/league/getSeachOutoCompleteData"
+      );
+      this.$root.store.setAutoCompleteSearchData(searchAutoComlateData);
+    }
   },
   component: {
     LoginPage,
   },
   computed: {
-    username() {
-      return `to be computed user name`;
-    },
+    userInUse() {
+      if(this.$root.store.username){
+        return this.$root.store.username;
+      }
+      return "Guest"
+    }
+  },
+  mounted() {
+    // this.setSearchAutoCompleteData();
+    this.$root.store.setSeachParameters();
   },
 };
 </script>
