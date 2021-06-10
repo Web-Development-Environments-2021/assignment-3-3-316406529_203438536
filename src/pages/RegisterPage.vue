@@ -21,24 +21,47 @@
           Username length should be between 3-8 characters long
         </b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!$v.form.username.alpha">
-          Username alpha
+          Username must contain only letters
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
-        id="input-group-country"
+        id="input-group-firstname"
         label-cols-sm="3"
-        label="Country:"
-        label-for="country"
+        label="Firstname:"
+        label-for="firstName"
       >
-        <b-form-select
-          id="country"
-          v-model="$v.form.country.$model"
-          :options="countries"
-          :state="validateState('country')"
-        ></b-form-select>
-        <b-form-invalid-feedback>
-          Country is required
+        <b-form-input
+          id="firstName"
+          v-model.trim="$v.form.firstName.$model"
+          type="text"
+          :state="validateState('firstName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.required">
+          Firstname is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.alpha">
+          Firstname must contain only letters
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-lastName"
+        label-cols-sm="3"
+        label="Lastname:"
+        label-for="lastName"
+      >
+        <b-form-input
+          id="lastName"
+          v-model="$v.form.lastName.$model"
+          type="text"
+          :state="validateState('lastName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.required">
+          Lastname is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.alpha">
+          Lastname must contain only letters
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -66,8 +89,17 @@
         >
           Have length between 5-10 characters long
         </b-form-invalid-feedback>
+        <b-form-invalid-feedback
+          v-if="$v.form.password.required && !$v.form.password.containsNumber"
+        >
+          Have at least one digit
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback
+          v-if="$v.form.password.required && !$v.form.password.constainsSpecial"
+        >
+          Have at least one special char
+        </b-form-invalid-feedback>
       </b-form-group>
-
       <b-form-group
         id="input-group-confirmedPassword"
         label-cols-sm="3"
@@ -90,6 +122,42 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          v-model.trim="$v.form.email.$model"
+          type="text"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          Email is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.email.email">
+          Please enter valid email (Example- israel@gmail.com)
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-country"
+        label-cols-sm="3"
+        label="Country:"
+        label-for="country"
+      >
+        <b-form-select
+          id="country"
+          v-model="$v.form.country.$model"
+          :options="countries"
+          :state="validateState('country')"
+        ></b-form-select>
+        <b-form-invalid-feedback>
+          Country is required
+        </b-form-invalid-feedback>
+      </b-form-group>
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
@@ -127,7 +195,7 @@ import {
   maxLength,
   alpha,
   sameAs,
-  email
+  email,
 } from "vuelidate/lib/validators";
 
 export default {
@@ -142,11 +210,11 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
-        submitError: undefined
+        submitError: undefined,
       },
       countries: [{ value: null, text: "", disabled: true }],
       errors: [],
-      validated: false
+      validated: false,
     };
   },
   validations: {
@@ -154,20 +222,38 @@ export default {
       username: {
         required,
         length: (u) => minLength(3)(u) && maxLength(8)(u),
-        alpha
+        alpha,
       },
       country: {
-        required
+        required,
       },
       password: {
         required,
-        length: (p) => minLength(5)(p) && maxLength(10)(p)
+        length: (p) => minLength(5)(p) && maxLength(10)(p),
+        containsNumber: (p) => {
+          return /[0-9]/.test(p);
+        },
+        containsSpecial: function(value) {
+          return /[#?!@$%^&*-]/.test(value);
+        },
       },
       confirmedPassword: {
         required,
-        sameAsPassword: sameAs("password")
-      }
-    }
+        sameAsPassword: sameAs("password"),
+      },
+      firstName: {
+        required,
+        alpha,
+      },
+      lastName: {
+        required,
+        alpha,
+      },
+      email: {
+        required,
+        email,
+      },
+    },
   },
   mounted() {
     // console.log("mounted");
@@ -185,7 +271,7 @@ export default {
           "https://test-for-3-2.herokuapp.com/user/Register",
           {
             username: this.form.username,
-            password: this.form.password
+            password: this.form.password,
           }
         );
         this.$router.push("/login");
@@ -212,13 +298,13 @@ export default {
         country: null,
         password: "",
         confirmedPassword: "",
-        email: ""
+        email: "",
       };
       this.$nextTick(() => {
         this.$v.$reset();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
