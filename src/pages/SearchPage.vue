@@ -1,12 +1,44 @@
 <template>
   <div>
-    <h1 class="title" align= "center">Search Page</h1>
-    <div v-if="searchAtribute=='player'">
-      <b-input-group prepend="Search Query:" id="search-input">
+    <div id="searchAttributes">
+      <h1 class="title" align= "center">Search Page</h1>
+      <div v-if="searchAtribute=='player'">
+        <b-input-group prepend="Search Query:" id="search-input">
+          <div>
+            <b-form-input list="player" v-model="searchQuery" :placeholder=searchQuery></b-form-input>
+            <datalist id=player>
+              <option v-for="p in playersList" :key="p">{{ p }}</option>
+            </datalist>
+          </div>
+          <template #append>
+            <b-dropdown v-bind:text="searchAtribute" variant="success">
+              <b-dropdown-item @click="playerSearch()">Player</b-dropdown-item>
+              <b-dropdown-item @click="teamSearch()">Team</b-dropdown-item>
+            </b-dropdown>
+          </template>
+        </b-input-group>
+        <b-input-group prepend="Search Team:" id="search-input">
+          <div>
+            <b-form-input list="teams" v-model="searchTeam" :placeholder=searchTeam></b-form-input>
+            <datalist id="teams">
+              <option v-for="t in teamsList" :key="t">{{ t }}</option>
+            </datalist>
+          </div>
+        </b-input-group>
+        <b-input-group prepend="Search Location:" id="search-input">
+          <div>
+            <b-form-input list="Locations" v-model="searchLocation" :placeholder=searchLocation></b-form-input>
+            <datalist id="Locations">
+              <option v-for="L in LocationsList" :key="L">{{ L }}</option>
+            </datalist>
+          </div>
+        </b-input-group>
+      </div>
+      <b-input-group prepend="Search Query:" id="search-input" v-else>
         <div>
-          <b-form-input list="player" v-model="searchQuery" :placeholder=searchQuery></b-form-input>
-          <datalist id=player>
-            <option v-for="p in playersList" :key="p">{{ p }}</option>
+          <b-form-input list="teams" v-model="searchQuery" :placeholder=searchQuery></b-form-input>
+          <datalist id="teams">
+            <option v-for="t in teamsList" :key="t">{{ t }}</option>
           </datalist>
         </div>
         <template #append>
@@ -16,42 +48,54 @@
           </b-dropdown>
         </template>
       </b-input-group>
-      <b-input-group prepend="Search Team:" id="search-input">
-        <div>
-          <b-form-input list="teams" v-model="searchTeam" :placeholder=searchTeam></b-form-input>
-          <datalist id="teams">
-            <option v-for="t in teamsList" :key="t">{{ t }}</option>
-          </datalist>
-        </div>
-      </b-input-group>
-      <b-input-group prepend="Search Location:" id="search-input">
-        <div>
-          <b-form-input list="Locations" v-model="searchLocation" :placeholder=searchLocation></b-form-input>
-          <datalist id="Locations">
-            <option v-for="L in LocationsList" :key="L">{{ L }}</option>
-          </datalist>
-        </div>
-      </b-input-group> -->
+      <b-input-group-append id="SeachBotton">
+        <b-button @click="search()" variant="success">Search</b-button>
+      </b-input-group-append>
     </div>
-    <b-input-group prepend="Search Query:" id="search-input" v-else>
-      <div>
-        <b-form-input list="teams" v-model="searchQuery" :placeholder=searchQuery></b-form-input>
-        <datalist id="teams">
-          <option v-for="t in teamsList" :key="t">{{ t }}</option>
-        </datalist>
-      </div>
-      <template #append>
-        <b-dropdown v-bind:text="searchAtribute" variant="success">
-          <b-dropdown-item @click="playerSearch()">Player</b-dropdown-item>
-          <b-dropdown-item @click="teamSearch()">Team</b-dropdown-item>
-        </b-dropdown>
-      </template>
-    </b-input-group>
+    <div id="showRes">
+      <b-table :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
+        sort-icon-left responsive="sm">
+        <template #cell(moreDetails)="data">
+        <b-button v-b-modal.modal-1 @click="showPlayer(data.value)">Show more</b-button>
+        </template>
+      </b-table>
+      <!-- <div>
+        Sorting By: <b>{{ sortBy }}</b>, Sort Direction:
+        <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
+      </div> -->
 
-    <b-input-group-append id="SeachBotton">
-      <b-button @click="search()" variant="success">Search</b-button>
-    </b-input-group-append>
-    <playersShow id="playerslayout"
+      <b-modal id="modal-1" v-if="showPlayerData!=null" :title="showPlayerData.common_name">
+        <!-- <p class="my-4">Hello from modal!</p> -->
+        <div v-if="searchAtribute=='player'">
+          <playersShow id="playerslayout"
+            :PlayerID="showPlayerData.PlayerID" 
+            :common_name="showPlayerData.common_name"
+            :fullname="showPlayerData.fullname"
+            :nationality="showPlayerData.nationality"
+            :birthdate="showPlayerData.birthdate"
+            :birthplace="showPlayerData.birthplace"
+            :height="showPlayerData.height"
+            :weight="showPlayerData.weight"
+            :playerPosition="showPlayerData.playerPosition"
+            :PositionID="showPlayerData.position_id" 
+            :teamName="showPlayerData.team"
+            :teamID="showPlayerData.team_id"
+            :photoPath="showPlayerData.image_path" 
+            :key="showPlayerData.PlayerID">
+          </playersShow>
+        </div>
+        <div v-else>
+          <teamsShow
+            :Team_id="showPlayerData.team_id"
+            :team_players="showPlayerData.team_players"
+            :team_games="showPlayerData.team_games"
+            :key="showPlayerData.team_id"
+          ></teamsShow>
+        </div>
+      </b-modal>
+
+    </div>
+    <!-- <playersShow id="playerslayout"
       v-for="p in players"
       :PlayerID="p.PlayerID" 
       :common_name="p.common_name"
@@ -73,7 +117,7 @@
       :team_players="t.team_players"
       :team_games="t.team_games"
       :key="t.team_id"
-    ></teamsShow>
+    ></teamsShow> -->
   </div>
 </template>
 
@@ -92,9 +136,10 @@ export default {
       playersList: [],
       teamsList:[],
       LocationsList: [],
-
-      teams: this.$root.store.players,
-      players: this.$root.store.teams
+      sortDesc: false,
+      teams: this.$root.store.teams,
+      players: this.$root.store.players,
+      showPlayerData: null
     };
   },
 
@@ -107,8 +152,15 @@ export default {
       this.$root.store.setStoredData(this.searchQuery,
         this.searchTeam,this.searchLocation,this.players,this.teams);
     },
-    playerSearch(){this.searchAtribute='player'},
-    teamSearch(){this.searchAtribute='team'},
+    playerSearch(){
+      this.searchAtribute='player';
+      this.searchQuery = "";
+    },
+    teamSearch(){
+      this.searchAtribute='team'
+      this.searchQuery = "";
+
+      },
     async getAutoCompleteData(){
       try{
         const searchAutoComlateData = this.$root.store.AutoCompleteSearchData;
@@ -118,7 +170,7 @@ export default {
         this.teamsList = searchAutoComlateData.data.teamsNames;
         this.LocationsList = searchAutoComlateData.data.positions;
       }catch(error){
-        console.log("error in getting aouto complete search data");
+        console.log("error in getting auto complete search data");
         console.log(error);
       }
     },
@@ -166,11 +218,7 @@ export default {
             `http://localhost:3000/teams/search/${this.searchQuery}`,
           );
           console.log(response);
-          if(!response.data.data){
-            console.log("No result");
-            return
-          }
-          if(response.status ==200){
+          if(response.status == 200){
             this.showteams(response);
             this.setStoredData();
           }
@@ -190,12 +238,61 @@ export default {
       const players = data.data;
         this.players = [];
         this.players.push(...players);
+    },
+    showPlayer(data){
+      this.showPlayerData = data;
+      console.log("print player show data");
+      console.log(data);
+    }
+  },
+  computed:{
+    items(){
+      if(this.searchAtribute == "player"){
+        return this.players.map((p)=>{
+          return{
+            full_name: p.fullname,
+            team_name: p.team,
+            photo: p.image_path,
+            position_id: p.position_id,
+            moreDetails: p,
+          }
+        });
+      }
+      return this.teams.map((t)=>{
+          return{
+            team_name: t.teamName,
+            leam_logo: t.teamLogo,
+            moreDetails: t,
+          }
+        });
+    },
+    fields(){
+      if(this.searchAtribute == "player"){
+        return [
+          {key: 'full_name', sortable: true},
+          {key: 'team_name', sortable: true},
+          {key: 'photo', sortable: false},
+          {key: 'position_id', sortable: true},
+          {key: 'moreDetails', sortable: false},
+
+        ]
+      }
+      return [
+          {key: 'team_name', sortable: true},
+          {key: 'leam_logo', sortable: true},
+          {key: 'moreDetails', sortable: false},
+      ]
+    },
+    sortBy(){
+      if(this.searchAtribute == 'player'){
+        return 'full_name';
+      }
+      return 'team_name';
     }
   },
 mounted() {
   console.log("enter search page");
   this.getAutoCompleteData();
-
 },
 }
 </script>
