@@ -60,6 +60,13 @@ const routes = [
       props: {id: 84658}
   }, 
   {
+    path: "/LeagueManagment",
+    name: "LeagueManagment",
+    component: () => import("./pages/LeagueManagment"), 
+      props: {id: 84658}
+  }, 
+  
+  {
     path: "*",
     name: "notFound",
     component: NotFound,
