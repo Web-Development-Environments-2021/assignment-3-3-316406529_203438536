@@ -53,12 +53,13 @@
       </b-input-group-append>
     </div>
     <div id="showRes">
-      <b-table :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
+      <b-table v-if="items[0]" :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
         sort-icon-left responsive="sm">
         <template #cell(moreDetails)="data">
         <b-button v-b-modal.modal-1 @click="showPlayer(data.value)">Show more</b-button>
         </template>
       </b-table>
+      <h1 v-else>No Results</h1>
       <!-- <div>
         Sorting By: <b>{{ sortBy }}</b>, Sort Direction:
         <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
@@ -127,7 +128,7 @@ import playersShow from "../components/PlayerShow.vue";
 import teamsShow from "../components/TeamPreview.vue";
 
 export default {
- data() {
+  data() {
     return {
       searchAtribute: "player",
       searchQuery: this.$root.store.searchQuery,
@@ -139,7 +140,8 @@ export default {
       sortDesc: false,
       teams: this.$root.store.teams,
       players: this.$root.store.players,
-      showPlayerData: null
+      showPlayerData: null,
+      hasRes: ""
     };
   },
 
@@ -147,6 +149,7 @@ export default {
     playersShow,
     teamsShow
   },
+
   methods: {
     setStoredData(){
       this.$root.store.setStoredData(this.searchQuery,
@@ -245,6 +248,7 @@ export default {
       console.log(data);
     }
   },
+
   computed:{
     items(){
       if(this.searchAtribute == "player"){
@@ -290,9 +294,10 @@ export default {
       return 'team_name';
     }
   },
-mounted() {
-  console.log("enter search page");
-  this.getAutoCompleteData();
+
+  mounted() {
+    console.log("enter search page");
+    this.getAutoCompleteData();
 },
 }
 </script>

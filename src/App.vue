@@ -7,8 +7,7 @@
           <b-nav-item :to="{ name: 'main' }">Main</b-nav-item>
           <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
           <b-nav-item :to="{ name: 'curStageGames' }"
-            >Currect stage games</b-nav-item
-          >
+            >Currect stage games</b-nav-item>
           <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
@@ -20,6 +19,8 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-else>
           <b-nav-item @click="Logout()">Log out</b-nav-item>
+          <b-nav-item v-if="isAdmin" :to="{ name: 'LeagueManagment' }">League Manage</b-nav-item>
+
           <b-nav-item-dropdown right>
             <template #button-content>
               My Account
@@ -82,6 +83,10 @@ export default {
         return this.$root.store.username;
       }
       return "Guest"
+    },
+    isAdmin(){
+      if(this.$root.store.username == 'admin'){return true;}
+      return false;
     }
   },
   mounted() {
