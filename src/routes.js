@@ -1,5 +1,6 @@
 import Main from "./pages/MainPage";
 import NotFound from "./pages/NotFoundPage";
+import TeamPage from "./pages/TeamPage";
 
 const routes = [
   {
@@ -50,15 +51,16 @@ const routes = [
   {
     path: "/PlayerPage/:id",
     name: "PlayerPage",
-    component: () => import("./pages/PlayerPage"), 
-      // props: {id: 84658}
-  }, 
+    component: () => import("./pages/PlayerPage"),
+    // props: {id: 84658}
+  },
   {
-    path: "/TeamPage",
+    path: "/TeamPage/:id",
     name: "TeamPage",
-    component: () => import("./pages/TeamPage"), 
-      props: {id: 84658}
-  }, 
+    // component: TeamPreview,
+    component: TeamPage,
+  },
+  //   component: () => import("./pages/TeamPage", "params:{id}"),
   {
     path: "/LeagueManagment",
     name: "LeagueManagment",
