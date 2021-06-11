@@ -268,17 +268,27 @@ export default {
     async Register() {
       try {
         const response = await this.axios.post(
-          "https://test-for-3-2.herokuapp.com/user/Register",
+          "http://localhost:3000/register",
           {
             username: this.form.username,
+            firstname: this.form.firstName,
+            lastname: this.form.lastName,
+            country: this.form.country,
             password: this.form.password,
+            email: this.form.email,
           }
         );
+        console.log(response);
+        console.log("responde back from server");
+        this.$root.toast("Register", response.data, "success");
+
         this.$router.push("/login");
         // console.log(response);
       } catch (err) {
-        console.log(err.response);
-        this.form.submitError = err.response.data.message;
+        console.log(err.response.data);
+        this.form.submitError = err.response.data;
+        this.$root.toast("Register", this.form.submitError, "failed");
+        this.onReset(); //reset all fields
       }
     },
     onRegister() {
