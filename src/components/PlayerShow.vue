@@ -120,7 +120,7 @@ export default {
       }
     },
     ClickTeam() {
-      this.$router.push("/TeamPage");
+      this.$router.push(`/TeamPage/:${this.teamID}`);
     },
   },
   mounted() {
