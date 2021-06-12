@@ -31,6 +31,8 @@ import {
   FormTimepickerPlugin,
   ImagePlugin,
   IconsPlugin,
+  SpinnerPlugin,
+  
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -50,6 +52,7 @@ import {
   FormTimepickerPlugin,
   ImagePlugin,
   IconsPlugin,
+  SpinnerPlugin,
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 
@@ -75,7 +78,6 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
