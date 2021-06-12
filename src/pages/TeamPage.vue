@@ -21,6 +21,7 @@ export default {
       // },
     };
   },
+
   mounted() {
     console.log("Enter team page");
     const TeamIdParam = this.$route.params.id.replace(":", "");
