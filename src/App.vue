@@ -7,7 +7,8 @@
           <b-nav-item :to="{ name: 'main' }">Main</b-nav-item>
           <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
           <b-nav-item :to="{ name: 'curStageGames' }"
-            >Currect stage games</b-nav-item>
+            >Currect stage games</b-nav-item
+          >
           <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
@@ -19,15 +20,23 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-else>
           <b-nav-item @click="Logout()">Log out</b-nav-item>
-          <b-nav-item v-if="isAdmin" :to="{ name: 'LeagueManagment' }">League Manage</b-nav-item>
+          <b-nav-item v-if="isAdmin" :to="{ name: 'LeagueManagment' }"
+            >League Manage</b-nav-item
+          >
 
           <b-nav-item-dropdown right>
             <template #button-content>
               My Account
             </template>
-            <b-dropdown-item @click="showFavoriteGames()">Favorites Games</b-dropdown-item>
-            <b-dropdown-item @click="showFavoriteTeams()">Favorites Teams</b-dropdown-item>
-            <b-dropdown-item @click="showFavoritePlayers()">Favorites Players</b-dropdown-item>
+            <b-dropdown-item @click="showFavoriteGames()"
+              >Favorites Games</b-dropdown-item
+            >
+            <b-dropdown-item @click="showFavoriteTeams()"
+              >Favorites Teams</b-dropdown-item
+            >
+            <b-dropdown-item @click="showFavoritePlayers()"
+              >Favorites Players</b-dropdown-item
+            >
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -66,32 +75,34 @@ export default {
       console.log("enter show fav. players");
       this.$router.push("/users​/FavoritePlayers");
     },
-    async setSearchAutoCompleteData(){
+    async setSearchAutoCompleteData() {
       console.log("enter get aouto complete data");
       const searchAutoComlateData = await this.axios.get(
         "http://localhost:3000/league/getSeachOutoCompleteData"
       );
       this.$root.store.setAutoCompleteSearchData(searchAutoComlateData);
-    }
+    },
   },
   component: {
     LoginPage,
   },
   computed: {
     userInUse() {
-      if(this.$root.store.username){
+      if (this.$root.store.username) {
         return this.$root.store.username;
       }
-      return "Guest"
+      return "Guest";
     },
-    isAdmin(){
-      if(this.$root.store.username == 'admin'){return true;}
+    isAdmin() {
+      if (this.$root.store.username == "admin") {
+        return true;
+      }
       return false;
-    }
+    },
   },
   mounted() {
-    this.setSearchAutoCompleteData();
-    this.$root.store.setStoredData("","","",[],[]);
+    // this.setSearchAutoCompleteData(); //occur once when building the app. (keep in comment)
+    this.$root.store.setStoredData("", "", "", [], []);
   },
 };
 </script>
