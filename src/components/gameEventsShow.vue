@@ -28,21 +28,9 @@ export default {
 
   },
   },
-//     created() {
-//         this.items = this.EventsList.map((eve)=>{
-//             return{
-//                 event_id: eve.event_id,
-//                 game_id: eve.game_id,
-//                 event_date: eve.event_date,
-//                 event_hour: eve.event_hour,
-//                 game_minute: eve.game_minute,
-//                 event_type: eve.event_type,
-//                 player_id: eve.player_id,
-//             }
-//         })
-//   },
   mounted() {
     console.log("game EVENTS show ");
+    console.log(this.EventsList);
   },
 };
 </script>

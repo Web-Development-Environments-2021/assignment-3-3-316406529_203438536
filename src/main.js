@@ -28,7 +28,8 @@ import {
   TablePlugin,
   ModalPlugin,
   FormDatepickerPlugin,
-  FormTimepickerPlugin
+  FormTimepickerPlugin,
+  SpinnerPlugin,
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -45,7 +46,8 @@ import {
   TablePlugin,
   ModalPlugin,
   FormDatepickerPlugin,
-  FormTimepickerPlugin
+  FormTimepickerPlugin,
+  SpinnerPlugin,
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 
@@ -71,7 +73,6 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
