@@ -1,13 +1,15 @@
 <template>
   <div>
     <GamePreview
-      v-for="g in games"
+      v-for="g in games.slice(0, showCunt)"
       :id="g.id"
       :hostTeam="g.hostTeam"
       :guestTeam="g.guestTeam"
       :date="g.date"
       :hour="g.hour"
       :key="g.id"
+      :homeTeamID="g.home_team_id"
+      :awayTeamID="g.away_team_id"
     ></GamePreview>
   </div>
 </template>
@@ -18,6 +20,12 @@ export default {
   name: "FavoriteGames",
   components: {
     GamePreview,
+  },
+  props:{
+      showCunt: {
+        type: Number,
+        required: true,
+      },
   },
   data() {
     return {
@@ -43,12 +51,12 @@ export default {
     async updateGames() {
       console.log("response");
       try {
-        axios.defaults.withCradentials=true;
+        this.axios.defaults.withCradentials=true;
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoriteGames"
         );
         const games = response.data.games;
-        axios.defaults.withCradentials=false;
+        this.axios.defaults.withCradentials=false;
         this.games = [];
         this.games.push(...games);
         console.log(response);
