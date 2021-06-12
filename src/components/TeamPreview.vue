@@ -1,23 +1,33 @@
 <template>
   <div class="team-preview">
-    <div :title="id" class="team-title"><b>Team id:</b> {{ id }}</div>
+    <div :title="id" class="team-title">
+      <!-- <b>{{ team_name }}</b> -->
+    </div>
     <ul class="team-content">
       <li>
         Team players:
         <div>
-          <PlayerShow
-            v-for="p in players"
+          <PlayerTeamPagePreview
+            v-for="p in team_players"
             :PlayerID="p.PlayerID"
-            :fullname="p.fullname"
-            :teamName="p.teamName"
-            :teamID="p.teamID"
-            :photoPath="p.photoPath"
-            :PositionID="p.PositionID"
+            :name="p.name"
+            :birthdate="p.birthdate"
+            :image="p.image"
+            :nationality="p.nationality"
             :key="p.PlayerID"
-          ></PlayerShow>
+          ></PlayerTeamPagePreview>
         </div>
       </li>
-      <li>team_coach: {{ team_coach }}</li>
+      <li>
+        Team coach:
+        <div>
+          <coachPreview
+            :coach_name="team_coach.coach_name"
+            :coach_id="coach_id"
+            :image="team_coach.image_path"
+          ></coachPreview>
+        </div>
+      </li>
       <li>
         Team games:
         <div>
@@ -38,11 +48,17 @@
 
 <script>
 import GamePreview from "./GamePreview.vue";
-import PlayerShow from "./PlayerShow.vue";
+// import PlayerShow from "./PlayerShow.vue";
+import PlayerTeamPagePreview from "../components/playerTeamPagePreview.vue";
+import coachPreview from "../components/coachPreview.vue";
 export default {
-  components: { PlayerShow, GamePreview },
+  components: { GamePreview, PlayerTeamPagePreview, coachPreview },
   name: "TeamPreview",
   props: {
+    team_name: {
+      type: String,
+      require: true,
+    },
     team_id: {
       type: Number,
       required: true,
@@ -60,7 +76,7 @@ export default {
       require: false,
     },
   },
-  
+
   mounted() {
     console.log("team preview mounted");
   },
@@ -70,14 +86,14 @@ export default {
 <style>
 .team-preview {
   display: inline-block;
-  width: 250px;
+  width: 100%;
   height: 200px;
   position: relative;
   margin: 10px 10px;
-  border-style: solid;
+  /* border-style: solid;
   border-radius: 10px;
   border-width: 5px;
-  border-color: cadetblue;
+  border-color: cadetblue; */
 }
 
 .team-preview .team-title {

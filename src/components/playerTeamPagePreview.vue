@@ -1,35 +1,37 @@
 <template>
-  <div class="player-preview">
-    <div :title="PlayerID" class="player-title">
-      <b>Player Name:</b> {{ fullname }}
-    </div>
-    <ul class="player-content">
-      <li>Full Name: {{ fullname }}</li>
+  <div class="player-in-team-preview">
+    <div :title="PlayerID" class="player-in-team-title"></div>
+    <ul class="player-in-team-content">
+      <!-- <li>Full Name: {{ fullname }}</li> -->
       <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
       <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
-      <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li>
+      <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li> -->
+      <li @click="showPlayerCard()">
+        <b>{{ name }}</b>
+      </li>
 
-      <li>Photo: {{ image_path }}</li>
-      <li>PositionID: {{ PositionID }}</li>
+      <li>Photo: {{ image }}</li>
+      <!-- <li>PositionID: {{ PositionID }}</li> -->
       <li>nationality: {{ nationality }}</li>
-      <div v-if="showMore == true">
+      <li>Birthdate: {{ birthdate }}</li>
+      <!-- <div v-if="showMore == true">
         <li>birthdate: {{ birthdate }}</li>
         <li v-if="birthplace != null">birthplace: {{ birthplace }}</li>
         <li v-if="height != null">height: {{ height }}</li>
         <li v-if="weight != null">weight: {{ weight }}</li>
         <li>playerPosition: {{ playerPosition }}</li>
         <li>common_name: {{ common_name }}</li>
-      </div>
-      <b-button id="b" @click="showMoreFunc()" variant="success"
+      </div> -->
+      <!-- <b-button id="b" @click="showMoreFunc()" variant="success"
         >show More</b-button
-      >
+      > -->
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: "PlayerShow",
+  name: "playerTeamPagePreview",
   props: {
     PlayerID: {
       type: Number,
@@ -39,20 +41,8 @@ export default {
       type: String,
       required: false,
     },
-    fullname: {
+    name: {
       type: String,
-      required: true,
-    },
-    teamName: {
-      type: String,
-      required: true,
-    },
-    teamID: {
-      type: Number,
-      required: true,
-    },
-    PositionID: {
-      type: Number,
       required: true,
     },
     nationality: {
@@ -63,52 +53,25 @@ export default {
       type: String,
       required: true,
     },
-    birthplace: {
+    image: {
       type: String,
       required: false,
     },
-    height: {
-      type: String,
-      required: false,
-    },
-    weight: {
-      type: String,
-      required: false,
-    },
-    playerPosition: {
-      type: String,
-      required: false,
-    },
-    image_path: {
-      type: String,
-      required: false,
-    },
-  },
-  data() {
-    return {
-      showMore: false,
-    };
   },
   methods: {
-    showMoreFunc() {
-      if (this.showMore) {
-        this.showMore = false;
-      } else {
-        this.showMore = true;
-      }
-    },
-    ClickTeam() {
-      this.$router.push(`/TeamPage/:${this.teamID}`);
+    showPlayerCard() {
+      console.log("click on player name");
+      this.$router.push(`/PlayerPage/:${this.PlayerID}`);
     },
   },
   mounted() {
-    console.log("Player show mounted");
+    console.log("Player team page show mounted");
   },
 };
 </script>
 
 <style>
-.player-preview {
+.player-in-team-preview {
   display: inline-block;
   width: 300px;
   height: flex;
@@ -124,13 +87,13 @@ export default {
   margin-top: 10px;
 }
 
-.player-preview .player-title {
+.player-in-team-preview .player-in-team-title {
   text-align: center;
   text-transform: uppercase;
   color: rgb(111, 197, 157);
 }
 
-.player-preview .player-content {
+.player-in-team-preview .player-in-team-content {
   width: 100%;
   overflow: hidden;
 }

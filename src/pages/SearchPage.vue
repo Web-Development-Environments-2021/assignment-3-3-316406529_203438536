@@ -1,12 +1,16 @@
 <template>
   <div>
     <div id="searchAttributes">
-      <h1 class="title" align= "center">Search Page</h1>
-      <div v-if="searchAtribute=='player'">
+      <h1 class="title" align="center">Search Page</h1>
+      <div v-if="searchAtribute == 'player'">
         <b-input-group prepend="Search Query:" id="search-input">
           <div>
-            <b-form-input list="player" v-model="searchQuery" :placeholder=searchQuery></b-form-input>
-            <datalist id=player>
+            <b-form-input
+              list="player"
+              v-model="searchQuery"
+              :placeholder="searchQuery"
+            ></b-form-input>
+            <datalist id="player">
               <option v-for="p in playersList" :key="p">{{ p }}</option>
             </datalist>
           </div>
@@ -19,7 +23,11 @@
         </b-input-group>
         <b-input-group prepend="Search Team:" id="search-input">
           <div>
-            <b-form-input list="teams" v-model="searchTeam" :placeholder=searchTeam></b-form-input>
+            <b-form-input
+              list="teams"
+              v-model="searchTeam"
+              :placeholder="searchTeam"
+            ></b-form-input>
             <datalist id="teams">
               <option v-for="t in teamsList" :key="t">{{ t }}</option>
             </datalist>
@@ -27,7 +35,11 @@
         </b-input-group>
         <b-input-group prepend="Search Location:" id="search-input">
           <div>
-            <b-form-input list="Locations" v-model="searchLocation" :placeholder=searchLocation></b-form-input>
+            <b-form-input
+              list="Locations"
+              v-model="searchLocation"
+              :placeholder="searchLocation"
+            ></b-form-input>
             <datalist id="Locations">
               <option v-for="L in LocationsList" :key="L">{{ L }}</option>
             </datalist>
@@ -36,7 +48,11 @@
       </div>
       <b-input-group prepend="Search Query:" id="search-input" v-else>
         <div>
-          <b-form-input list="teams" v-model="searchQuery" :placeholder=searchQuery></b-form-input>
+          <b-form-input
+            list="teams"
+            v-model="searchQuery"
+            :placeholder="searchQuery"
+          ></b-form-input>
           <datalist id="teams">
             <option v-for="t in teamsList" :key="t">{{ t }}</option>
           </datalist>
@@ -53,10 +69,19 @@
       </b-input-group-append>
     </div>
     <div id="showRes">
-      <b-table v-if="items[0]" :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
-        sort-icon-left responsive="sm">
+      <b-table
+        v-if="items[0]"
+        :items="items"
+        :fields="fields"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
+        sort-icon-left
+        responsive="sm"
+      >
         <template #cell(moreDetails)="data">
-        <b-button v-b-modal.modal-1 @click="showPlayer(data.value)">Show more</b-button>
+          <b-button v-b-modal.modal-1 @click="showPlayer(data.value)"
+            >Show more</b-button
+          >
         </template>
       </b-table>
       <h1 v-else>No Results</h1>
@@ -65,11 +90,16 @@
         <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
       </div> -->
 
-      <b-modal id="modal-1" v-if="showPlayerData!=null" :title="showPlayerData.common_name">
+      <b-modal
+        id="modal-1"
+        v-if="showPlayerData != null"
+        :title="showPlayerData.common_name"
+      >
         <!-- <p class="my-4">Hello from modal!</p> -->
-        <div v-if="searchAtribute=='player'">
-          <playersShow id="playerslayout"
-            :PlayerID="showPlayerData.PlayerID" 
+        <div v-if="searchAtribute == 'player'">
+          <playersShow
+            id="playerslayout"
+            :PlayerID="showPlayerData.PlayerID"
             :common_name="showPlayerData.common_name"
             :fullname="showPlayerData.fullname"
             :nationality="showPlayerData.nationality"
@@ -78,11 +108,12 @@
             :height="showPlayerData.height"
             :weight="showPlayerData.weight"
             :playerPosition="showPlayerData.playerPosition"
-            :PositionID="showPlayerData.position_id" 
+            :PositionID="showPlayerData.position_id"
             :teamName="showPlayerData.team"
             :teamID="showPlayerData.team_id"
-            :photoPath="showPlayerData.image_path" 
-            :key="showPlayerData.PlayerID">
+            :photoPath="showPlayerData.image_path"
+            :key="showPlayerData.PlayerID"
+          >
           </playersShow>
         </div>
         <div v-else>
@@ -94,7 +125,6 @@
           ></teamsShow>
         </div>
       </b-modal>
-
     </div>
     <!-- <playersShow id="playerslayout"
       v-for="p in players"
@@ -122,7 +152,6 @@
   </div>
 </template>
 
-
 <script>
 import playersShow from "../components/PlayerShow.vue";
 import teamsShow from "../components/TeamPreview.vue";
@@ -135,191 +164,198 @@ export default {
       searchTeam: this.$root.store.searchTeam,
       searchLocation: this.$root.store.searchLocation,
       playersList: [],
-      teamsList:[],
+      teamsList: [],
       LocationsList: [],
       sortDesc: false,
       teams: this.$root.store.teams,
       players: this.$root.store.players,
       showPlayerData: null,
-      hasRes: ""
+      hasRes: "",
     };
   },
 
-  components:{
+  components: {
     playersShow,
-    teamsShow
+    teamsShow,
   },
 
   methods: {
-    setStoredData(){
-      this.$root.store.setStoredData(this.searchQuery,
-        this.searchTeam,this.searchLocation,this.players,this.teams);
+    setStoredData() {
+      this.$root.store.setStoredData(
+        this.searchQuery,
+        this.searchTeam,
+        this.searchLocation,
+        this.players,
+        this.teams
+      );
     },
-    playerSearch(){
-      this.searchAtribute='player';
+    playerSearch() {
+      this.searchAtribute = "player";
       this.searchQuery = "";
     },
-    teamSearch(){
-      this.searchAtribute='team'
+    teamSearch() {
+      this.searchAtribute = "team";
       this.searchQuery = "";
-
-      },
-    async getAutoCompleteData(){
-      try{
+    },
+    async getAutoCompleteData() {
+      try {
         const searchAutoComlateData = this.$root.store.AutoCompleteSearchData;
         console.log("recived data");
         console.log(searchAutoComlateData);
         this.playersList = searchAutoComlateData.data.playersNames;
         this.teamsList = searchAutoComlateData.data.teamsNames;
         this.LocationsList = searchAutoComlateData.data.positions;
-      }catch(error){
+      } catch (error) {
         console.log("error in getting auto complete search data");
         console.log(error);
       }
     },
-    async search(){
-      this.players = []
-      this.teams =[]
+    async search() {
+      this.players = [];
+      this.teams = [];
       console.log("start searching");
       console.log({
         searchAtribute: this.searchAtribute,
         search_query: this.searchQuery,
         searchTeam: this.searchTeam,
-        searchLocation: this.searchLocation
-      })
-      if(this.searchAtribute == 'player'){
+        searchLocation: this.searchLocation,
+      });
+      if (this.searchAtribute == "player") {
         try {
-          if(this.searchTeam == ''){this.searchTeam =`{team}`};
-          if(this.searchLocation==''){this.searchLocation = `{location}`};
+          if (this.searchTeam == "") {
+            this.searchTeam = `{team}`;
+          }
+          if (this.searchLocation == "") {
+            this.searchLocation = `{location}`;
+          }
           const response = await this.axios.get(
-            `http://localhost:3000/players/search/locationAndTeam/${this.searchQuery}/${this.searchTeam}/${this.searchLocation}`,
+            `http://localhost:3000/players/search/locationAndTeam/${this.searchQuery}/${this.searchTeam}/${this.searchLocation}`
           );
           console.log(response);
-          if(this.searchTeam ==`{team}`){this.searchTeam =''};
-          if(this.searchLocation== `{location}`){this.searchLocation =''};
-          if(response.status == 201){
+          if (this.searchTeam == `{team}`) {
+            this.searchTeam = "";
+          }
+          if (this.searchLocation == `{location}`) {
+            this.searchLocation = "";
+          }
+          if (response.status == 201) {
             console.log("No result");
             this.setStoredData();
-            return
+            return;
           }
-          if(response.status == 400){
+          if (response.status == 400) {
             console.log("API search error");
             this.setStoredData();
-            return
+            return;
           }
-          if(response.status ==200){
+          if (response.status == 200) {
             this.showPlayers(response);
             this.setStoredData();
           }
         } catch (error) {
-          console.log("error in search keyword player")
+          console.log("error in search keyword player");
           console.log(error);
         }
-      }else{
+      } else {
         try {
           const response = await this.axios.get(
-            `http://localhost:3000/teams/search/${this.searchQuery}`,
+            `http://localhost:3000/teams/search/${this.searchQuery}`
           );
           console.log(response);
-          if(response.status == 200){
+          if (response.status == 200) {
             this.showteams(response);
             this.setStoredData();
           }
         } catch (error) {
-          console.log("error in search keyword team")
+          console.log("error in search keyword team");
           console.log(error);
         }
       }
-
     },
-    async showteams(data){
+    async showteams(data) {
       const teams = data.data;
-        this.teams = [];
-        this.teams.push(...teams);
+      this.teams = [];
+      this.teams.push(...teams);
     },
-    async showPlayers(data){
+    async showPlayers(data) {
       const players = data.data;
-        this.players = [];
-        this.players.push(...players);
+      this.players = [];
+      this.players.push(...players);
     },
-    showPlayer(data){
+    showPlayer(data) {
       this.showPlayerData = data;
       console.log("print player show data");
       console.log(data);
-    }
+    },
   },
 
-  computed:{
-    items(){
-      if(this.searchAtribute == "player"){
-        return this.players.map((p)=>{
-          return{
+  computed: {
+    items() {
+      if (this.searchAtribute == "player") {
+        return this.players.map((p) => {
+          return {
             full_name: p.fullname,
             team_name: p.team,
             photo: p.image_path,
             position_id: p.position_id,
             moreDetails: p,
-          }
+          };
         });
       }
-      return this.teams.map((t)=>{
-          return{
-            team_name: t.teamName,
-            leam_logo: t.teamLogo,
-            moreDetails: t,
-          }
-        });
+      return this.teams.map((t) => {
+        return {
+          team_name: t.teamName,
+          leam_logo: t.teamLogo,
+          moreDetails: t,
+        };
+      });
     },
-    fields(){
-      if(this.searchAtribute == "player"){
+    fields() {
+      if (this.searchAtribute == "player") {
         return [
-          {key: 'full_name', sortable: true},
-          {key: 'team_name', sortable: true},
-          {key: 'photo', sortable: false},
-          {key: 'position_id', sortable: true},
-          {key: 'moreDetails', sortable: false},
-
-        ]
+          { key: "full_name", sortable: true },
+          { key: "team_name", sortable: true },
+          { key: "photo", sortable: false },
+          { key: "position_id", sortable: true },
+          { key: "moreDetails", sortable: false },
+        ];
       }
       return [
-          {key: 'team_name', sortable: true},
-          {key: 'leam_logo', sortable: true},
-          {key: 'moreDetails', sortable: false},
-      ]
+        { key: "team_name", sortable: true },
+        { key: "leam_logo", sortable: true },
+        { key: "moreDetails", sortable: false },
+      ];
     },
-    sortBy(){
-      if(this.searchAtribute == 'player'){
-        return 'full_name';
+    sortBy() {
+      if (this.searchAtribute == "player") {
+        return "full_name";
       }
-      return 'team_name';
-    }
+      return "team_name";
+    },
   },
 
   mounted() {
     console.log("enter search page");
     this.getAutoCompleteData();
-},
-}
+  },
+};
 </script>
 
 <style scoped>
-
 #search-input {
-  margin-left: 25%; 
-  width: 500px; 
+  margin-left: 25%;
+  width: 500px;
   margin-top: 20px;
 }
 
 #SeachBotton {
   margin-top: 20px;
   margin-left: 50%;
-  width: 500px; 
+  width: 500px;
 }
 
-#playerslayout{
+#playerslayout {
   /* margin-top: 20px; */
   /* display: flex; */
-
-
 }
 </style>

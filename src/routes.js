@@ -58,16 +58,16 @@ const routes = [
     path: "/TeamPage/:id",
     name: "TeamPage",
     // component: TeamPreview,
-    component: TeamPage,
+    component: () => import("./pages/TeamPage"),
   },
   //   component: () => import("./pages/TeamPage", "params:{id}"),
   {
     path: "/LeagueManagment",
     name: "LeagueManagment",
-    component: () => import("./pages/LeagueManagment"), 
-      props: {id: 84658}
-  }, 
-  
+    component: () => import("./pages/LeagueManagment"),
+    props: { id: 84658 },
+  },
+
   {
     path: "*",
     name: "notFound",
