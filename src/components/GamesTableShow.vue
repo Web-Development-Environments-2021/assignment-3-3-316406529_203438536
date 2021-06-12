@@ -27,16 +27,16 @@
 import gameEvents from "./gameEventsShow.vue";
 
 export default ({
-    component:{
+    components:{
         gameEvents,
     },
     props:{
         Items: {
-            type: Number,
+            type: Array,
             required: false,
         },
         Fields: {
-            type: Number,
+            type: Array,
             required: false,
         },        
     },

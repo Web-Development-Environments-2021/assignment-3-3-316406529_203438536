@@ -49,13 +49,13 @@ export default {
     async updatePlayers() {
       console.log("response");
       try {
-        axios.defaults.withCradentials=true;
+        this.axios.defaults.withCradentials=true;
         console.log(this.$root.store.username);
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoritePlayers"
         );
         const players = response.data.players;
-        axios.defaults.withCradentials=false;
+        this.axios.defaults.withCradentials=false;
         this.players = [];
         this.players.push(...players);
         console.log(response);

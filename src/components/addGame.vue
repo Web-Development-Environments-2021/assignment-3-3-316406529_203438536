@@ -47,7 +47,7 @@
         <b-form-datepicker id="example-datepicker" v-model="date" class="mb-2"></b-form-datepicker>
         <b-form-timepicker v-model="hour" locale="en"></b-form-timepicker>
 
-        <b-buton @click="AddGame()"> Add Game </b-buton>
+        <b-button @click="AddGame()"> Add Game </b-button>
 
     </b-form>
 </template>

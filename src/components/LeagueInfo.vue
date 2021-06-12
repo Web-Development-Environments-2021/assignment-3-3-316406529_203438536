@@ -1,31 +1,64 @@
 <template>
   <div class="league-preview">
-    <b-card
-      img-alt="Image"
-      tag="article"
-      style="max-width: 20rem;"
-      class="mb-2"
-    >
-      <b-card-title>{{ leagueName }}</b-card-title>
-      <b-card-text>
-        Season: {{ season }}
-        <br />
-        Stage: {{ stage }}
-      </b-card-text>
-      <b-button href="#" variant="primary">Go somewhere</b-button>
-    </b-card>
+    <div>
+        <b-card
+          img-alt="Image"
+          tag="article"
+          style="max-width: 20rem;"
+          class="mb-2"
+        >
+          <b-card-title>{{ league_name }}</b-card-title>
+          <b-card-text>
+            Season: {{ current_season_name }}
+            <br />
+            Stage: {{ current_stage_name }}
+            <bt/>
+          </b-card-text>
+        </b-card>
+    </div>
+    <div>
+      <h1>Next Game Coming</h1>
+          <GamePreview :id="nextComingGame.game_id" :hostTeam="nextComingGame.home_team"
+    :guestTeam="nextComingGame.away_team" :date="nextComingGame.game_date" :hour="nextComingGame.game_hour"
+    :homeTeamID="nextComingGame.home_team_id" :awayTeamID="nextComingGame.away_team_id"></GamePreview>
+
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import GamePreview from "./GamePreview.vue";
 export default {
+  name: "LeagueInfo",
+  components:{
+    GamePreview,
+  },
   data() {
     return {
-      leagueName: "superliga",
-      season: "season",
-      stage: "stage",
+      league_name: "loading",
+      current_stage_name: "loading",
+      current_season_name:"loading",
+      nextComingGame:"loading",
     };
+  },
+  methods: {
+    setLeagueData(data){
+      this.league_name= data.league_name;
+      this.current_season_name= data.current_season_name;
+      this.current_stage_name = data.current_stage_name;
+      this.nextComingGame=data.nextComingGame;
+
+    }
+  },
+  async mounted() {
+    const response = await this.axios.get(
+          "http://localhost:3000/league/LeagueData"
+        );
+        console.log("league info gey");
+        console.log(response.data[0]);
+        this.setLeagueData(response.data[0]);
+
   },
   // async mounted() {
   //   const respond = await axios.get("http://127.0.0.1:3000/league/LeagueData");

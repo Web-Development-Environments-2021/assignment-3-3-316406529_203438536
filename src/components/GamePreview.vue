@@ -2,17 +2,17 @@
   <div class="game-preview">
     <div :title="id" class="game-title"><b>Game Id:</b> {{ id }}</div>
     <ul class="game-content">
-      <li>host: {{ hostTeam }}</li>
-      <li>guest: {{ guestTeam }}</li>
+      <li @click="clickTeam(home_team_id)">host: {{ hostTeam }}</li>
+      <li @click="clickTeam(away_team_id)">guest: {{ guestTeam }}</li>
       <li>date: {{ date }}</li>
       <li>time: {{ hour }}</li>
+
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: "GamePreview",
   props: {
     id: {
       type: Number,
@@ -26,6 +26,14 @@ export default {
       type: String,
       required: true,
     },
+    homeTeamID: {
+      type: String,
+      required: false,     
+    },
+    awayTeamID: {
+      type: String,
+      required: false,     
+    },
     date: {
       type: String,
       required: true,
@@ -34,6 +42,11 @@ export default {
       type: String,
       required: true,
     },
+  },
+  methods: {
+    clickTeam(id){
+      this.$router.push(`/TeamPage/:${id}`);
+    }
   },
   mounted() {
     console.log("game preview mounted");

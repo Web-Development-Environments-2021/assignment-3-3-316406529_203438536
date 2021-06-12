@@ -6,7 +6,7 @@
         <h2>Future Games</h2>
           <gamesTableShow :Items="FutureItems" :Fields="FutureFields"></gamesTableShow>
       </div>
-      <h1 v-else :busy="ture">loading Data, Please wait</h1>
+      <h1 v-else :busy=true>loading Data, Please wait</h1>
       <!-- <b-table :items="FutureItems" :busy="isBusy" :fields="FutureFields" 
       :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" sort-icon-left responsive="sm">
       <template #table-busy>

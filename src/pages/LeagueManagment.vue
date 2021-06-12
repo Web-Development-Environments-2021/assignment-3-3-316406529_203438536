@@ -91,6 +91,8 @@ import addScore from "../components/addGameScore.vue";
         items: [],
         fields: [],
         GameClickID: 0,
+        sortBy: 'age',
+        sortDesc: false,
       }
     },
     components:{
