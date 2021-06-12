@@ -15,11 +15,11 @@ import FavoritePlayers from "../components/FavoritePlayers";
 import LoginPage from "../pages/LoginPage";
 export default {
   components: {
-    LeagueInfo, 
-    LoginPage, 
+    LeagueInfo,
+    LoginPage,
     FavoriteGames,
-    FavoritePlayers
-  }
+    FavoritePlayers,
+  },
 };
 </script>
 

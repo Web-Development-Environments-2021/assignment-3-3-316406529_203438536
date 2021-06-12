@@ -7,7 +7,7 @@ import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({
-  routes
+  routes,
 });
 
 import Vuelidate from "vuelidate";
@@ -23,12 +23,14 @@ import {
   FormSelectPlugin,
   AlertPlugin,
   ToastPlugin,
-  LayoutPlugin, 
+  LayoutPlugin,
   InputGroupPlugin,
   TablePlugin,
   ModalPlugin,
   FormDatepickerPlugin,
-  FormTimepickerPlugin
+  FormTimepickerPlugin,
+  ImagePlugin,
+  IconsPlugin,
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -40,12 +42,14 @@ import {
   FormSelectPlugin,
   AlertPlugin,
   ToastPlugin,
-  LayoutPlugin, 
+  LayoutPlugin,
   InputGroupPlugin,
   TablePlugin,
   ModalPlugin,
   FormDatepickerPlugin,
-  FormTimepickerPlugin
+  FormTimepickerPlugin,
+  ImagePlugin,
+  IconsPlugin,
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 
@@ -94,24 +98,22 @@ const shared_data = {
     localStorage.removeItem("username");
     this.username = undefined;
   },
-  setAutoCompleteSearchData(data){
+  setAutoCompleteSearchData(data) {
     localStorage.setItem("autoCompleteSearchData", data);
-    this.AutoCompleteSearchData= data;
+    this.AutoCompleteSearchData = data;
   },
-  setStoredData(searchQuery,searchTeam,searchLocation,players,teams){
+  setStoredData(searchQuery, searchTeam, searchLocation, players, teams) {
     localStorage.setItem("searchQuery", searchQuery);
     localStorage.setItem("searchTeam", searchTeam);
     localStorage.setItem("searchLocation", searchLocation);
     localStorage.setItem("searchLocation", players);
     localStorage.setItem("searchLocation", teams);
-    this.searchQuery= searchQuery;
-    this.searchTeam= searchTeam;
-    this.searchLocation= searchLocation;
-    this.players= players;
-    this.teams= teams;
-
-
-  }
+    this.searchQuery = searchQuery;
+    this.searchTeam = searchTeam;
+    this.searchLocation = searchLocation;
+    this.players = players;
+    this.teams = teams;
+  },
 };
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
@@ -120,7 +122,7 @@ new Vue({
   router,
   data() {
     return {
-      store: shared_data
+      store: shared_data,
     };
   },
   methods: {
@@ -131,9 +133,9 @@ new Vue({
         variant: variant,
         solid: true,
         appendToast: append,
-        autoHideDelay: 3000
+        autoHideDelay: 3000,
       });
-    }
+    },
   },
-  render: (h) => h(App)
+  render: (h) => h(App),
 }).$mount("#app");
