@@ -10,7 +10,7 @@
         <b>{{ name }}</b>
       </li>
 
-      <li>Photo: {{ image }}</li>
+      <li><b-img :src="image"></b-img></li>
       <!-- <li>PositionID: {{ PositionID }}</li> -->
       <li>nationality: {{ nationality }}</li>
       <li>Birthdate: {{ birthdate }}</li>

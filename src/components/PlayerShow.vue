@@ -4,12 +4,12 @@
       <b>Player Name:</b> {{ fullname }}
     </div>
     <ul class="player-content">
+      <li><b-img :src="image_path"></b-img></li>
       <li>Full Name: {{ fullname }}</li>
       <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
       <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
       <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li>
 
-      <li>Photo: {{ image_path }}</li>
       <li>PositionID: {{ PositionID }}</li>
       <li>nationality: {{ nationality }}</li>
       <div v-if="showMore == true">

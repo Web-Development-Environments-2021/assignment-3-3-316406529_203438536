@@ -7,7 +7,7 @@
       :fullname="p.fullname"
       :teamName="p.teamName"
       :teamID="p.teamID"
-      :photoPath="p.photoPath"
+      :image_path="p.photoPath"
       :PositionID="p.PositionID"
       :key="p.PlayerID"
     ></PlayerShow>
