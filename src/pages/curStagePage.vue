@@ -2,26 +2,47 @@
   <div class="container">
     <h1>Currect Stage Page</h1>
     <div id="showRes">
-      <h2>Future Games</h2>
-      <b-table :items="FutureItems" :fields="FutureFields" 
+      <div v-if="!isBusy">
+        <h2>Future Games</h2>
+          <gamesTableShow :Items="FutureItems" :Fields="FutureFields"></gamesTableShow>
+      </div>
+      <h1 v-else :busy="ture">loading Data, Please wait</h1>
+      <!-- <b-table :items="FutureItems" :busy="isBusy" :fields="FutureFields" 
       :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" sort-icon-left responsive="sm">
+      <template #table-busy>
+        <div class="text-center text-danger my-2">
+          <b-spinner class="align-middle"></b-spinner>
+          <strong>Loading...</strong>
+        </div>
+      </template>
+      </b-table> -->
+      <div v-if="!isBusy">
+        <h2>Past Games</h2>
+        <gamesTableShow :Items="PastItems" :Fields="PastFields"></gamesTableShow>
+      </div>
+      <!-- <b-table :items="PastItems" :busy="isBusy" :fields="PastFields" sort-icon-left responsive="sm">
+        <template #table-busy>
+          <div class="text-center text-danger my-2">
+            <b-spinner class="align-middle"></b-spinner>
+            <strong>Loading...</strong>
+          </div>
+      </template>
         <template #cell(eventSchedule)="data">
           <b-button v-b-modal.gameEvents @click="CurEventData(data.value)">Game Events List</b-button>
         </template>
       </b-table>
-      <h2>Past Games</h2>
-      <b-table :items="PastItems" :fields="PastFields" sort-icon-left responsive="sm">
-      </b-table>
     </div>
-      <b-modal hide-footer id="gameEvents" title="Game Enets">
+      <b-modal size="lg" hide-footer id="gameEvents" title="Game Enets">
         <gameEvents id="gameEvents" :EventsList="curEventsList"></gameEvents>
-      </b-modal>
+      </b-modal> -->
+  </div>
   </div>
 
 </template>
 
 <script>
-import gameEvents from "../components/gameEventsShow.vue";
+// import gameEvents from "../components/gameEventsShow.vue";
+import gamesTableShow from "../components/GamesTableShow.vue";
 
   export default {
     data(){
@@ -33,10 +54,14 @@ import gameEvents from "../components/gameEventsShow.vue";
         PastItems: [],
         PastFields: [],
         curEventsList: [],
+        sortBy: 'age',
+        sortDesc: false,
+        isBusy: true,
       }
     },
     components:{
-      gameEvents,
+      // gameEvents,
+      gamesTableShow,
     },
     methods:{
       async getStageGames(){
@@ -60,8 +85,10 @@ import gameEvents from "../components/gameEventsShow.vue";
               game_id: g.game_id,
               game_date: g.game_date,
               game_hour: g.game_hour,
-              home_team: g.home_team,
-              away_team: g.away_team,
+              home_team: g,
+              away_team: g,
+              home_team_id: g.home_team_id,
+              away_team_id: g.away_team_id,
               field: g.field,
               referee_name: g.referee_name,
           }
@@ -82,8 +109,8 @@ import gameEvents from "../components/gameEventsShow.vue";
               game_id: g.game_id,
               game_date: g.game_date,
               game_hour: g.game_hour,
-              home_team: g.home_team,
-              away_team: g.away_team,
+              home_team: g,
+              away_team: g,
               home_team_goal: g.home_team_goal,
               away_team_goal: g.away_team_goal,
               field: g.field,
@@ -107,7 +134,8 @@ import gameEvents from "../components/gameEventsShow.vue";
       },
       CurEventData(data){
         console.log(data);
-        this.curEventsList = data.eventSchedule;
+        this.curEventsList = data;
+        console.log("set event data");
         console.log(this.curEventsList);
       }
     },
@@ -115,6 +143,7 @@ import gameEvents from "../components/gameEventsShow.vue";
       console.log("enter League managment page");
       const data =await  this.getStageGames();
       this.setTables(data);
+      this.isBusy=false;
     },
   }
 </script>

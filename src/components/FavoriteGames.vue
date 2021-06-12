@@ -43,10 +43,12 @@ export default {
     async updateGames() {
       console.log("response");
       try {
+        axios.defaults.withCradentials=true;
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoriteGames"
         );
         const games = response.data.games;
+        axios.defaults.withCradentials=false;
         this.games = [];
         this.games.push(...games);
         console.log(response);
