@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <b-navbar fixed="top" toggleable="lg" type="dark" variant="info">
+    <b-navbar
+      fixed="top"
+      sticky="true"
+      toggleable="lg"
+      type="dark"
+      variant="info"
+    >
       <b-navbar-brand :to="{ name: 'main' }">Superliga Vue</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
