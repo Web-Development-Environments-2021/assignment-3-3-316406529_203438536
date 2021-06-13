@@ -5,7 +5,7 @@
         label-cols-sm="3"
         label="Game Minute:"
         label-for="game_minute">
-        <b-form-input id="game_minute" type="number"></b-form-input>
+        <b-form-input v-model="game_minute" id="game_minute" type="number"></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -13,7 +13,7 @@
         label-cols-sm="3"
         label="Event Type:"
         label-for="event_type">
-        <b-form-input id="event_type" type="text" list="events"></b-form-input>
+        <b-form-input v-model="event_type" id="event_type" type="text" list="events"></b-form-input>
         <datalist id=events>
             <option v-for="eve in eventsList" :key="eve">{{ eve }}</option>
         </datalist>
@@ -25,8 +25,9 @@
         label="player_id:"
         label-for="player_id">
         <b-form-input
-          id="player_id"
-          type="number"
+            v-model="player_id"
+            id="player_id"
+            type="number"
         ></b-form-input>
         </b-form-group>
 
@@ -59,6 +60,7 @@
         methods: {
             async AddGameEvent(){
                 try{
+                    this.axios.defaults.withCredentials = true;
                     const response = await this.axios.post(
                         "http://localhost:3000/games/LeagueManagment/addEvent",
                     {
@@ -71,11 +73,12 @@
 
                     }
                     );
+                    this.axios.defaults.withCredentials = false;
                     this.$root.toast("Add enent", response.data, "success");
                 }
                 catch(err){
                     console.log(err.response.data);
-                    this.$root.toast("Add enent", this.form.submitError, "failed");
+                    this.$root.toast("Add enent",  err.response.data, "failed");
                 }
             }
         },

@@ -1,11 +1,12 @@
 <template>
   <div class="player-preview">
-    <div :title="PlayerID" class="player-title">
+    <div :title="PlayerID" class="player-title"  
+    @click="ClickPlayer()">
       <b>Player Name:</b> {{ fullname }}
     </div>
     <ul class="player-content">
       <li><b-img :src="image_path"></b-img></li>
-      <li>Full Name: {{ fullname }}</li>
+      <li @click="ClickPlayer()">Full Name: {{ fullname }}</li>
       <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
       <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
       <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li>
@@ -100,6 +101,10 @@ export default {
     ClickTeam() {
       this.$router.push(`/TeamPage/:${this.teamID}`);
     },
+    ClickPlayer(){
+      this.$router.push(`/PlayerPage/:${this.PlayerID}`);
+
+    }
   },
   mounted() {
     console.log("Player show mounted");

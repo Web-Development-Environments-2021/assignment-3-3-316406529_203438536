@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!isLoading">
-      <button v-if="players.length!=0" @click="updatePlayers()">Refresh</button>
+      <b-button v-if="players.length!=0" @click="updatePlayers()">Refresh</b-button>
       <h1>Favorite Players</h1>
       <PlayerShow
         v-for="p in players"
@@ -64,12 +64,12 @@ export default {
     },
   },
   created() {
-    this.$root.store.setFavPlayers();
+    this.$root.store.setItem("favPlayers",[]);
   },
   mounted() {
     console.log("favorite players mounted");
     if(this.$root.store.favPlayers.length ==0){
-      this.$root.store.setFavPlayers();
+      this.$root.store.setItem("favPlayers",[]);
       this.updatePlayers();
     }
     else{this.loading=false;}

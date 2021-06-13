@@ -109,7 +109,7 @@ export default {
     },
   },
   mounted() {
-    // this.setSearchAutoCompleteData(); //occur once when building the app. (keep in comment)
+    this.setSearchAutoCompleteData(); //occur once when building the app. (keep in comment)
     this.$root.store.setStoredData("", "", "", [], []);
   },
 };

@@ -32,7 +32,7 @@ import {
   ImagePlugin,
   IconsPlugin,
   SpinnerPlugin,
-  
+  FormFilePlugin,
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
@@ -53,6 +53,7 @@ import {
   ImagePlugin,
   IconsPlugin,
   SpinnerPlugin,
+  FormFilePlugin,
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 
@@ -95,6 +96,7 @@ const shared_data = {
   favGames: localStorage.favGames,
   favPlayers: localStorage.favPlayers,
   favTeams: localStorage.favTeams,
+  LeagueGames: localStorage.LeagueGames,
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -131,6 +133,9 @@ const shared_data = {
   setFavTeams(){
     localStorage.setItem("favTeams", []);
   },
+  setItem(name,value){
+    localStorage.setItem(name,value);
+  }
 };
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
