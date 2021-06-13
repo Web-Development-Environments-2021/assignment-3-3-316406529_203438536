@@ -2,6 +2,7 @@
   <div class="container">
     <h1>League managment page</h1>
     <b-button v-b-modal.addGame> Add Game </b-button>
+    <b-button @click="getLeagueGames()">Refresh</b-button>
     <div id="showRes">
       <b-table v-if="items[0]" :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
         sort-icon-left responsive="sm">
@@ -11,8 +12,14 @@
         <template #cell(allData2)="data">
           <b-button v-b-modal.addScore @click="GameClick(data.value)">Add Score</b-button>
         </template>
+        <template #cell(home_team)="data">
+            <a @click="ClickTeam(data.value.home_team_id)">{{ data.value.home_team }}</a>
+        </template>
+        <template #cell(away_team)="data">
+            <a @click="ClickTeam(data.value.away_team_id)">{{ data.value.away_team }}</a>
+        </template>
       </b-table>
-      <h1 v-else>No Games</h1>
+      <h1 v-else>Loading Games</h1>
     </div>
       <b-modal hide-footer id="addGame" title="Add Game To Sysyem">
         <addGame id="addGame"></addGame>
@@ -34,66 +41,16 @@ import addScore from "../components/addGameScore.vue";
   export default {
     data(){
       return {
-        LeagueGames: [
-          {
-    "game_id": 1,
-    "game_date": "2021-07-31T00:00:00.000Z",
-    "game_hour": "1970-01-01T20:30:00.000Z",
-    "home_team": "AaB",
-    "away_team": "Midtjylland",
-    "home_team_id": 1020,
-    "away_team_id": 939,
-    "home_team_goal": null,
-    "away_team_goal": null,
-    "field": "Parken",
-    "referee_name": "Alex Simovich"
-  },
-  {
-    "game_id": 2,
-    "game_date": "2021-09-14T00:00:00.000Z",
-    "game_hour": "1970-01-01T21:00:00.000Z",
-    "home_team": "AaB",
-    "away_team": "København",
-    "home_team_id": 1020,
-    "away_team_id": 85,
-    "home_team_goal": null,
-    "away_team_goal": null,
-    "field": "MCH Arena",
-    "referee_name": "John Riddman"
-  },
-  {
-    "game_id": 3,
-    "game_date": "2021-03-20T00:00:00.000Z",
-    "game_hour": "1970-01-01T20:30:00.000Z",
-    "home_team": "OB",
-    "away_team": "Midtjylland",
-    "home_team_id": 1789,
-    "away_team_id": 939,
-    "home_team_goal": 2,
-    "away_team_goal": 0,
-    "field": "Lyngby Stadion",
-    "referee_name": "Tom Jhonson "
-  },
-  {
-    "game_id": 4,
-    "game_date": "2021-01-20T00:00:00.000Z",
-    "game_hour": "1970-01-01T21:00:00.000Z",
-    "home_team": "Nordsjælland",
-    "away_team": "Randers",
-    "home_team_id": 2394,
-    "away_team_id": 2356,
-    "home_team_goal": 0,
-    "away_team_goal": 1,
-    "field": "Vejle Stadion",
-    "referee_name": "Tom Jhonson "
-  }
-        ],
+        // LeagueGames: [],
         items: [],
         fields: [],
         GameClickID: 0,
         sortBy: 'age',
         sortDesc: false,
       }
+    },
+    computed:{
+      LeagueGames(){return this.$root.store.LeagueGames;}
     },
     components:{
       addGame,
@@ -102,15 +59,26 @@ import addScore from "../components/addGameScore.vue";
     },
     methods:{
       async getLeagueGames(){
-        const response = await this.axios.get(
-          `http://localhost:3000/league/leagueGames`,
-        );
-        if(response.status == 400){
-            console.log("no premission ban");
-            return;
+        try{
+          this.axios.defaults.withCredentials = true;
+          const response = await this.axios.get(
+            `http://localhost:3000/league/leagueGames`,
+          );
+          if(response.status == 400){
+              console.log("no premission ban");
+              return;
+          }
+          this.axios.defaults.withCredentials = true;
+          this.$root.toast("league games", "Table data Loaded", "success");
+          console.log(response);
+          this.$root.store.LeagueGames = response.data;
+          this.setTable();
         }
-        console.log(response);
-        this.LeagueGames = response.data;
+        catch(err){
+          console.log(err.response.data);
+          this.$root.toast("league games", err.response.data, "fail");
+        }
+        
       },
       setTable(){
         this.items = this.LeagueGames.map((g)=>{
@@ -118,8 +86,8 @@ import addScore from "../components/addGameScore.vue";
               game_id: g.game_id,
               game_date: g.game_date,
               game_hour: g.game_hour,
-              home_team: g.home_team,
-              away_team: g.away_team,
+              home_team: g,
+              away_team: g,
               allData1: g,
               allData2: g,
               home_team_goal: g.home_team_goal,
@@ -148,12 +116,23 @@ import addScore from "../components/addGameScore.vue";
         console.log(data);
         this.GameClickID = data.game_id;
         console.log(this.GameClickID);
-      }
+      },
+      ClickTeam(id) {
+          this.$router.push(`/TeamPage/:${id}`);
+      },
     },
-    mounted() {
+    created() {
+      this.$root.store.setItem("LeagueGames", []);
+    },
+    async mounted() {
       console.log("enter League managment page");
-      // this.getLeagueGames();
-      this.setTable();
+      console.log(this.$root.store.LeagueGames.length);
+      if(this.$root.store.LeagueGames.length == 0){
+        this.$root.store.setItem("LeagueGames", []);
+        await this.getLeagueGames();
+      }
+      else{
+        this.setTable();};
     },
   }
 </script>

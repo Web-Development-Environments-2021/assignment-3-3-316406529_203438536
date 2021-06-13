@@ -1,18 +1,20 @@
 <template>
   <div>
     <div v-if="!isLoading">
-      <button v-if="games.length!=0" @click="updateGames()">Refresh</button>
+      <b-button v-if="games.length!=0" @click="updateGames()">Refresh</b-button>
       <br>
       <GamePreview
         v-for="g in games.slice(0, showCunt)"
         :id="g.game_id"
-        :hostTeam="g.home_team"
-        :guestTeam="g.away_team"
+        :homeTeam="g.home_team"
+        :awayTeam="g.away_team"
         :date="g.game_date"
         :hour="g.game_hour"
         :key="g.game_id"
         :homeTeamID="g.home_team_id"
         :awayTeamID="g.away_team_id"
+        :field="g.field"
+
       ></GamePreview>
     </div>
     <h1 v-else> Loading data, please wait </h1>
@@ -64,13 +66,13 @@ export default {
     },
   },
   created() {
-    this.$root.store.setFavGames();
+    this.$root.store.setItem("favGames",[]);
   },
   mounted() {
     console.log("favorite games mounted");
     console.log(this.$root.store.favGames.length)
     if(this.$root.store.favGames.length ==0){
-      this.$root.store.setFavGames();
+      this.$root.store.setItem("favGames",[]);
       this.updateGames();
     }
     else{this.loading=false;}

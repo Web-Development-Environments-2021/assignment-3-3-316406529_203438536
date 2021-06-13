@@ -77,7 +77,6 @@ export default {
         );
         console.log(response);
         this.axios.defaults.withCredentials = false;
-
         this.$root.toast("add Game", response.data, "success");
       } catch (err) {
         console.log(response);

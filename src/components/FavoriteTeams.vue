@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!isLoading">
-      <button v-if="teams.length!=0" @click="updateTeams()">Refresh</button>
+      <b-button v-if="teams.length!=0" @click="updateTeams()">Refresh</b-button>
       <TeamPreview
         v-for="t in teams"
         :team_id="t.teamID"
@@ -50,12 +50,12 @@ export default {
     },
   },
   created() {
-    this.$root.store.setFavTeams();
+    this.$root.store.setItem("favTeams",[]);
   },
   mounted() {
     console.log("favorite teams mounted");
     if(this.$root.store.favTeams.length ==0){
-      this.$root.store.setFavTeams();
+      this.$root.store.setItem("favTeams",[]);
       this.updateTeams();
     }
     else{this.loading=false;}

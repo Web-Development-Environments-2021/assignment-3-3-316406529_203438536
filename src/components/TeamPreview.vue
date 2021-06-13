@@ -4,8 +4,9 @@
       <!-- <b>{{ team_name }}</b> -->
     </div>
     <ul class="team-content">
-      <li>{{ team_name }}</li>
-      <li>Coach name: {{ coach_name }}</li>
+      <li  @click="ClickTeam()" style="Bold">Team Name: {{ team_name }}</li>
+      <li style="Bold">Coach name: {{ team_coach }}</li>
+      <li style="Bold">Team ID: {{ team_id }}</li>     
     </ul>
   </div>
 </template>
@@ -27,7 +28,11 @@ export default {
       required: true,
     },
   },
-
+  methods:{
+    ClickTeam() {
+      this.$router.push(`/TeamPage/:${this.teamID}`);
+    },
+  },
   mounted() {
     console.log("team preview mounted");
   },
@@ -37,14 +42,14 @@ export default {
 <style>
 .team-preview {
   display: inline-block;
-  width: 100%;
+  width: 300px;
   height: 200px;
   position: relative;
   margin: 10px 10px;
-  /* border-style: solid;
+  border-style: solid;
   border-radius: 10px;
   border-width: 5px;
-  border-color: cadetblue; */
+  border-color: cadetblue;
 }
 
 .team-preview .team-title {

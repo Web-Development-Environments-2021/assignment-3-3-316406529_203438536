@@ -6,8 +6,9 @@
         label="Home Team Goal:"
         label-for="home_team_goal">
         <b-form-input
-          id="home_team_goal"
-          type="number"
+            v-model="home_team_goal"
+            id="home_team_goal"
+            type="number"
         ></b-form-input>
         </b-form-group>
 
@@ -17,8 +18,9 @@
         label="Away Team Goal:"
         label-for="away_team_goal">
         <b-form-input
-          id="away_team_goal"
-          type="number"
+            v-model="away_team_goal"
+            id="away_team_goal"
+            type="number"
         ></b-form-input>
         </b-form-group>
 
@@ -44,6 +46,8 @@
         methods: {
             async AddGameScore(){
                 try{
+                    console.log("addScore");
+                    this.axios.defaults.withCredentials = true;
                     const response = await this.axios.post(
                         "http://localhost:3000/games/LeagueManagment/addScore",
                     {
@@ -53,11 +57,12 @@
 
                     }
                     );
+                    this.axios.defaults.withCredentials = false;
                     this.$root.toast("Add score", response.data, "success");
                 }
                 catch(err){
                     console.log(err.response.data);
-                    this.$root.toast("Add score", this.form.submitError, "failed");
+                    this.$root.toast("Add score", err.response.data, "failed");
                 }
             }
         },

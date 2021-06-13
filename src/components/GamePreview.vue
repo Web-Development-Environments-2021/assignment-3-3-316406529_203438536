@@ -6,6 +6,7 @@
       <li @click="clickTeam(away_team_id)">Away team: {{ awayTeam }}</li>
       <li>date: {{ date }}</li>
       <li>time: {{ hour }}</li>
+      <li>Game Field :{{field}}</li>
     </ul>
   </div>
 </template>
