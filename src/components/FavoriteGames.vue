@@ -1,7 +1,8 @@
 <template>
   <div>
-    <botton @click="updateGames()">Refresh</botton>
-    <div v-if="!loading">
+    <div v-if="!isLoading">
+      <button v-if="games.length!=0" @click="updateGames()">Refresh</button>
+      <br>
       <GamePreview
         v-for="g in games.slice(0, showCunt)"
         :id="g.game_id"
@@ -34,12 +35,12 @@ export default {
   },
   data() {
     return {
-      // games: this.$root.store.favGames,
-      loading: false,
-    };
+      loading: true,
+    }
   },
   computed:{
-    games(){return this.$root.store.favGames;}
+    games(){return this.$root.store.favGames;},
+    isLoading(){return this.loading;},
   },
   methods: {
     async updateGames() {
@@ -48,6 +49,7 @@ export default {
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoriteGames"
         );
+        this.loading = false;
         console.log("games data");
         console.log(response);
         this.axios.defaults.withCredentials=false;
@@ -61,6 +63,9 @@ export default {
       }
     },
   },
+  created() {
+    this.$root.store.setFavGames();
+  },
   mounted() {
     console.log("favorite games mounted");
     console.log(this.$root.store.favGames.length)
@@ -68,6 +73,7 @@ export default {
       this.$root.store.setFavGames();
       this.updateGames();
     }
+    else{this.loading=false;}
 
   },
 };

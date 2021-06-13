@@ -78,10 +78,11 @@ export default {
         console.log(response);
         this.axios.defaults.withCredentials = false;
 
-        this.toast("add Game", response.data, "success");
+        this.$root.toast("add Game", response.data, "success");
       } catch (err) {
         console.log(response);
         console.log(err.response.data);
+        this.$root.toast("add Game", response.data, "fail");
         // this.toast("add Game", this.form.submitError, "failed");
       }
     },
