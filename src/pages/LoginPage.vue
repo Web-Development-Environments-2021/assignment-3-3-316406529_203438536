@@ -107,7 +107,7 @@ export default {
         this.$root.loggedIn = true;
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
-        this.toalst("Login", "user logged in successfuly", "success");
+        this.toast("Login", "user logged in successfuly", "success");
         this.$router.push("/");
       } catch (err) {
         console.log(err.response);

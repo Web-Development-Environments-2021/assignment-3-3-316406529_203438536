@@ -92,6 +92,9 @@ const shared_data = {
   searchLocation: localStorage.searchLocation,
   teams: localStorage.teams,
   players: localStorage.players,
+  favGames: localStorage.favGames,
+  favPlayers: localStorage.favPlayers,
+  favTeams: localStorage.favTeams,
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -117,6 +120,15 @@ const shared_data = {
     this.searchLocation = searchLocation;
     this.players = players;
     this.teams = teams;
+  },
+  setFavGames(){
+    localStorage.setItem("favGames", []);
+  },
+  setFavPlayers(){
+    localStorage.setItem("favPlayers", []);
+  },
+  setFavTeams(){
+    localStorage.setItem("favTeams", []);
   },
 };
 console.log(shared_data);
