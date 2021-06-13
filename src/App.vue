@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar fixed="top" toggleable="lg" type="dark" variant="info">
       <b-navbar-brand :to="{ name: 'main' }">Superliga Vue</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
@@ -12,7 +12,7 @@
           <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
-          <b-nav-item>{{ userInUse }}</b-nav-item>
+          <b-nav-item>Hello, {{ userInUse }}</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
           <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
@@ -29,13 +29,13 @@
               My Account
             </template>
             <b-dropdown-item @click="showFavoriteGames()"
-              >Favorites Games</b-dropdown-item
+              >⚽Favorites Games</b-dropdown-item
             >
             <b-dropdown-item @click="showFavoriteTeams()"
-              >Favorites Teams</b-dropdown-item
+              >👨🏿‍🤝‍👨🏾Favorites Teams</b-dropdown-item
             >
             <b-dropdown-item @click="showFavoritePlayers()"
-              >Favorites Players</b-dropdown-item
+              >⛹️‍♂️Favorites Players</b-dropdown-item
             >
           </b-nav-item-dropdown>
         </b-navbar-nav>

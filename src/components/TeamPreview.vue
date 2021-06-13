@@ -1,6 +1,6 @@
 <template>
   <div class="team-preview">
-    <div :title="id" class="team-title">
+    <div :title="team_id" class="team-title">
       <!-- <b>{{ team_name }}</b> -->
     </div>
     <ul class="team-content">
@@ -21,11 +21,11 @@
       <li>
         Team coach:
         <div>
-          <coachPreview
+          <CoachPreview
             :coach_name="team_coach.coach_name"
-            :coach_id="coach_id"
+            :coach_id="team_coach.coach_id"
             :image="team_coach.image_path"
-          ></coachPreview>
+          ></CoachPreview>
         </div>
       </li>
       <li>
@@ -50,9 +50,10 @@
 import GamePreview from "./GamePreview.vue";
 // import PlayerShow from "./PlayerShow.vue";
 import PlayerTeamPagePreview from "../components/playerTeamPagePreview.vue";
-import coachPreview from "../components/coachPreview.vue";
+// import CoachPreview from "../components/CoachPreview.vue";
+import CoachPreview from "./CoachPreview.vue";
 export default {
-  components: { GamePreview, PlayerTeamPagePreview, coachPreview },
+  components: { GamePreview, PlayerTeamPagePreview, CoachPreview },
   name: "TeamPreview",
   props: {
     team_name: {

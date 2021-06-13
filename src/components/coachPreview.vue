@@ -1,7 +1,7 @@
 <template>
   <div class="coach-preview">
     <div :title="Coach - Id" class="coach-title">
-      <b>{{ coach_name }}</b>
+      <b @click="moveToCoachPage()">{{ coach_name }}</b>
     </div>
     <ul class="coach-content">
       <li v-if="image != null">Image : {{ image }}</li>
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "playerTeamPagePreview",
+  name: "CoachPreview",
   props: {
     coach_id: {
       type: Number,
@@ -44,6 +44,12 @@ export default {
     image: {
       type: String,
       require: false,
+    },
+  },
+  methods: {
+    moveToCoachPage() {
+      console.log("enter coach move to page");
+      this.$router.push(`/CoachPage/:${this.coach_id}`);
     },
   },
   mounted() {

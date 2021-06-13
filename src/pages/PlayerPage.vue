@@ -24,17 +24,6 @@
           >Add to favorite</b-button
         >
       </div>
-
-      <!-- <PlayerShow
-        :fullname="fullname"
-        :image_path="image_path"
-        :birthdate="birthdate"
-        :nationality="nationality"
-        :common_name="common_name"
-        :height="height"
-        :weight="weight"
-        :PositionID="position_id"
-      ></PlayerShow> -->
     </div>
   </div>
 </template>
