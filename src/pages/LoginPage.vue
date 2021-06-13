@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">Login</h1>
-    <b-form @submit.prevent="onLogin">
+    <b-form v-if="!isBusy" @submit.prevent="onLogin">
       <b-form-group
         id="input-group-Username"
         label-cols-sm="3"
@@ -48,6 +48,9 @@
         <router-link to="register"> Register in here</router-link>
       </div>
     </b-form>
+    <div v-else class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
     <b-alert
       class="mt-2"
       v-if="form.submitError"
@@ -57,6 +60,7 @@
     >
       Login failed: {{ form.submitError }}
     </b-alert>
+
     <!-- <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card> -->
@@ -72,9 +76,13 @@ export default {
       form: {
         username: "",
         password: "",
-        submitError: undefined
+        submitError: undefined,
+        busy: false,
       }
     };
+  },
+  computed:{
+    isBusy(){return this.busy;}
   },
   validations: {
     form: {
@@ -93,6 +101,7 @@ export default {
     },
     async Login() {
       try {
+        this.busy = true;
         console.log(this.form.username);
         this.axios.defaults.withCredentials = true;
         const response = await this.axios.post(
@@ -107,9 +116,12 @@ export default {
         this.$root.loggedIn = true;
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
-        this.toast("Login", "user logged in successfuly", "success");
+        this.$root.toast("Login", "user logged in successfuly", "success");
         this.$router.push("/");
       } catch (err) {
+        this.busy=false;
+        this.$root.toast("Login", "user logged incorrect details", "failed");
+
         console.log(err.response);
         this.form.submitError = err.response.data.message;
       }
@@ -122,6 +134,7 @@ export default {
         return;
       }
       // console.log("login method go");
+      this.busy=false;
 
       this.Login();
     }

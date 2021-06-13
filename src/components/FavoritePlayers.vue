@@ -1,25 +1,28 @@
 <template>
   <div>
-    <botton @click="updatePlayers()">Refresh</botton>
-    <h1>Favorite Players</h1>
-    <PlayerShow
-      v-for="p in players"
-      :PlayerID="p.PlayerID"
-      :fullname="p.fullname"
-      :teamName="p.team"
-      :teamID="p.team_id"
-      :image_path="p.image_path"
-      :PositionID="p.position_id"
-      :key="p.PlayerID"
-      :nationality ="p.nationality"
-      :birthdate ="p.birthdate"
-      :birthplace="p.birthplace"
-      :height="p.height"
-      :weight="p.weight"
-      :playerPosition="p.playerPosition"
-      :common_name="p.common_name"
+    <div v-if="!isLoading">
+      <button v-if="players.length!=0" @click="updatePlayers()">Refresh</button>
+      <h1>Favorite Players</h1>
+      <PlayerShow
+        v-for="p in players"
+        :PlayerID="p.PlayerID"
+        :fullname="p.fullname"
+        :teamName="p.team"
+        :teamID="p.team_id"
+        :image_path="p.image_path"
+        :PositionID="p.position_id"
+        :key="p.PlayerID"
+        :nationality ="p.nationality"
+        :birthdate ="p.birthdate"
+        :birthplace="p.birthplace"
+        :height="p.height"
+        :weight="p.weight"
+        :playerPosition="p.playerPosition"
+        :common_name="p.common_name"
 
-    ></PlayerShow>
+      ></PlayerShow>
+    </div>
+    <h1 v-else> Loading data, please wait </h1>
   </div>
 </template>
 
@@ -30,8 +33,14 @@ export default {
   components: {
     PlayerShow,
   },
+  date(){
+    return{
+      loading: true,
+    }
+  },
   computed:{
-    players(){return this.$root.store.favPlayers;}
+    players(){return this.$root.store.favPlayers;},
+    isLoading(){return this.loading;},
   },
   methods: {
     async updatePlayers() {
@@ -42,6 +51,7 @@ export default {
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoritePlayers"
         );
+        this.loading = false;
         const players = response.data;
         this.axios.defaults.withCredentials=false;
         this.$root.store.favPlayers = [];
@@ -53,12 +63,16 @@ export default {
       }
     },
   },
+  created() {
+    this.$root.store.setFavPlayers();
+  },
   mounted() {
     console.log("favorite players mounted");
     if(this.$root.store.favPlayers.length ==0){
       this.$root.store.setFavPlayers();
       this.updatePlayers();
     }
+    else{this.loading=false;}
   },
 };
 </script>

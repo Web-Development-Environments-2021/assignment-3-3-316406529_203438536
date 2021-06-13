@@ -1,13 +1,16 @@
 <template>
   <div>
-    <botton @click="updateTeams()">Refresh</botton>
-    <TeamPreview
-      v-for="t in teams"
-      :team_id="t.teamID"
-      :team_name="t.name"
-      :team_coach="t.coach_name"
-      :key="t.team_id"
-    ></TeamPreview>
+    <div v-if="!isLoading">
+      <button v-if="teams.length!=0" @click="updateTeams()">Refresh</button>
+      <TeamPreview
+        v-for="t in teams"
+        :team_id="t.teamID"
+        :team_name="t.name"
+        :team_coach="t.coach_name"
+        :key="t.team_id"
+      ></TeamPreview>
+    </div>
+    <h1 v-else> Loading data, please wait </h1>
   </div>
 </template>
 
@@ -19,55 +22,14 @@ export default {
     TeamPreview,
   },
   computed:{
-    teams(){return this.$root.store.favTeams;}
+    teams(){return this.$root.store.favTeams;},
+    isLoading(){return this.loading;},
   },
-  // data() {
-  //   return {
-  //     teams: {
-  //       team_id: 2,
-  //       team_players: [
-  //         {
-  //           PlayerID: 84658,
-  //           fullname: "Jens Stage",
-  //           teamName: "København",
-  //           teamID: 85,
-  //           photoPath:
-  //             "https://cdn.sportmonks.com/images/soccer/players/18/84658.png",
-  //           PositionID: "3",
-  //         },
-  //         {
-  //           PlayerID: 846589,
-  //           fullname: "Jens Stage",
-  //           teamName: "København",
-  //           teamID: 85,
-  //           photoPath:
-  //             "https://cdn.sportmonks.com/images/soccer/players/18/84658.png",
-  //           PositionID: "3",
-  //         },
-  //       ],
-  //       games: [
-  //         {
-  //           id: 25,
-  //           hostTeam: "Maccabi Tel-Aviv",
-  //           guestTeam: "Hapoel Beer-Sheva",
-  //           date: "27/5/21",
-  //           hour: "20:00",
-  //         },
-  //         {
-  //           id: 39,
-  //           hostTeam: "Hapoel Tel-Aviv",
-  //           guestTeam: "Maccabi Haifa",
-  //           date: "29/5/21",
-  //           hour: "20:00",
-  //         },
-  //       ],
-  //       team_coach: {
-  //         id: 21,
-  //         name: "sason",
-  //       },
-  //     },
-  //   };
-  // },
+  data() {
+    return {
+      loading: true,
+    }
+  },
   methods: {
     async updateTeams() {
       try {
@@ -75,6 +37,7 @@ export default {
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoriteTeams"
         );
+        this.loading = false;
         this.axios.defaults.withCredentials=false;
         const teams = response.data;
         this.$root.store.favTeams = [];
@@ -86,12 +49,16 @@ export default {
       }
     },
   },
+  created() {
+    this.$root.store.setFavTeams();
+  },
   mounted() {
     console.log("favorite teams mounted");
     if(this.$root.store.favTeams.length ==0){
       this.$root.store.setFavTeams();
       this.updateTeams();
     }
+    else{this.loading=false;}
   },
 };
 </script>

@@ -63,10 +63,12 @@ export default {
     async Logout() {
       console.log("log out method");
       this.$root.store.logout();
+      this.axios.defaults.withCredentials = true;
       this.$root.toast("Logout", "User logged out successfully", "success");
       const response = await this.axios.post(
-        "https://localhost:3000/user/logOut"
+        "http://localhost:3000/user/logOut"
       );
+      this.axios.defaults.withCredentials = false;
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
