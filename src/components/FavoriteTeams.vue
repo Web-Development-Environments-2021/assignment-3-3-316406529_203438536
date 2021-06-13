@@ -1,5 +1,6 @@
 <template>
   <div>
+    <botton @click="updateTeams()">Refresh</botton>
     <TeamPreview
       v-for="t in teams"
       :team_id="t.teamID"
@@ -87,8 +88,10 @@ export default {
   },
   mounted() {
     console.log("favorite teams mounted");
-    this.$root.store.setFavTeams();
-    this.updateTeams();
+    if(this.$root.store.favTeams.length ==0){
+      this.$root.store.setFavTeams();
+      this.updateTeams();
+    }
   },
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <botton @click="updatePlayers()">Refresh</botton>
     <h1>Favorite Players</h1>
     <PlayerShow
       v-for="p in players"
@@ -54,8 +55,10 @@ export default {
   },
   mounted() {
     console.log("favorite players mounted");
-    this.$root.store.setFavPlayers();
-    this.updatePlayers();
+    if(this.$root.store.favPlayers.length ==0){
+      this.$root.store.setFavPlayers();
+      this.updatePlayers();
+    }
   },
 };
 </script>
