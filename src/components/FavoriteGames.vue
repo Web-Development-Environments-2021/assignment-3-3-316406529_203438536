@@ -51,12 +51,12 @@ export default {
     async updateGames() {
       console.log("response");
       try {
-        this.axios.defaults.withCradentials=true;
+        this.axios.defaults.withCredentials=true;
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoriteGames"
         );
         const games = response.data.games;
-        this.axios.defaults.withCradentials=false;
+        this.axios.defaults.withCredentials=false;
         this.games = [];
         this.games.push(...games);
         console.log(response);

@@ -68,9 +68,11 @@ export default {
     async updateTeams() {
       console.log("response");
       try {
+        this.axios.defaults.withCredentials=true;
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoriteTeams"
         );
+        this.axios.defaults.withCredentials=false;
         const teams = response.data.games;
         this.teams = [];
         this.teams.push(...teams);
