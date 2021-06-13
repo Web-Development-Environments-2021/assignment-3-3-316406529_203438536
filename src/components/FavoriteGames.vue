@@ -55,8 +55,8 @@ export default {
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoriteGames"
         );
-        const games = response.data.games;
         this.axios.defaults.withCredentials=false;
+        const games = response.data.games;
         this.games = [];
         this.games.push(...games);
         console.log(response);
