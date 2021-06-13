@@ -2,17 +2,13 @@
   <div>
     <!-- <img :src="image_path" /> -->
     <h1>Coach Page</h1>
-    <b-img fluid :src="info.image_path"></b-img>
+    <b-img v-if="info.image_url != null" fluid :src="info.image_path"></b-img>
     <ul>
-      <li></li>
-      <!-- <li>Current team: {{ info.team_name }}</li>
-        <li>Player position: {{ info.position_id }}</li>
-        <li>Common name: {{ info.common_name }}</li>
-        <li>Birthdate: {{ info.birthdate }}</li>
-        <li>Birth country: {{ info.birthcountry }}</li>
-        <li>Nationality: {{ info.nationality }}</li>
-        <li v-if="info.height != null">Height: {{ info.height }}</li>
-        <li v-if="info.weight != null">Weight: {{ info.weight }}</li> -->
+      <li>Current team: {{ info.currentTeamName }}</li>
+      <li>Common name: {{ info.commonName }}</li>
+      <li>Birthdate: {{ info.birthdate }}</li>
+      <li>Birth country: {{ info.birthcountry }}</li>
+      <li>Nationality: {{ info.nationality }}</li>
     </ul>
     <!-- <div>
         <b-button
@@ -28,6 +24,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "CoachPage",
   components: {},
@@ -39,7 +36,9 @@ export default {
   async mounted() {
     console.log("enter coach page mounte!");
     const coach_id = this.$route.params.id.replace(":", "");
-    const result = await axios.get(`/coaches/coachDetails/${coach_id}`);
+    const result = await axios.get(
+      `http://127.0.0.1:3000/coaches/coachDetails/${coach_id}`
+    );
     console.log(result);
     this.info = result.data;
   },
