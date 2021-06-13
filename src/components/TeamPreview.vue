@@ -4,56 +4,14 @@
       <!-- <b>{{ team_name }}</b> -->
     </div>
     <ul class="team-content">
-      <li>
-        Team players:
-        <div>
-          <PlayerTeamPagePreview
-            v-for="p in team_players"
-            :PlayerID="p.PlayerID"
-            :name="p.name"
-            :birthdate="p.birthdate"
-            :image="p.image"
-            :nationality="p.nationality"
-            :key="p.PlayerID"
-          ></PlayerTeamPagePreview>
-        </div>
-      </li>
-      <li>
-        Team coach:
-        <div>
-          <CoachPreview
-            :coach_name="team_coach.coach_name"
-            :coach_id="team_coach.coach_id"
-            :image="team_coach.image_path"
-          ></CoachPreview>
-        </div>
-      </li>
-      <li>
-        Team games:
-        <div>
-          <GamePreview
-            v-for="g in team_games"
-            :id="g.id"
-            :hostTeam="g.hostTeam"
-            :guestTeam="g.guestTeam"
-            :date="g.date"
-            :hour="g.hour"
-            :key="g.id"
-          ></GamePreview>
-        </div>
-      </li>
+      <li>{{ team_name }}</li>
+      <li>Coach name: {{ coach_name }}</li>
     </ul>
   </div>
 </template>
 
 <script>
-import GamePreview from "./GamePreview.vue";
-// import PlayerShow from "./PlayerShow.vue";
-import PlayerTeamPagePreview from "../components/playerTeamPagePreview.vue";
-// import CoachPreview from "../components/CoachPreview.vue";
-import CoachPreview from "./CoachPreview.vue";
 export default {
-  components: { GamePreview, PlayerTeamPagePreview, CoachPreview },
   name: "TeamPreview",
   props: {
     team_name: {
@@ -64,17 +22,9 @@ export default {
       type: Number,
       required: true,
     },
-    team_players: {
-      type: Array,
-      required: true,
-    },
     team_coach: {
-      type: Array,
+      type: String,
       required: true,
-    },
-    team_games: {
-      type: Array,
-      require: false,
     },
   },
 

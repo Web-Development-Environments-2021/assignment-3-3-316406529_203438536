@@ -1,27 +1,67 @@
 <template>
-  <div class="container">
-    <h1 align="center">{{ info.team_name }}</h1>
-    <div v-if="info != null">
-      <TeamPreview
-        :team_name="info.team_name"
-        :team_players="info.team_players"
-        :team_coach="info.team_coach"
-        :team_games="info.team_games"
-      ></TeamPreview>
+  <div class="team-page">
+    <div :title="info.team_name" class="team-title">
+      <!-- <b>{{ team_name }}</b> -->
     </div>
-    <h1 v-else>Team ID Error</h1>
+    <ul class="team-content">
+      <li>
+        Team players:
+        <div>
+          <PlayerTeamPagePreview
+            v-for="p in info.team_players"
+            :PlayerID="p.PlayerID"
+            :name="p.name"
+            :birthdate="p.birthdate"
+            :image="p.image"
+            :nationality="p.nationality"
+            :key="p.PlayerID"
+          ></PlayerTeamPagePreview>
+        </div>
+      </li>
+      <li>
+        Team coach:
+        <div>
+          <CoachPreview
+            :coach_name="info.team_coach.coach_name"
+            :coach_id="info.team_coach.coach_id"
+            :image="info.team_coach.image_path"
+          ></CoachPreview>
+        </div>
+      </li>
+      <li v-if="info.team_games.length !== 0">
+        Team games:
+        <div>
+          <GamePreview
+            v-for="g in info.team_games"
+            :id="g.game_id"
+            :homeTeam="g.home_team"
+            :awayTeam="g.away_team"
+            :date="g.game_date"
+            :hour="g.game_hour"
+            :home_team_id="g.home_team_id"
+            :away_team_id="g.away_team_id"
+            :key="g.id"
+          ></GamePreview>
+        </div>
+        <!-- <div v-else><h2>We don't have any games for this team</h2></div> -->
+      </li>
+      <li v-else>
+        <h5>
+          We don't have any games for this team
+        </h5>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-// import { defineComponent } from '@vue/composition-api'
 import axios from "axios";
-import TeamPreview from "../components/TeamPreview.vue";
-// import TeamPreview from "../components/TeamPreview.vue";
-// import { component } from 'vue/types/umd';
 
+import PlayerTeamPagePreview from "../components/playerTeamPagePreview.vue";
+import GamePreview from "../components/GamePreview.vue";
+import CoachPreview from "../components/CoachPreview.vue";
 export default {
-  components: { TeamPreview },
+  components: { PlayerTeamPagePreview, GamePreview, CoachPreview },
   name: "TeamPage",
   data() {
     return {
@@ -280,12 +320,50 @@ export default {
           coach_name: "Jess Thorup",
           coach_id: 456421,
         },
-        team_games: [],
+        team_games: [
+          {
+            game_id: 4,
+            game_date: "2021-04-23T00:00:00.000Z",
+            game_hour: "1970-01-01T20:30:00.000Z",
+            home_team: "AaB",
+            away_team: "Midtjylland",
+            home_team_id: 1020,
+            away_team_id: 939,
+            field: "yahud",
+          },
+          {
+            game_id: 3,
+            game_date: "2021-05-23T00:00:00.000Z",
+            game_hour: "1970-01-01T20:30:00.000Z",
+            home_team: "Midtjylland",
+            away_team: "AaB",
+            home_team_id: 939,
+            away_team_id: 1020,
+            field: "Tedi",
+          },
+          {
+            game_id: 1,
+            game_date: "2021-08-23T00:00:00.000Z",
+            game_hour: "1970-01-01T20:30:00.000Z",
+            home_team: "Midtjylland",
+            away_team: "AaB",
+            home_team_id: 939,
+            away_team_id: 1020,
+            field: "Tedi",
+          },
+          {
+            game_id: 2,
+            game_date: "2021-09-23T00:00:00.000Z",
+            game_hour: "1970-01-01T20:30:00.000Z",
+            home_team: "AaB",
+            away_team: "Midtjylland",
+            home_team_id: 1020,
+            away_team_id: 939,
+            field: "Tedi",
+          },
+        ],
       },
     };
-    components: {
-      TeamPreview;
-    }
   },
 
   async mounted() {

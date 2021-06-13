@@ -18,12 +18,12 @@
           <div v-if="pressedGame === true">
             <GamePreview
               :id="nextComingGame.game_id"
-              :hostTeam="nextComingGame.home_team"
-              :guestTeam="nextComingGame.away_team"
+              :homeTeam="nextComingGame.home_team"
+              :awayTeam="nextComingGame.away_team"
               :date="nextComingGame.game_date"
               :hour="nextComingGame.game_hour"
-              :homeTeamID="nextComingGame.home_team_id"
-              :awayTeamID="nextComingGame.away_team_id"
+              :home_team_id="nextComingGame.home_team_id"
+              :away_team_id="nextComingGame.away_team_id"
             ></GamePreview>
           </div>
         </b-card-text>
