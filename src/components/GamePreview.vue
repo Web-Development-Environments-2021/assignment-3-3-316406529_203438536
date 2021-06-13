@@ -27,11 +27,11 @@ export default {
       required: true,
     },
     homeTeamID: {
-      type: String,
+      type: Number,
       required: false,     
     },
     awayTeamID: {
-      type: String,
+      type: Number,
       required: false,     
     },
     date: {
