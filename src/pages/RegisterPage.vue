@@ -158,6 +158,24 @@
           Country is required
         </b-form-invalid-feedback>
       </b-form-group>
+      <b-form-group
+        id="input-group-image"
+        label-cols-sm="3"
+        label="Image:"
+        label-for="image"
+      >
+        <b-form-file
+          accept="image/*"
+          id="image"
+          v-model="$v.form.image.$model"
+          :state="validateState('image')"
+          placeholder="Choose a file or drop it here..."
+          drop-placeholder="Drop file here..."
+        ></b-form-file>
+        <!-- <b-form-invalid-feedback>
+          Country is required
+        </b-form-invalid-feedback> -->
+      </b-form-group>
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
@@ -210,6 +228,7 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
+        image: null,
         submitError: undefined,
       },
       countries: [{ value: null, text: "", disabled: true }],
@@ -253,6 +272,7 @@ export default {
         required,
         email,
       },
+      image: {},
     },
   },
   mounted() {
@@ -267,6 +287,7 @@ export default {
     },
     async Register() {
       try {
+        let image_url = await imageUpload();
         const response = await this.axios.post(
           "http://localhost:3000/register",
           {
@@ -276,6 +297,7 @@ export default {
             country: this.form.country,
             password: this.form.password,
             email: this.form.email,
+            image_url: image_url,
           }
         );
         console.log(response);
@@ -291,6 +313,16 @@ export default {
         this.onReset(); //reset all fields
       }
     },
+    // async imageUpload() {
+    //   console.log("enter upload image");
+    //   const response = await axios.post(
+    //     "https://api.cloudinary.com/v1_1/dqkrrjag3/uplaod",
+    //     {
+    //       image,
+    //     }
+    //   );
+    //   console.log(response);
+    // },
     onRegister() {
       // console.log("register method called");
       this.$v.form.$touch();
