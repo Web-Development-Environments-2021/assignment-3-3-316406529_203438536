@@ -55,6 +55,11 @@ const routes = [
     // props: {id: 84658}
   },
   {
+    path: "/CoachPage/:id",
+    name: "CoachPage",
+    component: () => import("./pages/CoachPage"),
+  },
+  {
     path: "/TeamPage/:id",
     name: "TeamPage",
     // component: TeamPreview,
