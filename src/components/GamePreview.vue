@@ -6,15 +6,16 @@
       <li @click="clickTeam(away_team_id)">Away team: {{ awayTeam }}</li>
       <li>date: {{ date }}</li>
       <li>time: {{ hour }}</li>
-      <li>Game Field :{{field}}</li>
+      <li>Game Field :{{ field }}</li>
     </ul>
     <b-button
-      size="lg"
+      size="sm"
       id="addFavoriteGame"
       pill
       variant="outline-danger"
       @click="addGameToFavorites()"
-      >Add to favorite</b-button>
+      >Add to favorite</b-button
+    >
   </div>
 </template>
 
@@ -59,25 +60,35 @@ export default {
       this.$router.push(`/TeamPage/:${id}`);
     },
     async addGamesToFavorites() {
-      try{
-        this.$root.toast("Games Page", "Adding favorite, please wait....", "success");
+      try {
+        this.$root.toast(
+          "Games Page",
+          "Adding favorite, please wait....",
+          "success"
+        );
         const Games = this.$route.params.id.replace(":", "");
         console.log(`adding Game ${Games}`);
-        this.axios.defaults.withCredentials=true;
+        this.axios.defaults.withCredentials = true;
         const respond = await this.axios.post(
           "http://localhost:3000/users/FavoriteGames",
           { game_id: Games }
         );
         console.log(`data recived`);
         console.log(respond);
-        this.axios.defaults.withCredentials=false;
-        this.$root.toast("Games Page", "The Games added successfuly", "success");
-
-      }catch(error){
+        this.axios.defaults.withCredentials = false;
+        this.$root.toast(
+          "Games Page",
+          "The Games added successfuly",
+          "success"
+        );
+      } catch (error) {
         console.log(console.error());
-        this.$root.toast("Games Page", "The Games added failed- duplication favorite Posible", "fail");
+        this.$root.toast(
+          "Games Page",
+          "The Games added failed- duplication favorite Posible",
+          "fail"
+        );
       }
-
     },
   },
   mounted() {
@@ -87,7 +98,7 @@ export default {
 </script>
 
 <style>
-.game-preview {
+div.game-preview {
   display: inline-block;
   width: 250px;
   height: 200px;

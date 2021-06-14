@@ -1,11 +1,12 @@
 <template>
   <div class="league-preview">
-    <div>
+    <div class="leage-info-card">
       <b-card
         img-alt="Image"
         tag="article"
         style="max-width: 20rem;"
         class="mb-2"
+        id="infor-card-context"
       >
         <b-card-title>{{ league_name }}</b-card-title>
         <b-card-text>
@@ -90,9 +91,10 @@ export default {
   height: 200px;
   position: relative;
   margin: 10px 10px;
-  border-style: solid;
-  border-radius: 10px;
-  border-width: 5px;
+
+  /* border-style: solid; */
+  /* border-radius: 10px;
+  border-width: 5px; */
   border-color: rgb(44, 89, 116);
 }
 
@@ -105,5 +107,12 @@ export default {
 .league-preview .league-content {
   width: 100%;
   overflow: hidden;
+}
+
+#leage-info-card {
+  background-color: rgba(215, 237, 241, 0.616);
+}
+#infor-card-context {
+  background-color: rgba(215, 237, 241, 0.616);
 }
 </style>

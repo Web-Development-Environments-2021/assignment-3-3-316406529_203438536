@@ -352,6 +352,12 @@ export default {
 <style lang="scss" scoped>
 .container {
   max-width: 500px;
+  max-height: 100%;
   background-color: rgba(215, 237, 241, 0.61);
+  position: relative;
+  // padding: 10pt;
+  // margin-bottom: 10%;
+  margin-top: 5%;
+  // left: 0%;
 }
 </style>
