@@ -52,6 +52,7 @@ export default {
         );
         },
         async search() {
+            this.$root.toast("Search player", "Searching for teams, please wait....", "success");
             this.teams = [];
             console.log("start searching");
             console.log({

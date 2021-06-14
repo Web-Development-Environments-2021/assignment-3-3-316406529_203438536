@@ -17,9 +17,10 @@
                 <a @click="ClickTeam(data.value.away_team_id)">{{ data.value.away_team }}</a>
             </template>
         </b-table>
-        <b-modal size="lg"  hide-footer id="gameEvents" title="Game Enets">
+        <b-modal v-if="curEventsList!=null" size="lg"  hide-footer id="gameEvents" title="Game Enets">
             <gameEvents id="gameEvents" :EventsList="curEventsList"></gameEvents>
         </b-modal>
+
     </div>
 </template>
 
@@ -44,7 +45,7 @@ export default ({
         return{
             sortBy: 'age',
             sortDesc: false,
-            curEventsList: [],
+            curEventsList: null,
             isBusy: false,
         }
     },

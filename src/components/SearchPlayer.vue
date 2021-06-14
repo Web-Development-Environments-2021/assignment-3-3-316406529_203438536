@@ -119,6 +119,7 @@ export default {
         );
         },
         async search() {
+            this.$root.toast("Search player", "Searching for players, please wait....", "success");
             this.players = [];
             console.log("start searching");
             console.log({
@@ -150,7 +151,7 @@ export default {
                 return;
                 }
                 if (response.status == 200) {
-                this.$root.toast("Search player", response.data, "success");
+                this.$root.toast("Search player", "Players List below", "success");
                 this.showPlayers(response);
                 this.setStoredData();
                 }

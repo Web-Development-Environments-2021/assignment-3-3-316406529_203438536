@@ -60,6 +60,7 @@
         methods: {
             async AddGameEvent(){
                 try{
+                    this.$root.toast("Add Event", "Adding Event to system, please wait....", "success");
                     this.axios.defaults.withCredentials = true;
                     const response = await this.axios.post(
                         "http://localhost:3000/games/LeagueManagment/addEvent",

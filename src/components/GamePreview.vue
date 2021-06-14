@@ -8,6 +8,13 @@
       <li>time: {{ hour }}</li>
       <li>Game Field :{{field}}</li>
     </ul>
+    <b-button
+      size="lg"
+      id="addFavoriteGame"
+      pill
+      variant="outline-danger"
+      @click="addGameToFavorites()"
+      >Add to favorite</b-button>
   </div>
 </template>
 
@@ -50,6 +57,27 @@ export default {
   methods: {
     clickTeam(id) {
       this.$router.push(`/TeamPage/:${id}`);
+    },
+    async addGamesToFavorites() {
+      try{
+        this.$root.toast("Games Page", "Adding favorite, please wait....", "success");
+        const Games = this.$route.params.id.replace(":", "");
+        console.log(`adding Game ${Games}`);
+        this.axios.defaults.withCredentials=true;
+        const respond = await this.axios.post(
+          "http://localhost:3000/users/FavoriteGames",
+          { game_id: Games }
+        );
+        console.log(`data recived`);
+        console.log(respond);
+        this.axios.defaults.withCredentials=false;
+        this.$root.toast("Games Page", "The Games added successfuly", "success");
+
+      }catch(error){
+        console.log(console.error());
+        this.$root.toast("Games Page", "The Games added failed- duplication favorite Posible", "fail");
+      }
+
     },
   },
   mounted() {

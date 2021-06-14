@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!isLoading">
-      <b-button v-if="!hasData" @click="updatePlayers()">Refresh</b-button>
+      <b-button @click="updatePlayers()">Refresh</b-button>
       <h1>Favorite Players</h1>
       <div v-if="hasData">
         <PlayerShow
@@ -51,6 +51,7 @@ export default {
     async updatePlayers() {
       // console.log("response");
       try {
+        this.$root.toast("Favorite Players", "System Refrashing, please wait....", "success");
         this.axios.defaults.withCredentials=true;
         console.log(this.$root.store.username);
         const response = await this.axios.get(
@@ -71,10 +72,10 @@ export default {
   created() {
     this.$root.store.setItem("favPlayers",[]);
   },
-  mounted() {
+  async mounted() {
     console.log("favorite players mounted");
     if(this.$root.store.favPlayers.length ==0){
-      this.$root.store.setItem("favPlayers",[]);
+      await this.$root.store.setItem("favPlayers",[]);
       this.updatePlayers();
     }
     else{this.loading=false;}
