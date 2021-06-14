@@ -1,9 +1,13 @@
 <template>
   <div class="container">
-    <h1 class="title">Main Page</h1>
-    <LoginPage v-if="!$root.store.username"></LoginPage>
-    <FavoriteGames :showCunt="3" v-else></FavoriteGames>
-    <LeagueInfo></LeagueInfo>
+    <!-- <h1 class="title">Main Page</h1> -->
+    <div id="login-or-games-div">
+      <LoginPage v-if="!$root.store.username" id=""></LoginPage>
+      <FavoriteGames :showCunt="3" v-else></FavoriteGames>
+    </div>
+    <div id="leugue-info-div">
+      <LeagueInfo></LeagueInfo>
+    </div>
   </div>
 </template>
 
@@ -16,13 +20,21 @@ export default {
     LeagueInfo,
     LoginPage,
     FavoriteGames,
-    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.RandomRecipes {
-  margin: 10px 0 10px;
+div.container {
+  // margin: 10px 0 10px;
+  // position: absolute;
+  // left: 50%;
+  // top: 50%;
+  // transform: translate(-50%, -50%);
+  // border: 5px solid #ffff00;
+  // padding: 10px;
+  margin: 0 auto;
+  background-color: rgba(215, 237, 241, 0.61);
 }
 .blur {
   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
@@ -31,5 +43,20 @@ export default {
 ::v-deep .blur .recipe-preview {
   pointer-events: none;
   cursor: default;
+}
+#login-or-games-div {
+  position: -webkit-sticky;
+  top: 10px;
+  left: 20px;
+  right: 200px;
+}
+// #login-or-games-div#login-comp-css {
+//   position: relative;
+//   top: 10px;
+//   left: 20px;
+//   right: 200px;
+// }
+#leugue-info-div {
+  position: auto;
 }
 </style>

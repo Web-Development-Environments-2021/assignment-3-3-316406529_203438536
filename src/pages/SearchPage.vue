@@ -3,28 +3,35 @@
     <div id="searchAttributes">
       <h1 class="title" align="center">Search Page</h1>
       <b-input-group prepend="Search Query:" id="search-input">
-          <div>
-              <b-form-input
-              list="mainQueryDataList"
-              v-model="searchQueryinput"
-              :placeholder="searchQueryinput"
-              ></b-form-input>
-              <datalist id="mainQueryDataList">
-              <option v-for="p in mainQueryDataList" :key="p">{{ p }}</option>
-              </datalist>
-          </div>
-          <template #append>
-              <b-dropdown v-bind:text="searchAtribute" variant="success">
-              <b-dropdown-item @click="playerSearch()">Player</b-dropdown-item>
-              <b-dropdown-item @click="teamSearch()">Team</b-dropdown-item>
-              </b-dropdown>
-          </template>
+        <div>
+          <b-form-input
+            list="mainQueryDataList"
+            v-model="searchQueryinput"
+            :placeholder="searchQueryinput"
+          ></b-form-input>
+          <datalist id="mainQueryDataList">
+            <option v-for="p in mainQueryDataList" :key="p">{{ p }}</option>
+          </datalist>
+        </div>
+        <template #append>
+          <b-dropdown v-bind:text="searchAtribute" variant="success">
+            <b-dropdown-item @click="playerSearch()">Player</b-dropdown-item>
+            <b-dropdown-item @click="teamSearch()">Team</b-dropdown-item>
+          </b-dropdown>
+        </template>
       </b-input-group>
-      <br>
-      <SearchPlayer :searchQuery="searchQuery" :teamsList="teamsList" :LocationsList="LocationsList" v-if="searchAtribute == 'player'"></SearchPlayer>
-      <SearchTeam v-if="searchAtribute == 'team'" :searchQuery="searchQuery"></SearchTeam>
+      <br />
+      <SearchPlayer
+        :searchQuery="searchQuery"
+        :teamsList="teamsList"
+        :LocationsList="LocationsList"
+        v-if="searchAtribute == 'player'"
+      ></SearchPlayer>
+      <SearchTeam
+        v-if="searchAtribute == 'team'"
+        :searchQuery="searchQuery"
+      ></SearchTeam>
     </div>
-
   </div>
 </template>
 
@@ -88,13 +95,19 @@ export default {
     },
   },
   computed: {
-    mainQueryDataList(){
-      if(this.searchAtribute =='player'){return this.playersList;}
-      else{return this.teamsList;}
+    mainQueryDataList() {
+      if (this.searchAtribute == "player") {
+        return this.playersList;
+      } else {
+        return this.teamsList;
+      }
     },
-    searchQuery(){return this.searchQueryinput;},
-    searchAtribute(){return this.curSearchAtribute;},
-
+    searchQuery() {
+      return this.searchQueryinput;
+    },
+    searchAtribute() {
+      return this.curSearchAtribute;
+    },
   },
   mounted() {
     console.log("enter search page");
@@ -104,6 +117,9 @@ export default {
 </script>
 
 <style scoped>
+#searchAttributes {
+  background-color: rgba(215, 237, 241, 0.61);
+}
 #search-input {
   margin-left: 25%;
   width: 500px;
@@ -115,5 +131,4 @@ export default {
   margin-left: 50%;
   width: 500px;
 }
-
 </style>
