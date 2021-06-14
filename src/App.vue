@@ -59,17 +59,22 @@ export default {
   name: "App",
   methods: {
     async Logout() {
-      console.log("log out method");
-      this.$root.store.logout();
-      this.axios.defaults.withCredentials = true;
-      this.$root.toast("Logout", "User logged out successfully", "success");
-      const response = await this.axios.post(
-        "http://localhost:3000/user/logOut"
-      );
-      this.axios.defaults.withCredentials = false;
-      this.$router.push("/").catch(() => {
-        this.$forceUpdate();
-      });
+      try{
+        console.log("log out method");
+        this.axios.defaults.withCredentials = true;
+        this.$root.toast("Logout", "User logged out successfully", "success");
+        const response = await this.axios.post(
+          "http://localhost:3000/user/logOut"
+        );
+        this.axios.defaults.withCredentials = false;
+        this.$root.store.logout();
+        this.$router.push("/").catch(() => {
+          this.$forceUpdate();
+        });
+      }catch{
+        this.$root.toast("Logout", "Comunication with server week, log-out agian", "success");
+      }
+
     },
     showFavoriteGames() {
       this.$router.push("/users/FavoriteGames");
