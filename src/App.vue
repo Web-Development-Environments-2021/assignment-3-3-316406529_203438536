@@ -62,10 +62,10 @@ export default {
       try{
         console.log("log out method");
         this.axios.defaults.withCredentials = true;
-        this.$root.toast("Logout", "User logged out successfully", "success");
         const response = await this.axios.post(
           "http://localhost:3000/user/logOut"
         );
+        this.$root.toast("Logout", "User logged out successfully", "success");
         this.axios.defaults.withCredentials = false;
         this.$root.store.logout();
         this.$router.push("/").catch(() => {
