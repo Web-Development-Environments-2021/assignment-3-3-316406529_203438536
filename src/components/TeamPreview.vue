@@ -36,7 +36,7 @@ export default {
       required: false,
     },
     founded: {
-      type: String,
+      type: Number,
       required: false,
     },
     county_name: {
