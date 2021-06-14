@@ -7,7 +7,11 @@
         :team_id="t.teamID"
         :team_name="t.name"
         :team_coach="t.coach_name"
-        :key="t.team_id"
+        :team_photo="t.logo_path"
+        :founded="t.founded"
+        :national_team="t.nationa_team"
+        :county_name="county_name"
+        :key="t.teamID"
       ></TeamPreview>
     </div>
     <h1 v-else> Loading data, please wait </h1>
