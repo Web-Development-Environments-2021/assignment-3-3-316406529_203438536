@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Currect Stage Page</h1>
+    <h1 class="title">Currect Stage Page</h1>
     <div id="showRes">
       <div v-if="!isBusy">
         <h2>Future Games</h2>

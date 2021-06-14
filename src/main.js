@@ -103,7 +103,7 @@ const shared_data = {
     console.log("login", this.username);
   },
   logout() {
-    this.loggedIn=false;
+    this.loggedIn = false;
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
@@ -124,18 +124,18 @@ const shared_data = {
     this.players = players;
     this.teams = teams;
   },
-  setFavGames(){
+  setFavGames() {
     localStorage.setItem("favGames", []);
   },
-  setFavPlayers(){
+  setFavPlayers() {
     localStorage.setItem("favPlayers", []);
   },
-  setFavTeams(){
+  setFavTeams() {
     localStorage.setItem("favTeams", []);
   },
-  setItem(name,value){
-    localStorage.setItem(name,value);
-  }
+  setItem(name, value) {
+    localStorage.setItem(name, value);
+  },
 };
 console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;

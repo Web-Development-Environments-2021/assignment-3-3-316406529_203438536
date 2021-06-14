@@ -2,7 +2,7 @@
   <div class="container">
     <!-- <h1 class="title">Main Page</h1> -->
     <div id="login-or-games-div">
-      <LoginPage v-if="!$root.store.username" id=""></LoginPage>
+      <LoginPage v-if="!$root.store.username" id="login-comp-css"></LoginPage>
       <FavoriteGames :showCunt="3" v-else></FavoriteGames>
     </div>
     <div id="leugue-info-div">
@@ -27,13 +27,11 @@ export default {
 <style lang="scss" scoped>
 div.container {
   // margin: 10px 0 10px;
-  // position: absolute;
-  // left: 50%;
-  // top: 50%;
-  // transform: translate(-50%, -50%);
+
+  // transform: translate(-10%, -10%);
   // border: 5px solid #ffff00;
   // padding: 10px;
-  margin: 0 auto;
+  // margin: 0 auto;
   background-color: rgba(215, 237, 241, 0.61);
 }
 .blur {
@@ -49,14 +47,19 @@ div.container {
   top: 10px;
   left: 20px;
   right: 200px;
+  // background-color: rgba(215, 237, 241, 0.61);
 }
-// #login-or-games-div#login-comp-css {
-//   position: relative;
-//   top: 10px;
-//   left: 20px;
-//   right: 200px;
-// }
+#login-comp-css {
+  position: absolute;
+  left: 35%;
+  top: 10%;
+  right: 200px;
+  background-color: rgba(215, 237, 241, 0.616);
+}
 #leugue-info-div {
-  position: auto;
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  background-color: rgba(215, 237, 241, 0.616);
 }
 </style>

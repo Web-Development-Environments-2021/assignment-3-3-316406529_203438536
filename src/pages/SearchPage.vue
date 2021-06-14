@@ -3,7 +3,7 @@
     <div id="searchAttributes">
       <h1 class="title" align="center">Search Page</h1>
       <b-input-group prepend="Search Query:" id="search-input">
-        <div>
+        <div id="player-search-div">
           <b-form-input
             list="mainQueryDataList"
             v-model="searchQueryinput"
@@ -21,6 +21,7 @@
         </template>
       </b-input-group>
       <br />
+
       <SearchPlayer
         :searchQuery="searchQuery"
         :teamsList="teamsList"
@@ -125,10 +126,17 @@ export default {
   width: 500px;
   margin-top: 20px;
 }
-
+div.input-group {
+  position: relative;
+  left: 10%;
+  top: 10;
+}
 #SeachBotton {
   margin-top: 20px;
   margin-left: 50%;
   width: 500px;
+}
+#player-search-div {
+  position: static;
 }
 </style>
