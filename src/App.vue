@@ -2,7 +2,7 @@
   <div id="app">
     <b-navbar
       fixed="top"
-      sticky="true"
+      sticky
       toggleable="lg"
       type="dark"
       variant="info"

@@ -14,7 +14,7 @@
           Stage: {{ current_stage_name }}
           <h5 @click="showNextGame()">Next Game Coming</h5>
 
-          <bt />
+          <br />
           <div v-if="pressedGame === true">
             <GamePreview
               :id="nextComingGame.game_id"
@@ -24,6 +24,7 @@
               :hour="nextComingGame.game_hour"
               :home_team_id="nextComingGame.home_team_id"
               :away_team_id="nextComingGame.away_team_id"
+              :field="nextComingGame.field"
             ></GamePreview>
           </div>
         </b-card-text>
