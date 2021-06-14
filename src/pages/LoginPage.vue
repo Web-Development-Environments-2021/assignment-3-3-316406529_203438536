@@ -78,21 +78,23 @@ export default {
         password: "",
         submitError: undefined,
         busy: false,
-      }
+      },
     };
   },
-  computed:{
-    isBusy(){return this.busy;}
+  computed: {
+    isBusy() {
+      return this.busy;
+    },
   },
   validations: {
     form: {
       username: {
-        required, 
+        required,
       },
       password: {
-        required
-      }
-    }
+        required,
+      },
+    },
   },
   methods: {
     validateState(param) {
@@ -104,13 +106,10 @@ export default {
         this.busy = true;
         console.log(this.form.username);
         this.axios.defaults.withCredentials = true;
-        const response = await this.axios.post(
-          "http://localhost:3000/login",
-          {
-            username: this.form.username,
-            password: this.form.password
-          }
-        );
+        const response = await this.axios.post("http://localhost:3000/login", {
+          username: this.form.username,
+          password: this.form.password,
+        });
         this.axios.defaults.withCredentials = false;
         console.log(response);
         this.$root.loggedIn = true;
@@ -119,7 +118,7 @@ export default {
         this.$root.toast("Login", "user logged in successfuly", "success");
         this.$router.push("/");
       } catch (err) {
-        this.busy=false;
+        this.busy = false;
         this.$root.toast("Login", "user logged incorrect details", "failed");
 
         console.log(err.response);
@@ -134,15 +133,16 @@ export default {
         return;
       }
       // console.log("login method go");
-      this.busy=false;
+      this.busy = false;
 
       this.Login();
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
 .container {
   max-width: 400px;
+  background-color: rgba(215, 237, 241, 0.61);
 }
 </style>

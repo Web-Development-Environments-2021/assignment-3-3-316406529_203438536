@@ -1,16 +1,14 @@
 <template>
   <div id="app">
-    <b-navbar
-      fixed="top"
-      sticky
-      toggleable="lg"
-      type="dark"
-      variant="info"
-    >
-      <b-navbar-brand :to="{ name: 'main' }">Superliga Vue</b-navbar-brand>
+    <b-navbar fixed="top" sticky toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand :to="{ name: 'main' }" id="nav-bar-brand"
+        >Superliga Vue</b-navbar-brand
+      >
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item :to="{ name: 'main' }">Main</b-nav-item>
+          <b-nav-item class="nav-bar-item-css" :to="{ name: 'main' }"
+            >Main</b-nav-item
+          >
           <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
           <b-nav-item :to="{ name: 'curStageGames' }"
             >Currect stage games</b-nav-item
@@ -18,7 +16,7 @@
           <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
-          <b-nav-item disabled >Hello, {{ userInUse }}</b-nav-item>
+          <b-nav-item>Hello, {{ userInUse }}</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
           <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
@@ -124,12 +122,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   min-height: 100vh;
+  // background-color: #c0f1f3;
+  background-image: url("./assets/background3.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 #nav {
   padding: 30px;
 }
-
+#nav-bar-brand:hover {
+  color: #45574fd0;
+}
 #nav a {
   font-weight: bold;
   color: #2c3e50;
@@ -137,5 +141,11 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.nav-bar-item-css:hover {
+  color: #45574fd0;
+}
+.title {
+  color: #58a7aa;
 }
 </style>
