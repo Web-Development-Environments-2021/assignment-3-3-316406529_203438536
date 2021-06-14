@@ -6,7 +6,11 @@
     <ul class="team-content">
       <li  @click="ClickTeam()" style="Bold">Team Name: {{ team_name }}</li>
       <li style="Bold">Coach name: {{ team_coach }}</li>
-      <li style="Bold">Team ID: {{ team_id }}</li>     
+      <li style="Bold">Team ID: {{ team_id }}</li> 
+      <li v-if="team_photo"> Team Logo: {{team_photo}}</li>
+      <li v-if="founded"> Team Founded Year: {{founded}}</li>  
+      <li v-if="county_name"> Team Country: {{county_name}}</li>
+      <li v-if="national_team"> Netional Team : {{national_team}}</li>  
     </ul>
   </div>
 </template>
@@ -21,12 +25,31 @@ export default {
     },
     team_id: {
       type: Number,
-      required: true,
+      required: false,
     },
     team_coach: {
       type: String,
       required: true,
     },
+    team_photo: {
+      type: String,
+      required: false,
+    },
+    founded: {
+      type: String,
+      required: false,
+    },
+    county_name: {
+      type: String,
+      required: false,
+    },
+    national_team: {
+      type: String,
+      required: false,
+    },
+    
+    
+    
   },
   methods:{
     ClickTeam() {
