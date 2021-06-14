@@ -6,12 +6,12 @@
     <ul class="team-content">
       <li>
         Team Details:
-        <TeamPreview :county_name="info.team_details.county_name"
-         :national_team="info.team_details.national_team"
-          :founded="info.team_details.founded"
-         :team_photo="info.team_details.logo_path"
-          :team_name="info.team_details.name"
-           :team_coach="info.team_details.coach_name"></TeamPreview>
+        <TeamPreview :county_name="info.team_details[0].county_name"
+         :national_team="info.team_details[0].national_team"
+          :founded="info.team_details[0].founded"
+         :team_photo="info.team_details[0].logo_path"
+          :team_name="info.team_details[0].name"
+           :team_coach="info.team_details[0].coach_name"></TeamPreview>
       </li>
       <li>
         Team players:
@@ -83,6 +83,11 @@ export default {
     return {
       info: {
         team_players: [],
+        team_coach:{
+          coach_name:"",
+          coach_id:"",
+          image_path:"",
+        },
         team_games: [],
         team_details: {
           teamID: 939,
