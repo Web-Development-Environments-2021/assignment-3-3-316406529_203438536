@@ -46,6 +46,7 @@
         methods: {
             async AddGameScore(){
                 try{
+                    this.$root.toast("Add Score", "Adding Score to system, please wait....", "success");
                     console.log("addScore");
                     this.axios.defaults.withCredentials = true;
                     const response = await this.axios.post(

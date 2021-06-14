@@ -21,8 +21,7 @@
           pill
           variant="outline-danger"
           @click="addPlayerToFavorites()"
-          >Add to favorite</b-button
-        >
+          >Add to favorite</b-button>
       </div>
     </div>
   </div>
@@ -55,6 +54,7 @@ export default {
     // };
   },
   async mounted() {
+    this.$root.toast("Players Page", "Loading data, please wait....", "success");
     console.log("enter specific player page");
     const player_id = this.$route.params.id.replace(":", "");
     const result = await axios.get(
@@ -65,11 +65,25 @@ export default {
   },
   methods: {
     async addPlayerToFavorites() {
-      const player_id = this.$route.params.id.replace(":", "");
-      const respond = await axios.post(
-        "http://127.0.0.1:3000/users/FavoritePlayers",
-        { playerId: player_id }
-      );
+      try{
+        this.$root.toast("Players Page", "Adding favorite, please wait....", "success");
+        const player_id = this.$route.params.id.replace(":", "");
+        console.log(`adding player ${player_id}`);
+        this.axios.defaults.withCredentials=true;
+        const respond = await this.axios.post(
+          "http://localhost:3000/users/FavoritePlayers",
+          { playerId: player_id }
+        );
+        console.log(`data recived`);
+        console.log(respond);
+        this.axios.defaults.withCredentials=false;
+        this.$root.toast("Players Page", "The player added successfuly", "success");
+
+      }catch(error){
+        console.log(console.error());
+        this.$root.toast("Players Page", "The player added failed- duplication favorite Posible", "fail");
+      }
+
     },
   },
 };

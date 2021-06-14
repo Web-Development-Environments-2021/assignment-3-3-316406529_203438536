@@ -37,6 +37,7 @@ export default {
   methods: {
     async updateTeams() {
       try {
+        this.$root.toast("Favorite Players", "System Refrashing, please wait....", "success");
         this.axios.defaults.withCredentials=true;
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoriteTeams"

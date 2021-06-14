@@ -59,6 +59,13 @@
           We don't have any games for this team
         </h5>
       </li>
+      <b-button
+        size="lg"
+        id="addFavoriteTeam"
+        pill
+        variant="outline-danger"
+        @click="addTeamToFavorites()"
+        >Add to favorite</b-button>
     </ul>
   </div>
 </template>
@@ -102,6 +109,27 @@ export default {
       } catch (err) {
         console.log(err.respond);
       }
+    },
+    async addTeamToFavorites() {
+      try{
+        this.$root.toast("Team Page", "Adding favorite, please wait....", "success");
+        const Team_id = this.$route.params.id.replace(":", "");
+        console.log(`adding teams ${Team_id}`);
+        this.axios.defaults.withCredentials=true;
+        const respond = await this.axios.post(
+          "http://localhost:3000/users/FavoriteTeams",
+          { team_id: Team_id }
+        );
+        console.log(`data recived`);
+        console.log(respond);
+        this.axios.defaults.withCredentials=false;
+        this.$root.toast("Teams Page", "The teams added successfuly", "success");
+
+      }catch(error){
+        console.log(console.error());
+        this.$root.toast("Teams Page", "The teams added failed- duplication favorite Posible", "fail");
+      }
+
     },
   },
   async mounted() {

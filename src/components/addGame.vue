@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     async AddGame() {
+      this.$root.toast("Add Game", "Adding game to system, please wait....", "success");
       try {
         this.axios.defaults.withCredentials = true;
         console.log("enter to add game post API");
