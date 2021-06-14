@@ -1,26 +1,27 @@
 <template>
   <div>
     <div v-if="!isLoading">
-      <b-button v-if="players.length!=0" @click="updatePlayers()">Refresh</b-button>
+      <b-button v-if="!hasData" @click="updatePlayers()">Refresh</b-button>
       <h1>Favorite Players</h1>
-      <PlayerShow
-        v-for="p in players"
-        :PlayerID="p.PlayerID"
-        :fullname="p.fullname"
-        :teamName="p.team"
-        :teamID="p.team_id"
-        :image_path="p.image_path"
-        :PositionID="p.position_id"
-        :key="p.PlayerID"
-        :nationality ="p.nationality"
-        :birthdate ="p.birthdate"
-        :birthplace="p.birthplace"
-        :height="p.height"
-        :weight="p.weight"
-        :playerPosition="p.playerPosition"
-        :common_name="p.common_name"
-
-      ></PlayerShow>
+      <div v-if="hasData">
+        <PlayerShow
+          v-for="p in players"
+          :PlayerID="p.PlayerID"
+          :fullname="p.fullname"
+          :teamName="p.team"
+          :teamID="p.team_id"
+          :image_path="p.image_path"
+          :PositionID="p.position_id"
+          :key="p.PlayerID"
+          :nationality ="p.nationality"
+          :birthdate ="p.birthdate"
+          :birthplace="p.birthplace"
+          :height="p.height"
+          :weight="p.weight"
+          :playerPosition="p.playerPosition"
+          :common_name="p.common_name"
+        ></PlayerShow></div>
+      <h1 v-else> There is No Favorite Players</h1>
     </div>
     <h1 v-else> Loading data, please wait </h1>
   </div>
@@ -41,6 +42,10 @@ export default {
   computed:{
     players(){return this.$root.store.favPlayers;},
     isLoading(){return this.loading;},
+    hasData(){
+      if(this.players[0].PlayerID){return true;}
+      return false;
+    },
   },
   methods: {
     async updatePlayers() {
