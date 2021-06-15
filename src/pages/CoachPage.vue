@@ -1,15 +1,18 @@
 <template>
-  <div>
+  <div class="container">
     <!-- <img :src="image_path" /> -->
-    <h1>Coach Page</h1>
-    <b-img v-if="info.image_url != null" fluid :src="info.image_path"></b-img>
-    <ul>
-      <li>Current team: {{ info.currentTeamName }}</li>
-      <li>Common name: {{ info.commonName }}</li>
-      <li>Birthdate: {{ info.birthdate }}</li>
-      <li>Birth country: {{ info.birthcountry }}</li>
-      <li>Nationality: {{ info.nationality }}</li>
-    </ul>
+    <h1>{{ info.fullname }}</h1>
+    <div class="coach_preview">
+      <b-img v-if="info.image_url != null" fluid :src="info.image_url"></b-img>
+      <ul>
+        <li>Current team: {{ info.currentTeamName }}</li>
+        <li>Common name: {{ info.commonName }}</li>
+        <li>Birthdate: {{ info.birthdate }}</li>
+        <li>Birth country: {{ info.birthcountry }}</li>
+        <li>Nationality: {{ info.nationality }}</li>
+      </ul>
+    </div>
+
     <!-- <div>
         <b-button
           size="lg"
@@ -45,4 +48,33 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.coach_preview {
+  display: inline-block;
+  width: 300px;
+  height: flex;
+  position: relative;
+  margin: 10px 10px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 5px;
+  border-color: cadetblue;
+  margin-top: 20px;
+  background-color: rgba(215, 237, 241, 0.616);
+}
+#b {
+  margin-top: 10px;
+}
+
+.player-preview .player-title {
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(111, 197, 157);
+}
+
+.player-preview .player-content {
+  width: 100%;
+  overflow: hidden;
+  background-color: rgba(215, 237, 241, 0.616);
+}
+</style>

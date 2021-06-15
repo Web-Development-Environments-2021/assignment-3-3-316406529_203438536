@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="container">
     <div v-if="!isLoading">
       <b-button @click="updatePlayers()">Refresh</b-button>
-      <h1>Favorite Players</h1>
+      <h1 class="title">My Favorite Players</h1>
       <div v-if="hasData">
         <PlayerShow
           v-for="p in players"
@@ -13,17 +13,18 @@
           :image_path="p.image_path"
           :PositionID="p.position_id"
           :key="p.PlayerID"
-          :nationality ="p.nationality"
-          :birthdate ="p.birthdate"
+          :nationality="p.nationality"
+          :birthdate="p.birthdate"
           :birthplace="p.birthplace"
           :height="p.height"
           :weight="p.weight"
           :playerPosition="p.playerPosition"
           :common_name="p.common_name"
-        ></PlayerShow></div>
-      <h1 v-else> There is No Favorite Players</h1>
+        ></PlayerShow>
+      </div>
+      <h1 v-else>There is No Favorite Players</h1>
     </div>
-    <h1 v-else> Loading data, please wait </h1>
+    <h1 v-else>Loading data, please wait</h1>
   </div>
 </template>
 
@@ -34,16 +35,22 @@ export default {
   components: {
     PlayerShow,
   },
-  date(){
-    return{
+  date() {
+    return {
       loading: true,
-    }
+    };
   },
-  computed:{
-    players(){return this.$root.store.favPlayers;},
-    isLoading(){return this.loading;},
-    hasData(){
-      if(this.players[0].PlayerID){return true;}
+  computed: {
+    players() {
+      return this.$root.store.favPlayers;
+    },
+    isLoading() {
+      return this.loading;
+    },
+    hasData() {
+      if (this.players[0].PlayerID) {
+        return true;
+      }
       return false;
     },
   },
@@ -51,15 +58,19 @@ export default {
     async updatePlayers() {
       // console.log("response");
       try {
-        this.$root.toast("Favorite Players", "System Refrashing, please wait....", "success");
-        this.axios.defaults.withCredentials=true;
+        this.$root.toast(
+          "Favorite Players",
+          "System Refrashing, please wait....",
+          "success"
+        );
+        this.axios.defaults.withCredentials = true;
         console.log(this.$root.store.username);
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoritePlayers"
         );
         this.loading = false;
         const players = response.data;
-        this.axios.defaults.withCredentials=false;
+        this.axios.defaults.withCredentials = false;
         this.$root.store.favPlayers = [];
         this.$root.store.favPlayers.push(...players);
         console.log(response);
@@ -70,15 +81,16 @@ export default {
     },
   },
   created() {
-    this.$root.store.setItem("favPlayers",[]);
+    this.$root.store.setItem("favPlayers", []);
   },
   async mounted() {
     console.log("favorite players mounted");
-    if(this.$root.store.favPlayers.length ==0){
-      await this.$root.store.setItem("favPlayers",[]);
+    if (this.$root.store.favPlayers.length == 0) {
+      await this.$root.store.setItem("favPlayers", []);
       this.updatePlayers();
+    } else {
+      this.loading = false;
     }
-    else{this.loading=false;}
   },
 };
 </script>

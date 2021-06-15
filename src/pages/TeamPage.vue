@@ -1,20 +1,21 @@
 <template>
-  <div class="team-page">
+  <div class="container">
     <div :title="info.team_name" class="team-title">
-      <!-- <b>{{ team_name }}</b> -->
+      <b-img :src="info.team_details[0].logo_path"></b-img>
     </div>
     <ul class="team-content">
       <li>
-        Team Details:
-        <TeamPreview :county_name="info.team_details[0].county_name"
-         :national_team="info.team_details[0].national_team"
+        <TeamPreview
+          :county_name="info.team_details[0].county_name"
+          :national_team="info.team_details[0].national_team"
           :founded="info.team_details[0].founded"
-         :team_photo="info.team_details[0].logo_path"
+          :team_photo="info.team_details[0].logo_path"
           :team_name="info.team_details[0].name"
-           :team_coach="info.team_details[0].coach_name"></TeamPreview>
+          :team_coach="info.team_details[0].coach_name"
+        ></TeamPreview>
       </li>
       <li>
-        Team players:
+        <h1 class="title">Players</h1>
         <div>
           <PlayerTeamPagePreview
             v-for="p in info.team_players"
@@ -28,7 +29,7 @@
         </div>
       </li>
       <li>
-        Team coach:
+        <h1 class="title">Coach</h1>
         <div>
           <CoachPreview
             :coach_name="info.team_coach.coach_name"
@@ -38,10 +39,11 @@
         </div>
       </li>
       <li v-if="info.team_games.length !== 0">
-        Team games:
+        <h1 class="title">Games</h1>
         <div>
+          <h4 class="title">Future Games:</h4>
           <GamePreview
-            v-for="g in info.team_games"
+            v-for="g in info.team_games[0]"
             :id="g.game_id"
             :homeTeam="g.home_team"
             :awayTeam="g.away_team"
@@ -52,7 +54,22 @@
             :key="g.id"
           ></GamePreview>
         </div>
-        <!-- <div v-else><h2>We don't have any games for this team</h2></div> -->
+        <div>
+          <h4 class="title">
+            Past Games:
+          </h4>
+          <GamePreview
+            v-for="g in info.team_games[1]"
+            :id="g.game_id"
+            :homeTeam="g.home_team"
+            :awayTeam="g.away_team"
+            :date="g.game_date"
+            :hour="g.game_hour"
+            :home_team_id="g.home_team_id"
+            :away_team_id="g.away_team_id"
+            :key="g.id"
+          ></GamePreview>
+        </div>
       </li>
       <li v-else>
         <h5>
@@ -65,7 +82,8 @@
         pill
         variant="outline-danger"
         @click="addTeamToFavorites()"
-        >Add to favorite</b-button>
+        >Add to favorite</b-button
+      >
     </ul>
   </div>
 </template>
@@ -77,16 +95,21 @@ import PlayerTeamPagePreview from "../components/playerTeamPagePreview.vue";
 import GamePreview from "../components/GamePreview.vue";
 import CoachPreview from "../components/CoachPreview.vue";
 export default {
-  components: { PlayerTeamPagePreview, GamePreview, CoachPreview, TeamPreview },
+  components: {
+    PlayerTeamPagePreview,
+    GamePreview,
+    CoachPreview,
+    TeamPreview,
+  },
   name: "TeamPage",
   data() {
     return {
       info: {
         team_players: [],
-        team_coach:{
-          coach_name:"",
-          coach_id:"",
-          image_path:"",
+        team_coach: {
+          coach_name: "",
+          coach_id: "",
+          image_path: "",
         },
         team_games: [],
         team_details: {
@@ -97,12 +120,12 @@ export default {
           founded: 0,
           national_team: false,
           leagueID: 0,
-          coach_name: ""
-        }
+          coach_name: "",
+        },
       },
     };
   },
-  methods:{
+  methods: {
     async teamDetails(TeamIdParam) {
       try {
         console.log("enter to get team details API function");
@@ -116,25 +139,35 @@ export default {
       }
     },
     async addTeamToFavorites() {
-      try{
-        this.$root.toast("Team Page", "Adding favorite, please wait....", "success");
+      try {
+        this.$root.toast(
+          "Team Page",
+          "Adding favorite, please wait....",
+          "success"
+        );
         const Team_id = this.$route.params.id.replace(":", "");
         console.log(`adding teams ${Team_id}`);
-        this.axios.defaults.withCredentials=true;
+        this.axios.defaults.withCredentials = true;
         const respond = await this.axios.post(
           "http://localhost:3000/users/FavoriteTeams",
           { team_id: Team_id }
         );
         console.log(`data recived`);
         console.log(respond);
-        this.axios.defaults.withCredentials=false;
-        this.$root.toast("Teams Page", "The teams added successfuly", "success");
-
-      }catch(error){
+        this.axios.defaults.withCredentials = false;
+        this.$root.toast(
+          "Teams Page",
+          "The teams added successfuly",
+          "success"
+        );
+      } catch (error) {
         console.log(console.error());
-        this.$root.toast("Teams Page", "The teams added failed- duplication favorite Posible", "fail");
+        this.$root.toast(
+          "Teams Page",
+          "The teams added failed- duplication favorite Posible",
+          "fail"
+        );
       }
-
     },
   },
   async mounted() {
@@ -148,3 +181,13 @@ export default {
   },
 };
 </script>
+<style>
+.container {
+  background-color: rgba(215, 237, 241, 0.61);
+}
+.team-title {
+  position: relative;
+  top: 35%;
+  left: 55%;
+}
+</style>

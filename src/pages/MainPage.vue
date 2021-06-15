@@ -3,7 +3,11 @@
     <!-- <h1 class="title">Main Page</h1> -->
     <div id="login-or-games-div">
       <LoginPage v-if="!$root.store.username" id="login-comp-css"></LoginPage>
-      <FavoriteGames :showCunt="3" v-else></FavoriteGames>
+      <FavoriteGames
+        :showCunt="3"
+        v-else
+        id="fav-games-main-page"
+      ></FavoriteGames>
     </div>
     <div id="leugue-info-div">
       <LeagueInfo></LeagueInfo>
@@ -61,5 +65,11 @@ div.container {
   left: 20%;
   top: 20%;
   background-color: rgba(215, 237, 241, 0.616);
+}
+#fav-games-main-page {
+  position: absolute;
+  top: 10%;
+  left: 56%;
+  // right: 200px;
 }
 </style>
