@@ -1,11 +1,14 @@
 <template>
   <div class="coach-preview">
     <div :title="Coach - Id" class="coach-title">
-      <b @click="moveToCoachPage()">{{ coach_name }}</b>
+      <router-link :to="`/CoachPage/:${this.coach_id}`"
+        ><b>{{ coach_name }}</b></router-link
+      >
     </div>
     <ul class="coach-content">
       <li v-if="image != null">Image : {{ image }}</li>
-      <!-- <li>Full Name: {{ fullname }}</li> -->
+      <li>Full Name: {{ fullname }}</li>
+
       <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
       <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
       <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li> -->
@@ -70,6 +73,7 @@ export default {
   border-width: 5px;
   border-color: cadetblue;
   margin-top: 20px;
+  background-color: rgba(215, 237, 241, 0.616);
 }
 #b {
   margin-top: 10px;

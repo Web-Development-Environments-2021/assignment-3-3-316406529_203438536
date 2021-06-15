@@ -6,10 +6,12 @@
       <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
       <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
       <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li> -->
-      <li @click="showPlayerCard()">
+      <!-- <li @click="showPlayerCard()">
         <b>{{ name }}</b>
-      </li>
-
+      </li> -->
+      <router-link :to="`/PlayerPage/:${this.PlayerID}`">{{
+        name
+      }}</router-link>
       <li><b-img :src="image"></b-img></li>
       <!-- <li>PositionID: {{ PositionID }}</li> -->
       <li>nationality: {{ nationality }}</li>
@@ -80,8 +82,9 @@ export default {
   border-style: solid;
   border-radius: 10px;
   border-width: 5px;
-  border-color: cadetblue;
+  border-color: rgb(86, 136, 86);
   margin-top: 20px;
+  background-color: rgba(191, 207, 211, 0.616);
 }
 #b {
   margin-top: 10px;

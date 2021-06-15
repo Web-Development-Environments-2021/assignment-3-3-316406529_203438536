@@ -2,7 +2,7 @@
   <div>
     <div id="searchAttributes">
       <h1 class="title" align="center">Search Page</h1>
-      <b-input-group prepend="Search Query:" id="search-input">
+      <b-input-group prepend="Search Query:" id="search-input-first">
         <div id="player-search-div">
           <b-form-input
             list="mainQueryDataList"
@@ -21,17 +21,18 @@
         </template>
       </b-input-group>
       <br />
-
-      <SearchPlayer
-        :searchQuery="searchQuery"
-        :teamsList="teamsList"
-        :LocationsList="LocationsList"
-        v-if="searchAtribute == 'player'"
-      ></SearchPlayer>
-      <SearchTeam
-        v-if="searchAtribute == 'team'"
-        :searchQuery="searchQuery"
-      ></SearchTeam>
+      <div id="team-position-div-search">
+        <SearchPlayer
+          :searchQuery="searchQuery"
+          :teamsList="teamsList"
+          :LocationsList="LocationsList"
+          v-if="searchAtribute == 'player'"
+        ></SearchPlayer>
+        <SearchTeam
+          v-if="searchAtribute == 'team'"
+          :searchQuery="searchQuery"
+        ></SearchTeam>
+      </div>
     </div>
   </div>
 </template>
@@ -124,12 +125,12 @@ export default {
 #search-input {
   margin-left: 25%;
   width: 500px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
-div.input-group {
+.input-group {
   position: relative;
   left: 10%;
-  top: 10;
+  top: 15%;
 }
 #SeachBotton {
   margin-top: 20px;
@@ -138,5 +139,17 @@ div.input-group {
 }
 #player-search-div {
   position: static;
+}
+#team-position-div-search {
+  position: relative;
+  /* left: 10%; */
+  /* top: 0%; */
+}
+#search-input-first {
+  position: relative;
+  /* left: 34%; */
+  left: 35%;
+  /* top: 20%; */
+  margin-top: 3%;
 }
 </style>

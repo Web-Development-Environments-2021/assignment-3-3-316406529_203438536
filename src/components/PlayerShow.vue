@@ -1,16 +1,20 @@
 <template>
   <div class="player-preview">
-    <div :title="PlayerID" class="player-title"  
-    @click="ClickPlayer()">
+    <div :title="PlayerID" class="player-title" @click="ClickPlayer()">
       <b>Player Name:</b> {{ fullname }}
     </div>
     <ul class="player-content">
       <li><b-img :src="image_path"></b-img></li>
-      <li @click="ClickPlayer()">Full Name: {{ fullname }}</li>
+      <!-- <li @click="ClickPlayer()">Full Name: {{ fullname }}</li> -->
+      <router-link :to="`/PlayerPage/:${this.PlayerID}`"
+        >Full name: {{ fullname }}</router-link
+      >
       <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
       <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
-      <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li>
-
+      <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li> -->
+      <router-link :to="`/TeamPage/:${this.teamID}`"
+        >Team Name: {{ teamName }}</router-link
+      >
       <li>PositionID: {{ PositionID }}</li>
       <li>nationality: {{ nationality }}</li>
       <div v-if="showMore == true">
@@ -101,10 +105,9 @@ export default {
     ClickTeam() {
       this.$router.push(`/TeamPage/:${this.teamID}`);
     },
-    ClickPlayer(){
+    ClickPlayer() {
       this.$router.push(`/PlayerPage/:${this.PlayerID}`);
-
-    }
+    },
   },
   mounted() {
     console.log("Player show mounted");
@@ -124,6 +127,7 @@ export default {
   border-width: 5px;
   border-color: cadetblue;
   margin-top: 20px;
+  background-color: rgba(215, 237, 241, 0.616);
 }
 #b {
   margin-top: 10px;
@@ -138,5 +142,6 @@ export default {
 .player-preview .player-content {
   width: 100%;
   overflow: hidden;
+  background-color: rgba(215, 237, 241, 0.616);
 }
 </style>

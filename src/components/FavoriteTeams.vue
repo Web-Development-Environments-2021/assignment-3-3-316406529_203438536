@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div class="container">
+    <h1 class="title">My Favorite Teams</h1>
     <div v-if="!isLoading">
-      <b-button v-if="teams.length!=0" @click="updateTeams()">Refresh</b-button>
+      <b-button v-if="teams.length != 0" @click="updateTeams()"
+        >Refresh</b-button
+      >
       <TeamPreview
         v-for="t in teams"
         :team_id="t.teamID"
@@ -14,7 +17,7 @@
         :key="t.teamID"
       ></TeamPreview>
     </div>
-    <h1 v-else> Loading data, please wait </h1>
+    <h1 v-else>Loading data, please wait</h1>
   </div>
 </template>
 
@@ -25,25 +28,33 @@ export default {
   components: {
     TeamPreview,
   },
-  computed:{
-    teams(){return this.$root.store.favTeams;},
-    isLoading(){return this.loading;},
+  computed: {
+    teams() {
+      return this.$root.store.favTeams;
+    },
+    isLoading() {
+      return this.loading;
+    },
   },
   data() {
     return {
       loading: true,
-    }
+    };
   },
   methods: {
     async updateTeams() {
       try {
-        this.$root.toast("Favorite Players", "System Refrashing, please wait....", "success");
-        this.axios.defaults.withCredentials=true;
+        this.$root.toast(
+          "Favorite Players",
+          "System Refrashing, please wait....",
+          "success"
+        );
+        this.axios.defaults.withCredentials = true;
         const response = await this.axios.get(
           "http://localhost:3000/users/FavoriteTeams"
         );
         this.loading = false;
-        this.axios.defaults.withCredentials=false;
+        this.axios.defaults.withCredentials = false;
         const teams = response.data;
         this.$root.store.favTeams = [];
         this.$root.store.favTeams.push(...teams);
@@ -55,17 +66,25 @@ export default {
     },
   },
   created() {
-    this.$root.store.setItem("favTeams",[]);
+    this.$root.store.setItem("favTeams", []);
   },
   mounted() {
     console.log("favorite teams mounted");
-    if(this.$root.store.favTeams.length ==0){
-      this.$root.store.setItem("favTeams",[]);
+    if (this.$root.store.favTeams.length == 0) {
+      this.$root.store.setItem("favTeams", []);
       this.updateTeams();
+    } else {
+      this.loading = false;
     }
-    else{this.loading=false;}
   },
 };
 </script>
 
-<style></style>
+<style>
+.container {
+  background-color: rgba(215, 237, 241, 0.616);
+  position: absolute;
+  top: 10%;
+  left: 5%;
+}
+</style>

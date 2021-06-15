@@ -1,16 +1,20 @@
-<template>
+rt<template>
   <div class="team-preview">
     <div :title="team_id" class="team-title">
       <!-- <b>{{ team_name }}</b> -->
     </div>
     <ul class="team-content">
-      <li  @click="ClickTeam()" style="Bold">Team Name: {{ team_name }}</li>
+      <li v-if="team_photo"><b-img :src="team_photo"></b-img></li>
+      <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ team_name }}</li> -->
+      <router-link :to="`/TeamPage/:${this.teamID}`">
+        Team Name: {{ team_name }}</router-link
+      >
       <li style="Bold">Coach name: {{ team_coach }}</li>
-      <li style="Bold">Team ID: {{ team_id }}</li> 
-      <li v-if="team_photo"> Team Logo: {{team_photo}}</li>
-      <li v-if="founded"> Team Founded Year: {{founded}}</li>  
-      <li v-if="county_name"> Team Country: {{county_name}}</li>
-      <li v-if="national_team"> Netional Team : {{national_team}}</li>  
+      <li style="Bold">Team ID: {{ team_id }}</li>
+      <!-- <li v-if="team_photo">Team Logo: {{ team_photo }}</li> -->
+      <li v-if="founded">Team Founded Year: {{ founded }}</li>
+      <li v-if="county_name">Team Country: {{ county_name }}</li>
+      <li v-if="national_team">Netional Team : {{ national_team }}</li>
     </ul>
   </div>
 </template>
@@ -47,11 +51,8 @@ export default {
       type: String,
       required: false,
     },
-    
-    
-    
   },
-  methods:{
+  methods: {
     ClickTeam() {
       this.$router.push(`/TeamPage/:${this.teamID}`);
     },
@@ -66,13 +67,14 @@ export default {
 .team-preview {
   display: inline-block;
   width: 300px;
-  height: 200px;
+  height: 310px;
   position: relative;
-  margin: 10px 10px;
+  margin: 10px 10px 10px;
   border-style: solid;
   border-radius: 10px;
   border-width: 5px;
   border-color: cadetblue;
+  background-color: rgba(215, 237, 241, 0.616);
 }
 
 .team-preview .team-title {

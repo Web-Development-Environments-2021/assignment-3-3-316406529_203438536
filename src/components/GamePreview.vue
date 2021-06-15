@@ -2,8 +2,15 @@
   <div class="game-preview">
     <div :title="id" class="game-title"><b>Game Id:</b> {{ id }}</div>
     <ul class="game-content">
-      <li @click="clickTeam(home_team_id)">Home team: {{ homeTeam }}</li>
-      <li @click="clickTeam(away_team_id)">Away team: {{ awayTeam }}</li>
+      <!-- <li @click="clickTeam(home_team_id)">Home team: {{ homeTeam }}</li> -->
+      <router-link :to="`/TeamPage/:${this.home_team_id}`"
+        >Home team: {{ homeTeam }}</router-link
+      >
+      <br />
+      <!-- <li @click="clickTeam(away_team_id)">Away team: {{ awayTeam }}</li> -->
+      <router-link :to="`/TeamPage/:${this.away_team_id}`"
+        >Away team: {{ awayTeam }}</router-link
+      >
       <li>date: {{ date }}</li>
       <li>time: {{ hour }}</li>
       <li>Game Field :{{ field }}</li>
@@ -108,6 +115,7 @@ div.game-preview {
   border-radius: 10px;
   border-width: 5px;
   border-color: cadetblue;
+  background-color: rgba(215, 237, 241, 0.616);
 }
 
 .game-preview .game-title {

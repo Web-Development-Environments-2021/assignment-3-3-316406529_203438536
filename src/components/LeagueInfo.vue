@@ -1,6 +1,7 @@
 <template>
   <div class="league-preview">
     <div class="leage-info-card">
+      <img src="../assets/superliga.png" />
       <b-card
         img-alt="Image"
         tag="article"
@@ -90,7 +91,8 @@ export default {
   width: 250px;
   height: 200px;
   position: relative;
-  margin: 10px 10px;
+  top: 10%;
+  /* margin: 10px 10px; */
 
   /* border-style: solid; */
   /* border-radius: 10px;
@@ -111,6 +113,7 @@ export default {
 
 #leage-info-card {
   background-color: rgba(215, 237, 241, 0.616);
+  top: 10px;
 }
 #infor-card-context {
   background-color: rgba(215, 237, 241, 0.616);

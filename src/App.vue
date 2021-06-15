@@ -33,13 +33,13 @@
               My Account
             </template>
             <b-dropdown-item @click="showFavoriteGames()"
-              >⚽Favorites Games</b-dropdown-item
+              >⚽ My Games</b-dropdown-item
             >
             <b-dropdown-item @click="showFavoriteTeams()"
-              >👨🏿‍🤝‍👨🏾Favorites Teams</b-dropdown-item
+              >👨🏿‍🤝‍👨🏾 My Teams</b-dropdown-item
             >
             <b-dropdown-item @click="showFavoritePlayers()"
-              >⛹️‍♂️Favorites Players</b-dropdown-item
+              >⛹️‍♂️ My Players</b-dropdown-item
             >
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -59,7 +59,7 @@ export default {
   name: "App",
   methods: {
     async Logout() {
-      try{
+      try {
         console.log("log out method");
         this.axios.defaults.withCredentials = true;
         const response = await this.axios.post(
@@ -71,10 +71,13 @@ export default {
         this.$router.push("/").catch(() => {
           this.$forceUpdate();
         });
-      }catch{
-        this.$root.toast("Logout", "Comunication with server week, log-out agian", "success");
+      } catch {
+        this.$root.toast(
+          "Logout",
+          "Comunication with server week, log-out agian",
+          "success"
+        );
       }
-
     },
     showFavoriteGames() {
       this.$router.push("/users/FavoriteGames");
@@ -112,7 +115,7 @@ export default {
     },
   },
   mounted() {
-    this.setSearchAutoCompleteData(); //occur once when building the app. (keep in comment)
+    // this.setSearchAutoCompleteData(); //occur once when building the app. (keep in comment)
     this.$root.store.setStoredData("", "", "", [], []);
   },
 };
@@ -131,6 +134,7 @@ export default {
   background-image: url("./assets/background3.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
+  background-attachment: fixed;
 }
 
 #nav {
