@@ -2,20 +2,21 @@
   <div class="container">
     <h1 class="title">My Favorite Teams</h1>
     <div v-if="!isLoading">
-      <b-button v-if="teams.length != 0" @click="updateTeams()"
-        >Refresh</b-button
-      >
-      <TeamPreview
-        v-for="t in teams"
-        :team_id="t.teamID"
-        :team_name="t.name"
-        :team_coach="t.coach_name"
-        :team_photo="t.logo_path"
-        :founded="t.founded"
-        :national_team="t.nationa_team"
-        :county_name="county_name"
-        :key="t.teamID"
-      ></TeamPreview>
+      <b-button  @click="updateTeams()">Refresh</b-button>
+      <div v-if="teams.length != 0">
+        <TeamPreview
+          v-for="t in teams"
+          :team_id="t.teamID"
+          :team_name="t.name"
+          :team_coach="t.coach_name"
+          :team_photo="t.logo_path"
+          :founded="t.founded"
+          :national_team="t.nationa_team"
+          :county_name="county_name"
+          :key="t.teamID"
+        ></TeamPreview>
+      </div>
+      <h1 v-else>There is No Favorite Players</h1>
     </div>
     <h1 v-else>Loading data, please wait</h1>
   </div>

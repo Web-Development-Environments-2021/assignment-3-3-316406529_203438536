@@ -5,7 +5,8 @@
       <!-- <img :src="image_path" /> -->
       <b-img fluid :src="info.image_path"></b-img>
       <div>
-        <h6>Current team: {{ info.team_name }}</h6>
+        <router-link :to="`/TeamPage/:${this.info.team_id}`">
+          Current Name: {{ info.team_name }}</router-link>
         <h6>Player position: {{ info.position_id }}</h6>
         <h6>Common name: {{ info.common_name }}</h6>
         <h6>Birthdate: {{ info.birthdate }}</h6>
@@ -15,7 +16,7 @@
         <h6 v-if="info.weight != null">Weight: {{ info.weight }}</h6>
       </div>
       <div>
-        <b-button
+        <b-button v-if="addButton"
           size="md"
           id="addFavoritePlayer"
           pill
@@ -53,6 +54,14 @@ export default {
     //   team_id: 85,
     //   weight: "80 kg",
     // };
+  },
+  computed:{
+    addButton(){
+      if(this.$root.store.username){
+        return true;
+      }
+      return false;
+    },
   },
   async mounted() {
     this.$root.toast(

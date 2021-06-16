@@ -7,7 +7,7 @@
     </div>
     <ul class="coach-content">
       <li v-if="image != null">Image : {{ image }}</li>
-      <li>Full Name: {{ fullname }}</li>
+      <li>Full Name: {{ coach_name }}</li>
 
       <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
       <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->

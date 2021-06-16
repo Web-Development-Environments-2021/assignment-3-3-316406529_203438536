@@ -3,7 +3,7 @@
     <div v-if="!isLoading">
       <b-button @click="updatePlayers()">Refresh</b-button>
       <h1 class="title">My Favorite Players</h1>
-      <div v-if="hasData">
+      <div v-if="players.length != 0">
         <PlayerShow
           v-for="p in players"
           :PlayerID="p.PlayerID"
@@ -47,12 +47,12 @@ export default {
     isLoading() {
       return this.loading;
     },
-    hasData() {
-      if (this.players[0].PlayerID) {
-        return true;
-      }
-      return false;
-    },
+    // hasData() {
+    //   if (this.players[0].PlayerID) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
   },
   methods: {
     async updatePlayers() {

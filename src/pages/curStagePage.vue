@@ -10,15 +10,6 @@
         ></gamesTableShow>
       </div>
       <h1 v-else :busy="true">loading Data, Please wait</h1>
-      <!-- <b-table :items="FutureItems" :busy="isBusy" :fields="FutureFields" 
-      :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" sort-icon-left responsive="sm">
-      <template #table-busy>
-        <div class="text-center text-danger my-2">
-          <b-spinner class="align-middle"></b-spinner>
-          <strong>Loading...</strong>
-        </div>
-      </template>
-      </b-table> -->
       <div v-if="!isBusy">
         <h2>Past Games</h2>
         <gamesTableShow
@@ -26,21 +17,7 @@
           :Fields="PastFields"
         ></gamesTableShow>
       </div>
-      <!-- <b-table :items="PastItems" :busy="isBusy" :fields="PastFields" sort-icon-left responsive="sm">
-        <template #table-busy>
-          <div class="text-center text-danger my-2">
-            <b-spinner class="align-middle"></b-spinner>
-            <strong>Loading...</strong>
-          </div>
-      </template>
-        <template #cell(eventSchedule)="data">
-          <b-button v-b-modal.gameEvents @click="CurEventData(data.value)">Game Events List</b-button>
-        </template>
-      </b-table>
-    </div>
-      <b-modal size="lg" hide-footer id="gameEvents" title="Game Enets">
-        <gameEvents id="gameEvents" :EventsList="curEventsList"></gameEvents>
-      </b-modal> -->
+
     </div>
   </div>
 </template>
@@ -96,6 +73,7 @@ export default {
           away_team_id: g.away_team_id,
           field: g.field,
           referee_name: g.referee_name,
+          add_to_favorite: g.game_id,
         };
       });
       this.FutureFields = [
@@ -106,6 +84,7 @@ export default {
         { key: "field", sortable: true },
         { key: "home_team", sortable: true },
         { key: "away_team", sortable: true },
+        { key: "add_to_favorite", sortable: false },
       ];
     },
     setPastTable(data) {

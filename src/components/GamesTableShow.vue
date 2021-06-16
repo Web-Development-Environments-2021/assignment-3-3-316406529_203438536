@@ -16,6 +16,11 @@
             <template #cell(away_team)="data">
                 <a @click="ClickTeam(data.value.away_team_id)">{{ data.value.away_team }}</a>
             </template>
+            <template #cell(add_to_favorite)="data">
+                <b-button v-if="addButton" @click="addGamesToFavorites(data.value)">Add To Favorites</b-button>
+                <b-button v-else disabled>Add To Favorites</b-button>
+            </template>
+            add_to_favorite
         </b-table>
         <b-modal v-if="curEventsList!=null" size="lg"  hide-footer id="gameEvents" title="Game Enets">
             <gameEvents id="gameEvents" :EventsList="curEventsList"></gameEvents>
@@ -30,6 +35,14 @@ import gameEvents from "./gameEventsShow.vue";
 export default ({
     components:{
         gameEvents,
+    },
+    computed:{
+        addButton(){
+            if(this.$root.store.username){
+                return true;
+            }
+            return false;
+        },
     },
     props:{
         Items: {
@@ -60,6 +73,35 @@ export default ({
         },
         ClickTeam(id) {
             this.$router.push(`/TeamPage/:${id}`);
+        },
+        async addGamesToFavorites(gameID) {
+            try {
+                this.$root.toast(
+                "Games Page",
+                "Adding favorite, please wait....",
+                "success"
+                );
+                this.axios.defaults.withCredentials = true;
+                const respond = await this.axios.post(
+                "http://localhost:3000/users/FavoriteGames",
+                { game_id: gameID }
+                );
+                console.log(`data recived`);
+                console.log(respond);
+                this.axios.defaults.withCredentials = false;
+                this.$root.toast(
+                "Games Page",
+                "The Games added successfuly",
+                "success"
+                );
+            } catch (error) {
+                console.log(console.error());
+                this.$root.toast(
+                "Games Page",
+                "The Games added failed- duplication favorite Posible",
+                "fail"
+                );
+            }
         },
     },
 

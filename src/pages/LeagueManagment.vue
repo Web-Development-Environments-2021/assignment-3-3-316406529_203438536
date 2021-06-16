@@ -14,14 +14,17 @@
         responsive="sm"
       >
         <template #cell(allData1)="data">
-          <b-button v-b-modal.addEvent @click="GameClick(data.value)"
+          <b-button v-if="isPased(data.value.game_date)" v-b-modal.addEvent @click="GameClick(data.value)"
             >Add Events</b-button
           >
+          <b-button v-else disabled>Add Events</b-button>
+
         </template>
         <template #cell(allData2)="data">
-          <b-button v-b-modal.addScore @click="GameClick(data.value)"
+          <b-button v-if="isPased(data.value.game_date)" v-b-modal.addScore @click="GameClick(data.value)"
             >Add Score</b-button
           >
+          <b-button v-else disabled>Add Score</b-button>
         </template>
         <template #cell(home_team)="data">
           <a @click="ClickTeam(data.value.home_team_id)">{{
@@ -74,6 +77,14 @@ export default {
     addScore,
   },
   methods: {
+    isPased(date){
+      let today = new Date();
+      let Pdate = Date.parse(date);
+      if(today>=Pdate){
+        return true;
+      }
+      return false;
+    },
     async getLeagueGames() {
       try {
         this.axios.defaults.withCredentials = true;

@@ -16,7 +16,7 @@
           <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
-          <b-nav-item>Hello, {{ userInUse }}</b-nav-item>
+          <b-nav-item disabled>Hello, {{ userInUse }}</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
           <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
@@ -115,8 +115,9 @@ export default {
     },
   },
   mounted() {
-    // this.setSearchAutoCompleteData(); //occur once when building the app. (keep in comment)
+    this.setSearchAutoCompleteData(); //occur once when building the app. (keep in comment)
     this.$root.store.setStoredData("", "", "", [], []);
+    this.$root.store.setItem("favGames", []);
   },
 };
 </script>

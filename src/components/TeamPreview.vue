@@ -10,7 +10,7 @@ rt<template>
         Team Name: {{ team_name }}</router-link
       >
       <li style="Bold">Coach name: {{ team_coach }}</li>
-      <li style="Bold">Team ID: {{ team_id }}</li>
+      <!-- <li style="Bold">Team ID: {{ team_id }}</li> -->
       <!-- <li v-if="team_photo">Team Logo: {{ team_photo }}</li> -->
       <li v-if="founded">Team Founded Year: {{ founded }}</li>
       <li v-if="county_name">Team Country: {{ county_name }}</li>

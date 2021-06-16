@@ -2,22 +2,24 @@
   <div class="container-fav-games">
     <h1 class="title">My Favorite Games</h1>
     <div v-if="!isLoading">
-      <b-button v-if="games.length != 0" @click="updateGames()"
-        >Refresh</b-button
-      >
+      <b-button @click="updateGames()">Refresh</b-button>
       <br />
-      <GamePreview
-        v-for="g in games.slice(0, showCunt)"
-        :id="g.game_id"
-        :homeTeam="g.home_team"
-        :awayTeam="g.away_team"
-        :date="g.game_date"
-        :hour="g.game_hour"
-        :home_team_id="g.home_team_id"
-        :away_team_id="g.away_team_id"
-        :field="g.field"
-        :key="g.game_id"
-      ></GamePreview>
+      <div v-if="games.length != 0">
+        <GamePreview
+          v-for="g in games.slice(0, showCunt)"
+          :id="g.game_id"
+          :homeTeam="g.home_team"
+          :awayTeam="g.away_team"
+          :date="g.game_date"
+          :hour="g.game_hour"
+          :home_team_id="g.home_team_id"
+          :away_team_id="g.away_team_id"
+          :field="g.field"
+          :addButton="false"
+          :key="g.game_id"
+        ></GamePreview>
+      </div>
+      <h1 v-else>There is No Favorite Players</h1>
     </div>
     <h1 v-else>Loading data, please wait</h1>
   </div>
@@ -82,6 +84,7 @@ export default {
   mounted() {
     console.log("favorite games mounted");
     console.log(this.$root.store.favGames.length);
+    console.log(this.$root.store.favGames);
     if (this.$root.store.favGames.length == 0) {
       this.$root.store.setItem("favGames", []);
       this.updateGames();

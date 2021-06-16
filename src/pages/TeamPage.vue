@@ -5,6 +5,14 @@
     </div>
     <ul class="team-content">
       <li>
+        <b-button v-if="addButton"
+        size="lg"
+        id="addFavoriteTeam"
+        pill
+        variant="outline-danger"
+        @click="addTeamToFavorites()"
+        >Add to favorite
+        </b-button>
         <TeamPreview
           :county_name="info.team_details[0].county_name"
           :national_team="info.team_details[0].national_team"
@@ -51,6 +59,7 @@
             :hour="g.game_hour"
             :home_team_id="g.home_team_id"
             :away_team_id="g.away_team_id"
+            :addButton="addButton"
             :key="g.id"
           ></GamePreview>
         </div>
@@ -67,6 +76,7 @@
             :hour="g.game_hour"
             :home_team_id="g.home_team_id"
             :away_team_id="g.away_team_id"
+            :addButton="addButton"
             :key="g.id"
           ></GamePreview>
         </div>
@@ -76,14 +86,6 @@
           We don't have any games for this team
         </h5>
       </li>
-      <b-button
-        size="lg"
-        id="addFavoriteTeam"
-        pill
-        variant="outline-danger"
-        @click="addTeamToFavorites()"
-        >Add to favorite</b-button
-      >
     </ul>
   </div>
 </template>
@@ -170,7 +172,16 @@ export default {
       }
     },
   },
+  computed:{
+    addButton(){
+      if(this.$root.store.username){
+        return true;
+      }
+      return false;
+    },
+  },
   async mounted() {
+    this.$root.toast("Team Page", "Loading data, please wait", "success");
     console.log("Enter team page");
     const TeamIdParam = this.$route.params.id.replace(":", "");
     console.log(TeamIdParam); //print the team id to oconsole.

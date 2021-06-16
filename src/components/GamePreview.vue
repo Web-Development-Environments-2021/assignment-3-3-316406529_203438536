@@ -15,12 +15,12 @@
       <li>time: {{ hour }}</li>
       <li>Game Field :{{ field }}</li>
     </ul>
-    <b-button
+    <b-button v-if="addButton"
       size="sm"
       id="addFavoriteGame"
       pill
       variant="outline-danger"
-      @click="addGameToFavorites()"
+      @click="addGamesToFavorites()"
       >Add to favorite</b-button
     >
   </div>
@@ -59,6 +59,10 @@ export default {
     },
     away_team_id: {
       type: Number,
+      require: true,
+    },
+    addButton: {
+      type: Boolean,
       require: true,
     },
   },

@@ -98,14 +98,27 @@ const shared_data = {
   favTeams: localStorage.favTeams,
   LeagueGames: localStorage.LeagueGames,
   login(username) {
+    console.log("log In main page");
     localStorage.setItem("username", username);
     this.username = username;
-    console.log("login", this.username);
+    this.favGames= [];
+    this.favPlayers=[];
+    this.favTeams= [];
+    this.players=[];
+    this.teams= [];
+    this.searchQuery="";
+    this.searchTeam="";
+    this.searchLocation="";
+
+    console.log(this.favGames);
+    // console.log(this.favPlayers);
+    // console.log(this.favGames);
+    // console.log(this.username);
+
   },
   logout() {
     this.loggedIn = false;
     console.log("logout");
-    localStorage.removeItem("username");
     this.username = undefined;
   },
   setAutoCompleteSearchData(data) {
@@ -116,22 +129,13 @@ const shared_data = {
     localStorage.setItem("searchQuery", searchQuery);
     localStorage.setItem("searchTeam", searchTeam);
     localStorage.setItem("searchLocation", searchLocation);
-    localStorage.setItem("searchLocation", players);
-    localStorage.setItem("searchLocation", teams);
+    localStorage.setItem("players", players);
+    localStorage.setItem("teams", teams);
     this.searchQuery = searchQuery;
     this.searchTeam = searchTeam;
     this.searchLocation = searchLocation;
     this.players = players;
     this.teams = teams;
-  },
-  setFavGames() {
-    localStorage.setItem("favGames", []);
-  },
-  setFavPlayers() {
-    localStorage.setItem("favPlayers", []);
-  },
-  setFavTeams() {
-    localStorage.setItem("favTeams", []);
   },
   setItem(name, value) {
     localStorage.setItem(name, value);
