@@ -32,12 +32,12 @@
           <b-button v-else disabled>Add Score</b-button>
         </template>
         <template #cell(home_team)="data">
-          <a @click="ClickTeam(data.value.home_team_id)">{{
+          <a id="clickabble" @click="ClickTeam(data.value.home_team_id)">{{
             data.value.home_team
           }}</a>
         </template>
         <template #cell(away_team)="data">
-          <a @click="ClickTeam(data.value.away_team_id)">{{
+          <a id="clickabble" @click="ClickTeam(data.value.away_team_id)">{{
             data.value.away_team
           }}</a>
         </template>
@@ -169,7 +169,12 @@ export default {
   position: absolute;
   max-width: 80%;
   left: 10%;
+  right: 10%;
   top: 15%;
   background-color: rgba(215, 237, 241, 0.685);
+}
+#clickabble:hover{
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>

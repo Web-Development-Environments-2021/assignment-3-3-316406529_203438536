@@ -1,7 +1,7 @@
 <template>
   <div class="container">
+    <b-button @click="updatePlayers()">Refresh</b-button>
     <div v-if="!isLoading">
-      <b-button @click="updatePlayers()">Refresh</b-button>
       <h1 class="title">My Favorite Players</h1>
       <div v-if="players.length != 0">
         <PlayerShow

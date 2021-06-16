@@ -11,10 +11,10 @@
                 <b-button v-b-modal.gameEvents @click="CurEventData(data.value)">Game Events List</b-button>
             </template>
             <template #cell(home_team)="data">
-                <a @click="ClickTeam(data.value.home_team_id)">{{ data.value.home_team }}</a>
+                <a id="clickabble" @click="ClickTeam(data.value.home_team_id)">{{ data.value.home_team }}</a>
             </template>
             <template #cell(away_team)="data">
-                <a @click="ClickTeam(data.value.away_team_id)">{{ data.value.away_team }}</a>
+                <a id="clickabble" @click="ClickTeam(data.value.away_team_id)">{{ data.value.away_team }}</a>
             </template>
             <template #cell(add_to_favorite)="data">
                 <b-button v-if="addButton" @click="addGamesToFavorites(data.value)">Add To Favorites</b-button>
@@ -107,4 +107,11 @@ export default ({
 
 })
 </script>
+
+<style>
+#clickabble:hover{
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
 

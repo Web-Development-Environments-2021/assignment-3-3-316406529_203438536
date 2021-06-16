@@ -104,7 +104,7 @@ export default {
         console.log(console.error());
         this.$root.toast(
           "Players Page",
-          "The player added failed- duplication favorite Posible",
+          error.respond.massage,
           "fail"
         );
       }
