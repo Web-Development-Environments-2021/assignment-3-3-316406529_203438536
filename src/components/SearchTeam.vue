@@ -16,7 +16,7 @@
         <a @click="ClickTeam(data.value.TeamID)">{{ data.value.teamName }}</a>
       </template>
     </b-table>
-    <h1 v-else>No Results</h1>
+    <h1 class="title" v-else>No Results</h1>
   </div>
 </template>
 
@@ -118,9 +118,14 @@ export default {
 };
 </script>
 <style>
-/* #search-team-div {
+#search-team-div {
   position: absolute;
   left: 20%;
   top: 34%;
+}
+/* #SeachBotton {
+  position: relative;
+  left: 480px;
+  top: 10px;
 } */
 </style>

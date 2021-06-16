@@ -41,7 +41,7 @@
         responsive="sm"
       >
         <template #cell(photo)="data">
-          <img :src="data.value" />
+          <img class="player-img-table" :src="data.value" />
         </template>
         <template #cell(moreDetails)="data">
           <b-button v-b-modal.modal-1 @click="showPlayer(data.value)"
@@ -224,7 +224,8 @@ export default {
 </script>
 <style>
 #search-player-page-div {
-  background-color: rgba(215, 237, 241, 0.616);
+  /* background-color: rgba(215, 237, 241, 0.616); */
+  top: 5px;
 }
 .team-position-div {
   position: absolute;
@@ -232,9 +233,14 @@ export default {
   top: 17%;
 }
 #result-table-div {
-  position: absolute;
-  left: 10%;
-  top: 35%;
+  position: relative;
+  max-width: 95%;
+  left: 3%;
+  top: 150px;
   background-color: rgba(215, 237, 241, 0.616);
+}
+.player-img-table {
+  width: 50px;
+  height: 50px;
 }
 </style>

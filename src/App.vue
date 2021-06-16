@@ -156,7 +156,7 @@ export default {
   color: #45574fd0;
 }
 .title {
-  color: #58a7aa;
+  color: #445858;
   text-align: center;
 }
 </style>

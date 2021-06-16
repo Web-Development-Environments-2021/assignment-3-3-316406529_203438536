@@ -1,7 +1,7 @@
 <template>
   <div class="league-preview">
     <div class="leage-info-card">
-      <img src="../assets/superliga.png" />
+      <img id="league-img" src="../assets/superliga.png" />
       <b-card
         img-alt="Image"
         tag="article"
@@ -17,7 +17,7 @@
           <h5 @click="showNextGame()">Next Game Coming</h5>
 
           <br />
-          <div v-if="pressedGame === true">
+          <div id="next-game-div" v-if="pressedGame === true">
             <GamePreview
               :id="nextComingGame.game_id"
               :homeTeam="nextComingGame.home_team"
@@ -92,6 +92,7 @@ export default {
   height: 200px;
   position: relative;
   top: 10%;
+  left: -150px;
   /* margin: 10px 10px; */
 
   /* border-style: solid; */
@@ -112,10 +113,21 @@ export default {
 }
 
 #leage-info-card {
-  background-color: rgba(215, 237, 241, 0.616);
+  /* background-color: rgba(215, 237, 241, 0.616); */
   top: 10px;
 }
 #infor-card-context {
-  background-color: rgba(215, 237, 241, 0.616);
+  /* background-color: rgba(215, 237, 241, 0.616); */
+}
+#league-img {
+  height: 100px;
+  width: 250px;
+}
+#next-game-div {
+  position: absolute;
+  top: 180px;
+  left: -5px;
+  width: 0;
+  background-color: rgb(141, 207, 185);
 }
 </style>

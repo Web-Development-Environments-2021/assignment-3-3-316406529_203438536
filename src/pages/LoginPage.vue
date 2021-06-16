@@ -142,7 +142,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  max-width: 28%;
+  max-width: 450px;
   max-height: 40%;
   background-color: rgba(215, 237, 241, 0.61);
   position: relative;
@@ -152,14 +152,4 @@ export default {
   left: 0%;
   top: 20%;
 }
-
-// .mt-2 {
-//   max-width: ;
-//   max-height: 40%;
-//   background-color: rgba(215, 237, 241, 0.61);
-//   position: absolute;
-//   padding: 10pt;
-//   left: 40%;
-//   top: 15%;
-// }
 </style>

@@ -14,14 +14,19 @@
         responsive="sm"
       >
         <template #cell(allData1)="data">
-          <b-button v-if="isPased(data.value.game_date)" v-b-modal.addEvent @click="GameClick(data.value)"
+          <b-button
+            v-if="isPased(data.value.game_date)"
+            v-b-modal.addEvent
+            @click="GameClick(data.value)"
             >Add Events</b-button
           >
           <b-button v-else disabled>Add Events</b-button>
-
         </template>
         <template #cell(allData2)="data">
-          <b-button v-if="isPased(data.value.game_date)" v-b-modal.addScore @click="GameClick(data.value)"
+          <b-button
+            v-if="isPased(data.value.game_date)"
+            v-b-modal.addScore
+            @click="GameClick(data.value)"
             >Add Score</b-button
           >
           <b-button v-else disabled>Add Score</b-button>
@@ -77,10 +82,10 @@ export default {
     addScore,
   },
   methods: {
-    isPased(date){
+    isPased(date) {
       let today = new Date();
       let Pdate = Date.parse(date);
-      if(today>=Pdate){
+      if (today >= Pdate) {
         return true;
       }
       return false;
@@ -162,8 +167,9 @@ export default {
 <style>
 .container {
   position: absolute;
-  left: 5%;
-  top: 20%;
+  max-width: 80%;
+  left: 10%;
+  top: 15%;
   background-color: rgba(215, 237, 241, 0.685);
 }
 </style>
