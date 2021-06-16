@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div id="searchAttributes">
       <h1 class="title" align="center">Search Page</h1>
       <b-input-group prepend="Search Query:" id="search-input-first">
@@ -120,8 +120,16 @@ export default {
 
 <style scoped>
 #searchAttributes {
+  /* position: relative;
   background-color: rgba(215, 237, 241, 0.61);
+  max-height: 100%;
+  max-width: 100%; */
 }
+/* .container {
+  top: 0%;
+  max-width: 100%;
+  max-height: 100%;
+} */
 #search-input {
   margin-left: 25%;
   width: 500px;
@@ -134,14 +142,15 @@ export default {
 }
 #SeachBotton {
   margin-top: 20px;
-  margin-left: 50%;
+  margin-left: 60%;
   width: 500px;
 }
 #player-search-div {
-  position: static;
+  position: relative;
 }
 #team-position-div-search {
   position: relative;
+  top: -30px;
   /* left: 10%; */
   /* top: 0%; */
 }

@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="title">My Favorite Teams</h1>
     <div v-if="!isLoading">
-      <b-button  @click="updateTeams()">Refresh</b-button>
+      <b-button @click="updateTeams()">Refresh</b-button>
       <div v-if="teams.length != 0">
         <TeamPreview
           v-for="t in teams"
@@ -84,8 +84,13 @@ export default {
 <style>
 .container {
   background-color: rgba(215, 237, 241, 0.616);
+  position: relative;
+  width: 90%;
+  top: 10%;
+  left: 3%;
+  /* background-color: rgba(215, 237, 241, 0.616);
   position: absolute;
   top: 10%;
-  left: 5%;
+  left: 5%; */
 }
 </style>

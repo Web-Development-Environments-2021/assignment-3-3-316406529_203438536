@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fav-games">
+  <div class="container">
     <h1 class="title">My Favorite Games</h1>
     <div v-if="!isLoading">
       <b-button @click="updateGames()">Refresh</b-button>
@@ -96,8 +96,14 @@ export default {
 </script>
 
 <style>
-.container-fav-games {
+.container {
   position: relative;
-  background-color: rgba(215, 237, 241, 0.61);
 }
+/* .container-fav-games {
+  background-color: rgba(215, 237, 241, 0.616);
+  position: relative;
+  width: 90%;
+  top: 10%;
+  left: 5%;
+} */
 </style>

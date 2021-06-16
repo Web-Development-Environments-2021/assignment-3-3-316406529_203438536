@@ -29,15 +29,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div.container {
-  // margin: 10px 0 10px;
-
-  // transform: translate(-10%, -10%);
-  // border: 5px solid #ffff00;
-  // padding: 10px;
-  // margin: 0 auto;
-  background-color: rgba(215, 237, 241, 0.61);
-}
+// div.container {
+//   background-color: rgba(215, 237, 241, 0.61);
+// }
 .blur {
   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
   filter: blur(2px);
@@ -47,24 +41,26 @@ div.container {
   cursor: default;
 }
 #login-or-games-div {
-  position: -webkit-sticky;
+  position: relative;
+  left: 20%;
+  // max-width:
+  width: 550px;
   top: 10px;
-  left: 20px;
-  right: 200px;
-  // background-color: rgba(215, 237, 241, 0.61);
+  background-color: rgba(215, 237, 241, 0.61);
 }
 #login-comp-css {
-  position: absolute;
-  left: 35%;
-  top: 10%;
-  right: 200px;
-  background-color: rgba(215, 237, 241, 0.616);
+  position: fixed;
+  left: 60%;
+  max-height: 450px;
+  max-width: 420px;
+  top: 5%;
+  background-color: rgba(215, 237, 241, 0.76);
 }
 #leugue-info-div {
   position: absolute;
-  left: 20%;
-  top: 20%;
-  background-color: rgba(215, 237, 241, 0.616);
+  left: 10%;
+  top: 24%;
+  // background-color: rgba(215, 237, 241, 0.616);
 }
 #fav-games-main-page {
   position: absolute;
