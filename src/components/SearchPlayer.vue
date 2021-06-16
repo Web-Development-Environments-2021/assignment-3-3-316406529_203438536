@@ -49,10 +49,10 @@
           >
         </template>
         <template #cell(team_name)="data">
-          <a @click="ClickTeam(data.value.team_id)">{{ data.value.team }}</a>
+          <a id="clickabble" @click="ClickTeam(data.value.team_id)">{{ data.value.team }}</a>
         </template>
         <template #cell(full_name)="data">
-          <a @click="ClickPlayer(data.value.PlayerID)">{{
+          <a id="clickabble" @click="ClickPlayer(data.value.PlayerID)">{{
             data.value.fullname
           }}</a>
         </template>
@@ -230,17 +230,22 @@ export default {
 .team-position-div {
   position: absolute;
   left: 35%;
-  top: 17%;
 }
 #result-table-div {
   position: relative;
   max-width: 95%;
   left: 3%;
-  top: 150px;
+  right: 3%;
+  top: 170px;
   background-color: rgba(215, 237, 241, 0.616);
 }
 .player-img-table {
   width: 50px;
   height: 50px;
 }
+#clickabble:hover{
+  font-weight: bold;
+  cursor: pointer;
+}
+
 </style>

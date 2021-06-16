@@ -14,7 +14,7 @@
           Season: {{ current_season_name }}
           <br />
           Stage: {{ current_stage_name }}
-          <h5 @click="showNextGame()">Next Game Coming</h5>
+          <b-button id="nextGame" @click="showNextGame()">Next Game Coming</b-button>
 
           <br />
           <div id="next-game-div" v-if="pressedGame === true">
@@ -129,5 +129,8 @@ export default {
   left: -5px;
   width: 0;
   background-color: rgb(141, 207, 185);
+}
+#nextGame{
+  margin-top:15px ;
 }
 </style>

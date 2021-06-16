@@ -21,14 +21,14 @@
         </template>
       </b-input-group>
       <br />
-      <div id="team-position-div-search">
-        <SearchPlayer
+      <div id="ExtrasearchInput">
+        <SearchPlayer id="player-position-div-search"
           :searchQuery="searchQuery"
           :teamsList="teamsList"
           :LocationsList="LocationsList"
           v-if="searchAtribute == 'player'"
         ></SearchPlayer>
-        <SearchTeam
+        <SearchTeam id="team-position-div-search"
           v-if="searchAtribute == 'team'"
           :searchQuery="searchQuery"
         ></SearchTeam>
@@ -149,8 +149,13 @@ export default {
   position: relative;
 }
 #team-position-div-search {
-  position: relative;
-  top: -30px;
+  /* position: relative; */
+  /* top: -45px; */
+  /* left: 10%; */
+  /* top: 0%; */
+}
+#player-position-div-search {
+  /* position: relative; */
   /* left: 10%; */
   /* top: 0%; */
 }
@@ -158,7 +163,13 @@ export default {
   position: relative;
   /* left: 34%; */
   left: 35%;
-  /* top: 20%; */
+  right: 65%;
+  top: 20%;
   margin-top: 3%;
 }
+#ExtrasearchInput{
+  position: relative;
+  margin: 10px;
+}
+
 </style>

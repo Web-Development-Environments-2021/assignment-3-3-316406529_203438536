@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <h1 class="title">My Favorite Teams</h1>
+    <b-button @click="updateTeams()">Refresh</b-button>
     <div v-if="!isLoading">
-      <b-button @click="updateTeams()">Refresh</b-button>
       <div v-if="teams.length != 0">
         <TeamPreview
           v-for="t in teams"

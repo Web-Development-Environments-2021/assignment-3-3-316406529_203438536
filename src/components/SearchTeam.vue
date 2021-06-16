@@ -3,20 +3,24 @@
     <b-input-group-append id="SeachBotton">
       <b-button @click="search()" variant="success">Search</b-button>
     </b-input-group-append>
-    <b-table
-      v-if="items[0]"
-      :items="items"
-      :fields="fields"
-      :sort-by.sync="sortBy"
-      :sort-desc.sync="sortDesc"
-      sort-icon-left
-      responsive="sm"
-    >
-      <template #cell(team_name)="data">
-        <a @click="ClickTeam(data.value.TeamID)">{{ data.value.teamName }}</a>
-      </template>
-    </b-table>
-    <h1 class="title" v-else>No Results</h1>
+    <div v-if="items[0]" id="result-table-div">
+      <b-table
+        :items="items"
+        :fields="fields"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
+        sort-icon-left
+        responsive="sm"
+      >
+        <template #cell(team_name)="data">
+          <a id="clickabble"  @click="ClickTeam(data.value.TeamID)">{{ data.value.teamName }}</a>
+        </template>
+        <template #cell(leam_logo)="data">
+          <img class="player-img-table" :src="data.value" />
+        </template>
+      </b-table>
+    </div>
+    <h1 class="title" id="Noresult" v-else>No Results</h1>
   </div>
 </template>
 
@@ -118,14 +122,32 @@ export default {
 };
 </script>
 <style>
+#clickabble:hover{
+  font-weight: bold;
+  cursor: pointer;
+}
 #search-team-div {
   position: absolute;
   left: 20%;
+  right: 20%;
   top: 34%;
 }
-/* #SeachBotton {
+#result-table-div {
   position: relative;
-  left: 480px;
+  max-width: 95%;
+  left: 3%;
+  right: 3%;
+  top: 150px;
+  background-color: rgba(215, 237, 241, 0.616);
+}
+#SeachBotton {
+  position: relative;
+  left: 47%;
+  
   top: 10px;
-} */
+}
+#Noresult{
+  margin: 50px;
+
+}
 </style>
