@@ -41,6 +41,9 @@
             <b-dropdown-item @click="showFavoritePlayers()"
               >⛹️‍♂️ My Players</b-dropdown-item
             >
+            <b-dropdown-item @click="showUserDetails()"
+              >⛹️‍♂️ My Details</b-dropdown-item
+            >
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -88,6 +91,9 @@ export default {
     showFavoritePlayers() {
       console.log("enter show fav. players");
       this.$router.push("/users​/FavoritePlayers");
+    },
+    showUserDetails() {
+      this.$router.push("/userPage");
     },
     async setSearchAutoCompleteData() {
       console.log("enter get aouto complete data");
