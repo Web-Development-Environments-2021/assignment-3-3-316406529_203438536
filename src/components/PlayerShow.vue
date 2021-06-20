@@ -9,6 +9,7 @@
       <router-link :to="`/PlayerPage/:${this.PlayerID}`"
         >Full name: {{ fullname }}</router-link
       >
+      <br />
       <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
       <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
       <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li> -->

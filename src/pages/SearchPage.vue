@@ -22,13 +22,15 @@
       </b-input-group>
       <br />
       <div id="ExtrasearchInput">
-        <SearchPlayer id="player-position-div-search"
+        <SearchPlayer
+          id="player-position-div-search"
           :searchQuery="searchQuery"
           :teamsList="teamsList"
           :LocationsList="LocationsList"
           v-if="searchAtribute == 'player'"
         ></SearchPlayer>
-        <SearchTeam id="team-position-div-search"
+        <SearchTeam
+          id="team-position-div-search"
           v-if="searchAtribute == 'team'"
           :searchQuery="searchQuery"
         ></SearchTeam>
@@ -125,11 +127,12 @@ export default {
   max-height: 100%;
   max-width: 100%; */
 }
-/* .container {
-  top: 0%;
-  max-width: 100%;
-  max-height: 100%;
-} */
+.container {
+  /* top: 0%;
+  max-width:%;
+  max-height: 100%; */
+  height: 250px;
+}
 #search-input {
   margin-left: 25%;
   width: 500px;
@@ -167,9 +170,8 @@ export default {
   top: 20%;
   margin-top: 3%;
 }
-#ExtrasearchInput{
+#ExtrasearchInput {
   position: relative;
   margin: 10px;
 }
-
 </style>
