@@ -30,8 +30,9 @@
         <b-button @click="search()" variant="success">Search</b-button>
       </b-input-group-append>
     </div>
-    <div id="result-table-div">
+    <div>
       <b-table
+        id="result-table-div-team"
         v-if="items[0]"
         :items="items"
         :fields="fields"
@@ -49,7 +50,9 @@
           >
         </template>
         <template #cell(team_name)="data">
-          <a id="clickabble" @click="ClickTeam(data.value.team_id)">{{ data.value.team }}</a>
+          <a id="clickabble" @click="ClickTeam(data.value.team_id)">{{
+            data.value.team
+          }}</a>
         </template>
         <template #cell(full_name)="data">
           <a id="clickabble" @click="ClickPlayer(data.value.PlayerID)">{{
@@ -230,22 +233,22 @@ export default {
 .team-position-div {
   position: absolute;
   left: 35%;
+  top: -34px;
 }
-#result-table-div {
+#result-table-div-team {
   position: relative;
   max-width: 95%;
   left: 3%;
   right: 3%;
-  top: 170px;
+  top: 100px;
   background-color: rgba(215, 237, 241, 0.616);
 }
 .player-img-table {
   width: 50px;
   height: 50px;
 }
-#clickabble:hover{
+#clickabble:hover {
   font-weight: bold;
   cursor: pointer;
 }
-
 </style>

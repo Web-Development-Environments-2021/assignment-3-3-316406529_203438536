@@ -13,7 +13,9 @@
         responsive="sm"
       >
         <template #cell(team_name)="data">
-          <a id="clickabble"  @click="ClickTeam(data.value.TeamID)">{{ data.value.teamName }}</a>
+          <a id="clickabble" @click="ClickTeam(data.value.TeamID)">{{
+            data.value.teamName
+          }}</a>
         </template>
         <template #cell(leam_logo)="data">
           <img class="player-img-table" :src="data.value" />
@@ -122,7 +124,7 @@ export default {
 };
 </script>
 <style>
-#clickabble:hover{
+#clickabble:hover {
   font-weight: bold;
   cursor: pointer;
 }
@@ -137,17 +139,17 @@ export default {
   max-width: 95%;
   left: 3%;
   right: 3%;
-  top: 150px;
-  background-color: rgba(215, 237, 241, 0.616);
+  top: 100px;
+
+  /* background-color: rgba(218, 233, 233, 0.514); */
 }
 #SeachBotton {
   position: relative;
   left: 47%;
-  
+
   top: 10px;
 }
-#Noresult{
+#Noresult {
   margin: 50px;
-
 }
 </style>
