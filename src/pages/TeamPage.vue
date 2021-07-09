@@ -5,7 +5,6 @@
       class="team-title"
       v-if="info.team_details[0].logo_path"
     >
-      <b-img :src="info.team_details[0].logo_path"></b-img>
     </div>
     <ul class="team-content">
       <li>
