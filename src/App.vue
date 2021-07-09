@@ -71,6 +71,7 @@ export default {
         this.$root.toast("Logout", "User logged out successfully", "success");
         this.axios.defaults.withCredentials = false;
         this.$root.store.logout();
+        console.log("finished log oout method main page");
         this.$router.push("/").catch(() => {
           this.$forceUpdate();
         });

@@ -101,9 +101,9 @@ const shared_data = {
     console.log("log In main page");
     sessionStorage.setItem("username", username);
     this.username = username;
-    // this.favGames= [];
-    // this.favPlayers=[];
-    // this.favTeams= [];
+    this.favGames= [];
+    this.favPlayers=[];
+    this.favTeams= [];
     // this.players=[];
     // this.teams= [];
     this.searchQuery="";
@@ -123,14 +123,17 @@ const shared_data = {
     // localStorage.removeItem("searchQuery", JSON.stringify(searchQuery));
     // localStorage.removeItem("searchTeam",  JSON.stringify(searchTeam));
     // localStorage.removeItem("searchLocation",  JSON.stringify(searchLocation));
+    console.log("1");
     localStorage.removeItem("players");
     localStorage.removeItem("teams");
+    console.log("2");
     this.favGames= [];
     this.favPlayers=[];
     this.favTeams= [];
-    localStorage.removeItem("favGames",  JSON.stringify(teams));
-    localStorage.removeItem("favPlayers",  JSON.stringify(teams));
-    localStorage.removeItem("favTeams",  JSON.stringify(teams));
+    console.log("4");
+    // localStorage.removeItem("favGames",  JSON.stringify(teams));
+    // localStorage.removeItem("favPlayers",  JSON.stringify(teams));
+    // localStorage.removeItem("favTeams",  JSON.stringify(teams));
   },
   setAutoCompleteSearchData(data) {
     localStorage.setItem("autoCompleteSearchData", data);

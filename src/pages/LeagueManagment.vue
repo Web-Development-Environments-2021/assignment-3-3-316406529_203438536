@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       // LeagueGames: [],
-      items: [],
+      items_data: [],
       fields: [],
       GameClickID: 0,
       sortBy: "age",
@@ -75,6 +75,9 @@ export default {
     LeagueGames() {
       return this.$root.store.LeagueGames;
     },
+    items() {
+      return this.items_data;
+    }
   },
   components: {
     addGame,
@@ -111,7 +114,7 @@ export default {
       }
     },
     setTable() {
-      this.items = this.LeagueGames.map((g) => {
+      this.items_data = this.LeagueGames.map((g) => {
         return {
           game_id: g.game_id,
           game_date: g.game_date.slice(0, 10),
@@ -154,8 +157,8 @@ export default {
   },
   async mounted() {
     console.log("enter League managment page");
-    console.log(this.$root.store.LeagueGames.length);
-    if (this.$root.store.LeagueGames.length == 0) {
+    // console.log(this.$root.store.LeagueGames.length);
+    if (!this.$root.store.LeagueGames || this.$root.store.LeagueGames.length == 0) {
       this.$root.store.setItem("LeagueGames", []);
       await this.getLeagueGames();
     } else {
