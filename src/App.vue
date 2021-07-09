@@ -122,8 +122,11 @@ export default {
   },
   mounted() {
     this.setSearchAutoCompleteData(); //occur once when building the app. (keep in comment)
-    this.$root.store.setStoredData("", "", "", [], []);
+    // this.$root.store.setStoredData("", "", "", [], []);
     this.$root.store.setItem("favGames", []);
+    localStorage.setItem("searchQuery", JSON.stringify(""))
+    localStorage.setItem("searchTeam", JSON.stringify(""))
+    localStorage.setItem("searchLocation", JSON.stringify(""))
   },
 };
 </script>
