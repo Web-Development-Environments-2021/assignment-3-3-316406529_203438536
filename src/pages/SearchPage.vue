@@ -25,8 +25,6 @@
         <SearchPlayer
           id="player-position-div-search"
           :searchQuery="searchQuery"
-          :teamsList="teamsList"
-          :LocationsList="LocationsList"
           v-if="searchAtribute == 'player'"
         ></SearchPlayer>
         <SearchTeam
@@ -46,13 +44,15 @@ import SearchTeam from "../components/SearchTeam.vue";
 export default {
   data() {
     return {
-      curSearchAtribute: "player",
-      searchQueryinput: this.$root.store.searchQuery,
+      curSearchAtribute_change: "player",
+      // searchQueryinput: this.$root.store.searchQuery,
+      searchQueryinput: JSON.parse(localStorage.getItem("searchQuery")),
+
       // searchTeam: this.$root.store.searchTeam,
       // searchLocation: this.$root.store.searchLocation,
-      playersList: [],
-      teamsList: [],
-      LocationsList: [],
+      // playersList: [],
+      // teamsList: [],
+      // LocationsList: [],
       // sortDesc: false,
       // teams: this.$root.store.teams,
       // players: this.$root.store.players,
@@ -65,40 +65,48 @@ export default {
     SearchTeam,
   },
   methods: {
-    setStoredData() {
-      this.$root.store.setStoredData(
-        this.searchQueryinput,
-        this.searchTeam,
-        this.searchLocation,
-        this.players,
-        this.teams
-      );
-    },
+    // setStoredData() {
+    //   this.$root.store.setStoredData(
+    //     this.searchQueryinput,
+    //     this.searchTeam,
+    //     this.searchLocation,
+    //     this.players,
+    //     this.teams
+    //   );
+    // },
     async getAutoCompleteData() {
       try {
         const searchAutoComlateData = this.$root.store.AutoCompleteSearchData;
         console.log("recived data");
         console.log(searchAutoComlateData);
-        this.playersList = searchAutoComlateData.data.playersNames;
-        this.teamsList = searchAutoComlateData.data.teamsNames;
-        this.LocationsList = searchAutoComlateData.data.positions;
+        // this.playersList = searchAutoComlateData.data.playersNames;
+        // this.teamsList = searchAutoComlateData.data.teamsNames;
+        // this.LocationsList = searchAutoComlateData.data.positions;
       } catch (error) {
         console.log("error in getting auto complete search data");
         console.log(error);
       }
     },
     playerSearch() {
-      this.getAutoCompleteData();
-      this.curSearchAtribute = "player";
+      // this.getAutoCompleteData();
+      localStorage.setItem("curSearchAtribute", JSON.stringify("player"));
+      this.curSearchAtribute_change = "player";
       this.searchQueryinput = "";
     },
     teamSearch() {
-      this.getAutoCompleteData();
-      this.curSearchAtribute = "team";
-      this.searchQuery = "";
+      // this.getAutoCompleteData();
+      localStorage.setItem("curSearchAtribute", JSON.stringify("team"));
+      this.curSearchAtribute_change = "team";
+      this.searchQueryinput = "";
     },
   },
   computed: {
+    curSearchAtribute(){
+      if(this.curSearchAtribute_change){
+        console.log("attribute changed");
+      }
+      return JSON.parse(localStorage.getItem("curSearchAtribute"));
+    },
     mainQueryDataList() {
       if (this.searchAtribute == "player") {
         return this.playersList;
@@ -106,6 +114,33 @@ export default {
         return this.teamsList;
       }
     },
+    playersList(){
+      if (this.$root.store.AutoCompleteSearchData && this.$root.store.AutoCompleteSearchData.data){
+        return this.$root.store.AutoCompleteSearchData.data.playersNames;
+      }
+      return [];
+      
+    },
+    // teamsList(){
+    //   if (this.$root.store.AutoCompleteSearchData.data){
+    //     return this.$root.store.AutoCompleteSearchData.data.teamsList;
+    //   }
+    //   return [];
+      
+    // },
+    teamsList(){
+      if (this.$root.store.AutoCompleteSearchData.data){
+        return this.$root.store.AutoCompleteSearchData.data.teamsNames;
+      }
+      return [];
+    },
+    // LocationsList(){
+    //   if (this.$root.store.AutoCompleteSearchData.data){
+    //     return this.$root.store.AutoCompleteSearchData.data.LocationsList;
+    //   }
+    //   return [];
+      
+    // },
     searchQuery() {
       return this.searchQueryinput;
     },
@@ -113,9 +148,10 @@ export default {
       return this.curSearchAtribute;
     },
   },
-  mounted() {
-    console.log("enter search page");
-    this.getAutoCompleteData();
+  created() {
+    console.log("enter search page",);
+    localStorage.setItem("curSearchAtribute", JSON.stringify("player"));
+    // this.getAutoCompleteData();
   },
 };
 </script>
