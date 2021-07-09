@@ -11,7 +11,7 @@
           :team_coach="t.coach_name"
           :team_photo="t.logo_path"
           :founded="t.founded"
-          :county_name="county_name"
+          :county_name="t.county_name"
           :key="t.teamID"
         ></TeamPreview>
       </div>
@@ -30,6 +30,7 @@ export default {
   },
   computed: {
     teams() {
+      console.log(this.$root.store.favTeams[0].teamID);
       return this.$root.store.favTeams;
     },
     isLoading() {
