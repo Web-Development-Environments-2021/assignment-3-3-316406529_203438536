@@ -1,17 +1,22 @@
 <template>
   <div class="container">
-    <div :title="info.team_name" class="team-title">
+    <div
+      :title="info.team_name"
+      class="team-title"
+      v-if="info.team_details[0].logo_path"
+    >
       <b-img :src="info.team_details[0].logo_path"></b-img>
     </div>
     <ul class="team-content">
       <li>
-        <b-button v-if="addButton"
-        size="lg"
-        id="addFavoriteTeam"
-        pill
-        variant="outline-danger"
-        @click="addTeamToFavorites()"
-        >Add to favorite
+        <b-button
+          v-if="addButton"
+          size="lg"
+          id="addFavoriteTeam"
+          pill
+          variant="outline-danger"
+          @click="addTeamToFavorites()"
+          >Add to favorite
         </b-button>
         <TeamPreview
           :county_name="info.team_details[0].county_name"
@@ -172,9 +177,9 @@ export default {
       }
     },
   },
-  computed:{
-    addButton(){
-      if(this.$root.store.username){
+  computed: {
+    addButton() {
+      if (this.$root.store.username) {
         return true;
       }
       return false;
@@ -194,6 +199,7 @@ export default {
 </script>
 <style>
 .container {
+  background-attachment: scroll;
   background-color: rgba(215, 237, 241, 0.61);
 }
 .team-title {
