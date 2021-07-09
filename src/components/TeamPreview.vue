@@ -38,14 +38,20 @@ export default {
     team_photo: {
       type: String,
       required: false,
+      default: () => "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhe.wikipedia.org%2Fwiki%2F%25D7%25A7%25D7%2595%25D7%2591%25D7%25A5%3ASoccerball.svg&psig=AOvVaw3cK-bXeqYjd14Q7pFVZy7u&ust=1625954416359000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCLDc7a3-1vECFQAAAAAdAAAAABAD"
+
     },
     founded: {
       type: Number,
       required: false,
+      default: () => 12345
+
     },
     county_name: {
       type: String,
       required: false,
+      default: () => "no Data"
+
     },
     // national_team: {
     //   type: String,

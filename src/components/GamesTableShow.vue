@@ -48,6 +48,7 @@ export default ({
         Items: {
             type: Array,
             required: false,
+            default: () => [],
         },
         Fields: {
             type: Array,
