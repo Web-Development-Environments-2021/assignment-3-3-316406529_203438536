@@ -75,6 +75,8 @@
                     }
                     );
                     this.axios.defaults.withCredentials = false;
+                    console.log("emit");
+                    this.$emit('dataChaneged');
                     this.$root.toast("Add enent", response.data, "success");
                 }
                 catch(err){

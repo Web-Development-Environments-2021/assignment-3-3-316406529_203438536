@@ -45,13 +45,13 @@
       <h1 v-else>Loading Games</h1>
     </div>
     <b-modal hide-footer id="addGame" title="Add Game To Sysyem">
-      <addGame id="addGame"></addGame>
+      <addGame id="addGame" @dataChaneged="getLeagueGames"></addGame>
     </b-modal>
     <b-modal hide-footer id="addEvent" title="Add Event To Game">
-      <addEvent :game_id="GameClickID"></addEvent>
+      <addEvent :game_id="GameClickID" @dataChaneged="getLeagueGames"></addEvent>
     </b-modal>
     <b-modal hide-footer id="addScore" title="Add Event To Game">
-      <addScore :game_id="GameClickID"></addScore>
+      <addScore :game_id="GameClickID" @dataChaneged="getLeagueGames"></addScore>
     </b-modal>
   </div>
 </template>
