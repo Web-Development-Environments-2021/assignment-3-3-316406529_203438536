@@ -38,25 +38,14 @@ export default {
     return {
       found: 0,
       sortDesc: false,
-      // teams: this.$root.store.teams,
     };
   },
-  components: {
-    // teamsShow,
-  },
+  components: {},
   methods: {
     ClickTeam(id) {
       this.$router.push(`/TeamPage/:${id}`);
     },
-    // setStoredData() {
-    //   this.$root.store.setStoredData(
-    //     this.searchQuery,
-    //     this.$root.store.searchTeam,
-    //     this.$root.store.searchLocation,
-    //     this.$root.store.players,
-    //     this.teams
-    //   );
-    // },
+
     async search() {
       this.$root.toast(
         "Search player",
@@ -68,7 +57,7 @@ export default {
       console.log({
         search_query: this.searchQuery,
       });
-      localStorage.setItem("searchQuery", JSON.stringify(this.searchQuery))
+      localStorage.setItem("searchQuery", JSON.stringify(this.searchQuery));
       try {
         const response = await this.axios.get(
           `http://localhost:3000/teams/search/${this.searchQuery}`
@@ -76,7 +65,7 @@ export default {
         console.log("team search results");
         console.log(response);
         if (response.status == 201) {
-          this.found +=1;
+          this.found += 1;
           localStorage.setItem("teams", JSON.stringify([]));
           this.$root.toast(
             "Search team",
@@ -84,10 +73,9 @@ export default {
             "success"
           );
         } else {
-          this.found +=1;
+          this.found += 1;
           this.$root.toast("Search team", "search complete", "success");
           this.showteams(response);
-          // this.setStoredData();
         }
       } catch (error) {
         this.$root.toast("Search team", err.response.data, "fail");
@@ -97,13 +85,15 @@ export default {
     },
     async showteams(data) {
       const teams = data.data;
-      // this.teams = [];
-      // this.teams.push(...teams);
+
       let teams_data = [];
       teams_data.push(...teams);
       localStorage.setItem("teams", JSON.stringify(teams_data));
-      console.log("teams from server" , teams_data);
-      console.log("teams from local storage",JSON.parse(localStorage.getItem("teams")));
+      console.log("teams from server", teams_data);
+      console.log(
+        "teams from local storage",
+        JSON.parse(localStorage.getItem("teams"))
+      );
     },
   },
   computed: {
@@ -116,12 +106,12 @@ export default {
         };
       });
     },
-    teams(){
-      if(this.found){
+    teams() {
+      if (this.found) {
         console.log(this.found);
         console.log("teams called!");
       }
-      if(localStorage.getItem("teams")){
+      if (localStorage.getItem("teams")) {
         console.log(localStorage.getItem("teams"));
         return JSON.parse(localStorage.getItem("teams"));
       }
@@ -162,8 +152,6 @@ export default {
   right: 3%;
   top: 100px;
   background-color: rgba(218, 233, 233, 0.514);
-
-  /* background-color: rgba(218, 233, 233, 0.514); */
 }
 #SeachBotton {
   position: relative;

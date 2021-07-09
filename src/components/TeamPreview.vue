@@ -1,20 +1,18 @@
 rt<template>
   <div class="team-preview">
-    <div :title="team_id" class="team-title">
-      <!-- <b>{{ team_name }}</b> -->
-    </div>
+    <div :title="team_id" class="team-title"></div>
     <ul class="team-content">
       <li v-if="team_photo"><b-img :src="team_photo"></b-img></li>
+      <router-link :to="`/TeamPage/:${this.teamID}`">
+
       <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ team_name }}</li> -->
       <router-link :to="`/TeamPage/:${this.team_id}`">
         Team Name: {{ team_name }}</router-link
       >
       <li style="Bold">Coach name: {{ team_coach }}</li>
-      <!-- <li style="Bold">Team ID: {{ team_id }}</li> -->
-      <!-- <li v-if="team_photo">Team Logo: {{ team_photo }}</li> -->
+
       <li v-if="founded">Team Founded Year: {{ founded }}</li>
       <li v-if="county_name">Team Country: {{ county_name }}</li>
-      <!-- <li v-if="national_team">Netional Team : {{ national_team }}</li> -->
     </ul>
   </div>
 </template>
@@ -39,28 +37,24 @@ export default {
     team_photo: {
       type: String,
       required: false,
-      default: () => "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhe.wikipedia.org%2Fwiki%2F%25D7%25A7%25D7%2595%25D7%2591%25D7%25A5%3ASoccerball.svg&psig=AOvVaw3cK-bXeqYjd14Q7pFVZy7u&ust=1625954416359000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCLDc7a3-1vECFQAAAAAdAAAAABAD"
-
+      default: () =>
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhe.wikipedia.org%2Fwiki%2F%25D7%25A7%25D7%2595%25D7%2591%25D7%25A5%3ASoccerball.svg&psig=AOvVaw3cK-bXeqYjd14Q7pFVZy7u&ust=1625954416359000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCLDc7a3-1vECFQAAAAAdAAAAABAD",
     },
     founded: {
       type: Number,
       required: false,
-      default: () => 12345
-
+      default: () => 12345,
     },
     county_name: {
       type: String,
       required: false,
-      default: () => "no Data"
-
+      default: () => "no Data",
     },
-    // national_team: {
-    //   type: String,
-    //   required: false,
-    // },
   },
   methods: {
     ClickTeam() {
+      //move to the team page
+      this.$router.push(`/TeamPage/:${this.teamID}`);
       this.$router.push(`/TeamPage/:${this.team_id}`);
     },
   },

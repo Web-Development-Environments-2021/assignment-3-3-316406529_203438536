@@ -48,10 +48,16 @@
       <addGame id="addGame" @dataChaneged="getLeagueGames"></addGame>
     </b-modal>
     <b-modal hide-footer id="addEvent" title="Add Event To Game">
-      <addEvent :game_id="GameClickID" @dataChaneged="getLeagueGames"></addEvent>
+      <addEvent
+        :game_id="GameClickID"
+        @dataChaneged="getLeagueGames"
+      ></addEvent>
     </b-modal>
     <b-modal hide-footer id="addScore" title="Add Event To Game">
-      <addScore :game_id="GameClickID" @dataChaneged="getLeagueGames"></addScore>
+      <addScore
+        :game_id="GameClickID"
+        @dataChaneged="getLeagueGames"
+      ></addScore>
     </b-modal>
   </div>
 </template>
@@ -63,7 +69,6 @@ import addScore from "../components/addGameScore.vue";
 export default {
   data() {
     return {
-      // LeagueGames: [],
       items_data: [],
       fields: [],
       GameClickID: 0,
@@ -77,7 +82,7 @@ export default {
     },
     items() {
       return this.items_data;
-    }
+    },
   },
   components: {
     addGame,
@@ -94,6 +99,7 @@ export default {
       return false;
     },
     async getLeagueGames() {
+      //send get request to the server to get the league games and store them in shared data
       try {
         this.axios.defaults.withCredentials = true;
         const response = await this.axios.get(
@@ -106,6 +112,7 @@ export default {
         this.axios.defaults.withCredentials = true;
         this.$root.toast("league games", "Table data Loaded", "success");
         console.log(response);
+        //store in shared data
         this.$root.store.LeagueGames = response.data;
         this.setTable();
       } catch (err) {
@@ -157,8 +164,10 @@ export default {
   },
   async mounted() {
     console.log("enter League managment page");
-    // console.log(this.$root.store.LeagueGames.length);
-    if (!this.$root.store.LeagueGames || this.$root.store.LeagueGames.length == 0) {
+    if (
+      !this.$root.store.LeagueGames ||
+      this.$root.store.LeagueGames.length == 0
+    ) {
       this.$root.store.setItem("LeagueGames", []);
       await this.getLeagueGames();
     } else {
@@ -176,7 +185,7 @@ export default {
   top: 15%;
   background-color: rgba(215, 237, 241, 0.685);
 }
-#clickabble:hover{
+#clickabble:hover {
   font-weight: bold;
   cursor: pointer;
 }

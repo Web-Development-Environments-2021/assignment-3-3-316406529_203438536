@@ -195,10 +195,6 @@
     >
       Register failed: {{ form.submitError }}
     </b-alert>
-    <!-- <b-card class="mt-3 md-3" header="Form Data Result">
-      <pre class="m-0"><strong>form:</strong> {{ form }}</pre>
-      <pre class="m-0"><strong>$v.form:</strong> {{ $v.form }}</pre>
-    </b-card> -->
   </div>
 </template>
 
@@ -233,6 +229,7 @@ export default {
       validated: false,
     };
   },
+  //validate the input before submit
   validations: {
     form: {
       username: {
@@ -273,9 +270,7 @@ export default {
     },
   },
   mounted() {
-    // console.log("mounted");
     this.countries.push(...countries);
-    // console.log($v);
   },
   methods: {
     validateState(param) {
@@ -284,7 +279,6 @@ export default {
     },
     async Register() {
       try {
-        // let image_url = await imageUpload();
         console.log("enter register");
         const response = await this.axios.post(
           "http://localhost:3000/register",
@@ -303,7 +297,6 @@ export default {
         this.$root.toast("Register", response.data, "success");
 
         this.$router.push("/login");
-        // console.log(response);
       } catch (err) {
         console.log(err.response.data);
         this.form.submitError = err.response.data;
@@ -311,23 +304,12 @@ export default {
         this.onReset(); //reset all fields
       }
     },
-    // async imageUpload() {
-    //   console.log("enter upload image");
-    //   const response = await axios.post(
-    //     "https://api.cloudinary.com/v1_1/dqkrrjag3/uplaod",
-    //     {
-    //       image,
-    //     }
-    //   );
-    //   console.log(response);
-    // },
+
     onRegister() {
-      // console.log("register method called");
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
       }
-      // console.log("register method go");
       this.Register();
     },
     onReset() {
@@ -353,9 +335,6 @@ export default {
   max-height: 100%;
   background-color: rgba(215, 237, 241, 0.61);
   position: relative;
-  // padding: 10pt;
-  // margin-bottom: 10%;
   margin-top: 5%;
-  // left: 0%;
 }
 </style>

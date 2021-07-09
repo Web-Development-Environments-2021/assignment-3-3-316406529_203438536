@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- <img :src="image_path" /> -->
     <h1>{{ info.fullname }}</h1>
     <div class="coach_preview">
       <b-img v-if="info.image_url != null" fluid :src="info.image_url"></b-img>
@@ -12,17 +11,6 @@
         <li>Nationality: {{ info.nationality }}</li>
       </ul>
     </div>
-
-    <!-- <div>
-        <b-button
-          size="lg"
-          id="addFavoritePlayer"
-          pill
-          variant="outline-danger"
-          @click="addPlayerToFavorites()"
-          >Add to favorite</b-button
-        >
-      </div> -->
   </div>
 </template>
 
@@ -37,6 +25,7 @@ export default {
     };
   },
   async mounted() {
+    //move to the coach page
     console.log("enter coach page mounte!");
     const coach_id = this.$route.params.id.replace(":", "");
     const result = await axios.get(

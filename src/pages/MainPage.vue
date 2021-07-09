@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- <h1 class="title">Main Page</h1> -->
     <div id="login-or-games-div">
       <LoginPage v-if="!$root.store.username" id="login-comp-css"></LoginPage>
       <FavoriteGames
@@ -29,9 +28,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// div.container {
-//   background-color: rgba(215, 237, 241, 0.61);
-// }
 .blur {
   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
   filter: blur(2px);
@@ -43,7 +39,6 @@ export default {
 #login-or-games-div {
   position: relative;
   left: 20%;
-  // max-width:
   width: 550px;
   top: 10px;
   background-color: rgba(215, 237, 241, 0.61);
@@ -60,12 +55,10 @@ export default {
   position: absolute;
   left: 10%;
   top: 24%;
-  // background-color: rgba(215, 237, 241, 0.616);
 }
 #fav-games-main-page {
   position: absolute;
   top: 10%;
   left: 56%;
-  // right: 200px;
 }
 </style>

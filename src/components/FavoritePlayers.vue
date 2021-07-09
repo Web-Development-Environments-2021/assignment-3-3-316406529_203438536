@@ -47,16 +47,11 @@ export default {
     isLoading() {
       return this.loading;
     },
-    // hasData() {
-    //   if (this.players[0].PlayerID) {
-    //     return true;
-    //   }
-    //   return false;
-    // },
   },
   methods: {
     async updatePlayers() {
-      // console.log("response");
+      //the function send get request to the server to get user favorite players
+      // we store them in the share data
       try {
         this.$root.toast(
           "Favorite Players",
@@ -71,6 +66,7 @@ export default {
         this.loading = false;
         const players = response.data;
         this.axios.defaults.withCredentials = false;
+        //store in shared data
         this.$root.store.favPlayers = [];
         this.$root.store.favPlayers.push(...players);
         console.log(response);
@@ -85,7 +81,11 @@ export default {
   },
   async mounted() {
     console.log("favorite players mounted");
-    if (this.$root.store.favPlayers || this.$root.store.favPlayers.length == 0) {
+    //if the user favorite players empty- set and update
+    if (
+      this.$root.store.favPlayers ||
+      this.$root.store.favPlayers.length == 0
+    ) {
       await this.$root.store.setItem("favPlayers", []);
       this.updatePlayers();
     } else {

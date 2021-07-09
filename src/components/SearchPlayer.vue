@@ -1,7 +1,6 @@
 <template>
   <div id="search-player-page-div">
     <div class="team-position-div">
-      <!-- <h1>div-team--position</h1> -->
       <b-input-group prepend="Search Team:" id="search-input">
         <div>
           <b-form-input
@@ -98,26 +97,14 @@ export default {
       type: String,
       required: true,
     },
-    // teamsList: {
-    //   type: Array,
-    //   required: false,
-      
-    // },
-    // LocationsList: {
-    //   type: Array,
-    //   required: false,
-    // },
   },
   data() {
     return {
-      // searchTeam: this.$root.store.searchTeam,
-      // searchLocation: this.$root.store.searchLocation,
       searchTeam: JSON.parse(localStorage.getItem("searchTeam")),
       searchLocation: JSON.parse(localStorage.getItem("searchLocation")),
       sortDesc: false,
       found: 0,
-      // players: this.$root.store.players,
-      // players: JSON.parse(localStorage.getItem("players")),
+
       showPlayerData: null,
       hasRes: "",
     };
@@ -132,24 +119,19 @@ export default {
     ClickPlayer(id) {
       this.$router.push(`/PlayerPage/:${id}`);
     },
-    // setStoredData() {
-    //   this.$root.store.setStoredData(
-    //     this.searchQuery,
-    //     this.searchTeam,
-    //     this.searchLocation,
-    //     this.players,
-    //     this.$root.store.teams
-    //   );
-    // },
+
     async search() {
       this.$root.toast(
         "Search player",
         "Searching for players, please wait....",
         "success"
       );
-      localStorage.setItem("searchQuery", JSON.stringify(this.searchQuery))
-      localStorage.setItem("searchTeam", JSON.stringify(this.searchTeam))
-      localStorage.setItem("searchLocation", JSON.stringify(this.searchLocation))
+      localStorage.setItem("searchQuery", JSON.stringify(this.searchQuery));
+      localStorage.setItem("searchTeam", JSON.stringify(this.searchTeam));
+      localStorage.setItem(
+        "searchLocation",
+        JSON.stringify(this.searchLocation)
+      );
 
       this.players = [];
       console.log("start searching");
@@ -165,7 +147,7 @@ export default {
         if (this.searchLocation == "") {
           this.searchLocation = `{location}`;
         }
-        console.log("query", this.searchQuery)
+        console.log("query", this.searchQuery);
         const response = await this.axios.get(
           `http://localhost:3000/players/search/locationAndTeam/${this.searchQuery}/${this.searchTeam}/${this.searchLocation}`
         );
@@ -178,20 +160,17 @@ export default {
         }
         if (response.status == 201) {
           console.log("No result");
-          this.found +=1;
+          this.found += 1;
           localStorage.setItem("players", JSON.stringify([]));
           this.$root.toast("Search player", "No Search results", "fail");
-          // this.setStoredData();
           return;
         }
         if (response.status == 200) {
-          this.found +=1;
+          this.found += 1;
           this.$root.toast("Search player", "Players List below", "success");
           this.showPlayers(response);
-          // this.setStoredData();
         }
       } catch (error) {
-        // this.setStoredData();
         this.$root.toast("Search player", err.response.data, "fail");
         console.log("error in search keyword player");
         console.log(error);
@@ -199,16 +178,16 @@ export default {
     },
     async showPlayers(data) {
       const players = data.data;
-      // this.players = [];
-      // this.players.push(...players);
+
       let playerss = [];
       playerss.push(...players);
-      // try{
-      //   localStorage.removeItem("players");
-      // }catch{return};
+
       localStorage.setItem("players", JSON.stringify(playerss));
-      console.log("players from server" , playerss);
-      console.log("players from local storage",JSON.parse(localStorage.getItem("players")));
+      console.log("players from server", playerss);
+      console.log(
+        "players from local storage",
+        JSON.parse(localStorage.getItem("players"))
+      );
     },
     showPlayer(data) {
       this.showPlayerData = data;
@@ -217,23 +196,19 @@ export default {
     },
   },
   computed: {
-    teamsList(){
-      if (this.$root.store.AutoCompleteSearchData.data){
+    teamsList() {
+      if (this.$root.store.AutoCompleteSearchData.data) {
         return this.$root.store.AutoCompleteSearchData.data.teamsNames;
       }
       return [];
     },
-    LocationsList(){
-            if (this.$root.store.AutoCompleteSearchData.data){
+    LocationsList() {
+      if (this.$root.store.AutoCompleteSearchData.data) {
         return this.$root.store.AutoCompleteSearchData.data.positions;
       }
       return [];
     },
     items() {
-      // if(this.found){
-      //   console.log(this.found);
-      //   console.log("players", this.players);
-      // }
       return this.players.map((p) => {
         return {
           full_name: p,
@@ -244,12 +219,12 @@ export default {
         };
       });
     },
-    players(){
-      if(this.found){
+    players() {
+      if (this.found) {
         console.log(this.found);
         console.log("players called!");
       }
-      if(localStorage.getItem("players")){
+      if (localStorage.getItem("players")) {
         console.log(localStorage.getItem("players"));
         return JSON.parse(localStorage.getItem("players"));
       }
@@ -271,13 +246,11 @@ export default {
   mounted() {
     console.log("enter search player component");
     console.log(this.players);
-
   },
 };
 </script>
 <style>
 #search-player-page-div {
-  /* background-color: rgba(215, 237, 241, 0.616); */
   top: 5px;
 }
 .team-position-div {

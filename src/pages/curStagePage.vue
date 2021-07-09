@@ -17,13 +17,11 @@
           :Fields="PastFields"
         ></gamesTableShow>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-// import gameEvents from "../components/gameEventsShow.vue";
 import gamesTableShow from "../components/GamesTableShow.vue";
 
 export default {
@@ -42,7 +40,6 @@ export default {
     };
   },
   components: {
-    // gameEvents,
     gamesTableShow,
   },
   methods: {
@@ -62,6 +59,7 @@ export default {
       this.setPastTable(data.pastGamesList);
     },
     setFutureTable(data) {
+      //set future games table
       this.FutureItems = data.map((g) => {
         return {
           game_id: g.game_id,
@@ -88,6 +86,7 @@ export default {
       ];
     },
     setPastTable(data) {
+      //set the table for the past games table
       this.PastItems = data.map((g) => {
         return {
           game_id: g.game_id,

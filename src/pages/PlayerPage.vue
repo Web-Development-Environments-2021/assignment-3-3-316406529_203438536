@@ -2,7 +2,6 @@
   <div class="container">
     <h1 align="center">{{ info.fullname }}</h1>
     <div id="player-info-div">
-      <!-- <img :src="image_path" /> -->
       <b-img fluid :src="info.image_path"></b-img>
       <div>
         <router-link :to="`/TeamPage/:${this.info.team_id}`">
@@ -33,8 +32,7 @@
 
 <script>
 import axios from "axios";
-// import { defineComponent } from '@vue/composition-api'
-// import PlayerShow from "../components/PlayerShow.vue";
+
 export default {
   name: "PlayerPageComponent",
   components: {},
@@ -42,20 +40,6 @@ export default {
     return {
       info: null,
     };
-    // return {
-    //   fullname: "Stephan Maigaard Andersen",
-    //   image_path:
-    //     "https://cdn.sportmonks.com/images/soccer/players/2/26722.png",
-    //   common_name: "S. Andersen",
-    //   position_id: 1,
-    //   nationality: "Denmark",
-    //   height: "190 cm",
-    //   birthcountry: "Denmark",
-    //   birthdate: "26/11/1981",
-    //   team_name: "København",
-    //   team_id: 85,
-    //   weight: "80 kg",
-    // };
   },
   computed: {
     addButton() {
@@ -81,6 +65,7 @@ export default {
   },
   methods: {
     async addPlayerToFavorites() {
+      //the function add player to user favorites players
       try {
         this.$root.toast(
           "Players Page",
@@ -118,6 +103,5 @@ export default {
   position: relative;
   left: 40%;
   top: 13%;
-  /* background-color: rgba(215, 237, 241, 0.616); */
 }
 </style>
