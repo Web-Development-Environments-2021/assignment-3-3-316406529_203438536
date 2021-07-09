@@ -1,14 +1,12 @@
-rt<template>
+<template>
   <div class="team-preview">
     <div :title="team_id" class="team-title"></div>
     <ul class="team-content">
       <li v-if="team_photo"><b-img :src="team_photo"></b-img></li>
-      <router-link :to="`/TeamPage/:${this.teamID}`">
-
-      <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ team_name }}</li> -->
+      <!-- <router-link :to="`/TeamPage/:${this.teamID}`"> -->
       <router-link :to="`/TeamPage/:${this.team_id}`">
-        Team Name: {{ team_name }}</router-link
-      >
+        Team Name: {{ team_name }}
+      </router-link>
       <li style="Bold">Coach name: {{ team_coach }}</li>
 
       <li v-if="founded">Team Founded Year: {{ founded }}</li>
@@ -28,7 +26,7 @@ export default {
     team_id: {
       type: Number,
       required: false,
-      default: 12345
+      default: 12345,
     },
     team_coach: {
       type: String,
