@@ -14,11 +14,23 @@
         <b-card-text>
           This site developed by <strong>Aviran Giat & Noam Kotlar</strong>.
           Here you can manage the superliga games, Follow players,teams and stay
-          tuned to the last news in league!⚽🥇
+          tuned to the last news in league!⚽🥇 Tools: Node,Express,Javascript,
+          SportMonks API, AzureDB
           <div>
             <!-- <br /> -->
-            <h5>Technical tools we used:</h5>
-            <h7>Node,Express,Javascript, SportMonks API, AzureDB</h7>
+            <h5>Last projects we worked on:</h5>
+            <a
+              href="https://web-development-environments-2021.github.io/203438536/"
+              target="_blank"
+              >Aviran's site</a
+            >
+
+            <a
+              href="https://web-development-environments-2021.github.io/Assignment2-203438536_316406529/"
+              target="_blank"
+            >
+              Packman game</a
+            >
             <br />
             <h7>If you have any questions, Please send us an email☺</h7>
             <a

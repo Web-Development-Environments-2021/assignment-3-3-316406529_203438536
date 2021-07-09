@@ -139,9 +139,9 @@ export default {
   min-height: 100vh;
   // background-color: #c0f1f3;
   background-image: url("./assets/background3.jpg");
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 100%;
-  background-attachment: fixed;
 }
 
 #nav {
