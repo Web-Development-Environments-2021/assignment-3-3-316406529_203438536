@@ -20,12 +20,13 @@
             <a
               href="https://web-development-environments-2021.github.io/203438536/"
               target="_blank"
-              >Aviran's site</a
-            >
+              >Aviran's site
+            </a>
             <a
               href="https://web-development-environments-2021.github.io/316406529/"
               target="_blank"
-              >Noam's site</a
+            >
+              Noam's site</a
             >
             <a
               href="https://web-development-environments-2021.github.io/Assignment2-203438536_316406529/"
