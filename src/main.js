@@ -86,26 +86,26 @@ Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 
 const shared_data = {
-  username: localStorage.username,
+  username: sessionStorage.username,
   AutoCompleteSearchData: localStorage.autoCompleteSearchData,
-  searchQuery: localStorage.searchQuery,
-  searchTeam: localStorage.searchTeam,
-  searchLocation: localStorage.searchLocation,
-  teams: localStorage.teams,
-  players: localStorage.players,
+  // searchQuery: localStorage.searchQuery,
+  // searchTeam: localStorage.searchTeam,
+  // searchLocation: localStorage.searchLocation,
+  // teams: JSON.parse(localStorage.getItem("teams")),
+  // players: JSON.parse(localStorage.getItem("players")),
   favGames: localStorage.favGames,
   favPlayers: localStorage.favPlayers,
   favTeams: localStorage.favTeams,
   LeagueGames: localStorage.LeagueGames,
   login(username) {
     console.log("log In main page");
-    localStorage.setItem("username", username);
+    sessionStorage.setItem("username", username);
     this.username = username;
-    this.favGames= [];
-    this.favPlayers=[];
-    this.favTeams= [];
-    this.players=[];
-    this.teams= [];
+    // this.favGames= [];
+    // this.favPlayers=[];
+    // this.favTeams= [];
+    // this.players=[];
+    // this.teams= [];
     this.searchQuery="";
     this.searchTeam="";
     this.searchLocation="";
@@ -120,23 +120,34 @@ const shared_data = {
     this.loggedIn = false;
     console.log("logout");
     this.username = undefined;
+    // localStorage.removeItem("searchQuery", JSON.stringify(searchQuery));
+    // localStorage.removeItem("searchTeam",  JSON.stringify(searchTeam));
+    // localStorage.removeItem("searchLocation",  JSON.stringify(searchLocation));
+    localStorage.removeItem("players");
+    localStorage.removeItem("teams");
+    this.favGames= [];
+    this.favPlayers=[];
+    this.favTeams= [];
+    localStorage.removeItem("favGames",  JSON.stringify(teams));
+    localStorage.removeItem("favPlayers",  JSON.stringify(teams));
+    localStorage.removeItem("favTeams",  JSON.stringify(teams));
   },
   setAutoCompleteSearchData(data) {
     localStorage.setItem("autoCompleteSearchData", data);
     this.AutoCompleteSearchData = data;
   },
-  setStoredData(searchQuery, searchTeam, searchLocation, players, teams) {
-    localStorage.setItem("searchQuery", searchQuery);
-    localStorage.setItem("searchTeam", searchTeam);
-    localStorage.setItem("searchLocation", searchLocation);
-    localStorage.setItem("players", players);
-    localStorage.setItem("teams", teams);
-    this.searchQuery = searchQuery;
-    this.searchTeam = searchTeam;
-    this.searchLocation = searchLocation;
-    this.players = players;
-    this.teams = teams;
-  },
+  // setStoredData(searchQuery, searchTeam, searchLocation, players, teams) {
+  //   // localStorage.setItem("searchQuery", searchQuery);
+  //   // localStorage.setItem("searchTeam", searchTeam);
+  //   // localStorage.setItem("searchLocation", searchLocation);
+  //   // localStorage.setItem("players",  JSON.stringify(players));
+  //   // localStorage.setItem("teams",  JSON.stringify(teams));
+  //   this.searchQuery = searchQuery;
+  //   this.searchTeam = searchTeam;
+  //   this.searchLocation = searchLocation;
+  //   // this.players = players;
+  //   this.teams = teams;
+  // },
   setItem(name, value) {
     localStorage.setItem(name, value);
   },
