@@ -15,7 +15,8 @@
       <li>time: {{ hour }}</li>
       <li>Game Field :{{ field }}</li>
     </ul>
-    <b-button v-if="addButton"
+    <b-button
+      v-if="addButton"
       size="sm"
       id="addFavoriteGame"
       pill
@@ -51,7 +52,8 @@ export default {
     },
     field: {
       type: String,
-      required: true,
+      required: false,
+      default: "Sydney Park",
     },
     home_team_id: {
       type: Number,
@@ -102,6 +104,12 @@ export default {
       }
     },
   },
+  created() {
+    if ((this.date.length > 15) & (this.hour.length > 15)) {
+      this.date = this.date.slice(0, 10);
+      this.hour = this.hour.slice(11, 19);
+    }
+  },
   mounted() {
     console.log("game preview mounted");
   },
@@ -125,7 +133,7 @@ div.game-preview {
 .game-preview .game-title {
   text-align: center;
   text-transform: uppercase;
-  color: rgb(111, 197, 157);
+  color: rgb(59, 73, 73);
 }
 
 .game-preview .game-content {

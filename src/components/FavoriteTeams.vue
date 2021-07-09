@@ -11,7 +11,6 @@
           :team_coach="t.coach_name"
           :team_photo="t.logo_path"
           :founded="t.founded"
-          :national_team="t.nationa_team"
           :county_name="county_name"
           :key="t.teamID"
         ></TeamPreview>

@@ -6,7 +6,8 @@
       <b-img fluid :src="info.image_path"></b-img>
       <div>
         <router-link :to="`/TeamPage/:${this.info.team_id}`">
-          Current Name: {{ info.team_name }}</router-link>
+          Current Team Name: {{ info.team_name }}</router-link
+        >
         <h6>Player position: {{ info.position_id }}</h6>
         <h6>Common name: {{ info.common_name }}</h6>
         <h6>Birthdate: {{ info.birthdate }}</h6>
@@ -16,7 +17,8 @@
         <h6 v-if="info.weight != null">Weight: {{ info.weight }}</h6>
       </div>
       <div>
-        <b-button v-if="addButton"
+        <b-button
+          v-if="addButton"
           size="md"
           id="addFavoritePlayer"
           pill
@@ -55,9 +57,9 @@ export default {
     //   weight: "80 kg",
     // };
   },
-  computed:{
-    addButton(){
-      if(this.$root.store.username){
+  computed: {
+    addButton() {
+      if (this.$root.store.username) {
         return true;
       }
       return false;
@@ -102,11 +104,7 @@ export default {
         );
       } catch (error) {
         console.log(console.error());
-        this.$root.toast(
-          "Players Page",
-          error.respond.massage,
-          "fail"
-        );
+        this.$root.toast("Players Page", error.respond.massage, "fail");
       }
     },
   },
