@@ -284,7 +284,8 @@ export default {
     },
     async Register() {
       try {
-        let image_url = await imageUpload();
+        // let image_url = await imageUpload();
+        console.log("enter register");
         const response = await this.axios.post(
           "http://localhost:3000/register",
           {
@@ -294,7 +295,7 @@ export default {
             country: this.form.country,
             password: this.form.password,
             email: this.form.email,
-            image_url: image_url,
+            picture: this.image_url,
           }
         );
         console.log(response);
