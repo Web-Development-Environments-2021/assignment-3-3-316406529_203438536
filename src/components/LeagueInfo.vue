@@ -14,7 +14,9 @@
           Season: {{ current_season_name }}
           <br />
           Stage: {{ current_stage_name }}
-          <b-button id="nextGame" @click="showNextGame()">Next Game Coming</b-button>
+          <b-button id="nextGame" @click="showNextGame()"
+            >Next Game Coming</b-button
+          >
 
           <br />
           <div id="next-game-div" v-if="pressedGame === true">
@@ -69,6 +71,7 @@ export default {
     },
   },
   async mounted() {
+    //send get request to the server to get the league info
     const response = await this.axios.get(
       "http://localhost:3000/league/LeagueData"
     );
@@ -76,12 +79,6 @@ export default {
     console.log(response.data[0]);
     this.setLeagueData(response.data[0]);
   },
-  // async mounted() {
-  //   const respond = await axios.get("http://127.0.0.1:3000/league/LeagueData");
-  //   this.leagueName = respond.date[0].league_name;
-  //   this.season = respond.data[0].current_season_name;
-  //   this.stage = respond.data[0].current_stage_name;
-  // },
 };
 </script>
 
@@ -93,11 +90,6 @@ export default {
   position: relative;
   top: 10%;
   left: -150px;
-  /* margin: 10px 10px; */
-
-  /* border-style: solid; */
-  /* border-radius: 10px;
-  border-width: 5px; */
   border-color: rgb(44, 89, 116);
 }
 
@@ -113,12 +105,9 @@ export default {
 }
 
 #leage-info-card {
-  /* background-color: rgba(215, 237, 241, 0.616); */
   top: 10px;
 }
-#infor-card-context {
-  /* background-color: rgba(215, 237, 241, 0.616); */
-}
+
 #league-img {
   height: 100px;
   width: 250px;
@@ -130,7 +119,7 @@ export default {
   width: 0;
   background-color: rgb(141, 207, 185);
 }
-#nextGame{
-  margin-top:15px ;
+#nextGame {
+  margin-top: 15px;
 }
 </style>

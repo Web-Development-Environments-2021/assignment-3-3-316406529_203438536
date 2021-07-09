@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- <h1 class="title">About page</h1> -->
     <div id="about-us-main-div" style="height:300px; weight:400px;">
       <b-card
         title="About us"
@@ -17,14 +16,17 @@
           tuned to the last news in league!⚽🥇 Tools: Node,Express,Javascript,
           SportMonks API, AzureDB
           <div>
-            <!-- <br /> -->
             <h5>Last projects we worked on:</h5>
             <a
               href="https://web-development-environments-2021.github.io/203438536/"
               target="_blank"
               >Aviran's site</a
             >
-
+            <a
+              href="https://web-development-environments-2021.github.io/316406529/"
+              target="_blank"
+              >Noam's site</a
+            >
             <a
               href="https://web-development-environments-2021.github.io/Assignment2-203438536_316406529/"
               target="_blank"
@@ -41,8 +43,6 @@
             >
           </div>
         </b-card-text>
-
-        <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
       </b-card>
     </div>
   </div>
@@ -56,12 +56,10 @@ div.container {
   position: fixed;
   top: -5px;
   height: 10%;
-  /* background-color: rgba(215, 237, 241, 0.61); */
 }
 #about-us-main-div {
   position: absolute;
   left: 28%;
   top: 13%;
-  /* background-color: rgba(215, 237, 241, 0.616); */
 }
 </style>

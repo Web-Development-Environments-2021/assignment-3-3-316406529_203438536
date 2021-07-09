@@ -9,7 +9,7 @@
         <li>First Name: {{ info.firstname }}</li>
         <li>Last Name: {{ info.lastname }}</li>
         <li>Birth country: {{ info.country }}</li>
-        <li>Email: {{ info.email }}</li>        
+        <li>Email: {{ info.email }}</li>
       </ul>
     </div>
   </div>
@@ -25,11 +25,12 @@ export default {
     };
   },
   async mounted() {
+    //send get request to server to get user details
     console.log("enter user page mounte!");
     this.axios.defaults.withCredentials = true;
     const username = this.$root.store.username;
     const result = await this.axios.get(
-        `http://localhost:3000/users/userDetails`
+      `http://localhost:3000/users/userDetails`
     );
     console.log(result);
     this.axios.defaults.withCredentials = false;

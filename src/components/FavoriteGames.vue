@@ -54,6 +54,8 @@ export default {
   },
   methods: {
     async updateGames() {
+      //the function send get request to the server to get the favorite games of user
+      //and store in shared data for reuse
       try {
         this.$root.toast(
           "Favorite Players",
@@ -69,6 +71,7 @@ export default {
         console.log(response);
         this.axios.defaults.withCredentials = false;
         const gamesData = response.data;
+        //store in shared data
         this.$root.store.favGames = [];
         this.$root.store.favGames.push(...gamesData);
         console.log(response);
@@ -83,8 +86,7 @@ export default {
   },
   mounted() {
     console.log("favorite games mounted");
-    // console.log(this.$root.store.favGames.length);
-    // console.log(this.$root.store.favGames);
+    //if not in shared data - set the favorite games and update user fav. games
     if (!this.$root.store.favGames || this.$root.store.favGames.length == 0) {
       this.$root.store.setItem("favGames", []);
       this.updateGames();

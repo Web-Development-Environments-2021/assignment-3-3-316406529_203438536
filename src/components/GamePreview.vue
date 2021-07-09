@@ -2,12 +2,10 @@
   <div class="game-preview">
     <div :title="id" class="game-title"><b>Game Id:</b> {{ id }}</div>
     <ul class="game-content">
-      <!-- <li @click="clickTeam(home_team_id)">Home team: {{ homeTeam }}</li> -->
       <router-link :to="`/TeamPage/:${this.home_team_id}`"
         >Home team: {{ homeTeam }}</router-link
       >
       <br />
-      <!-- <li @click="clickTeam(away_team_id)">Away team: {{ awayTeam }}</li> -->
       <router-link :to="`/TeamPage/:${this.away_team_id}`"
         >Away team: {{ awayTeam }}</router-link
       >
@@ -53,7 +51,7 @@ export default {
     field: {
       type: String,
       required: false,
-      default: "Sydney Park",
+      default: () => "Sydney Park",
     },
     home_team_id: {
       type: Number,
@@ -70,9 +68,12 @@ export default {
   },
   methods: {
     clickTeam(id) {
+      //move to team page when pressing team name using the router
       this.$router.push(`/TeamPage/:${id}`);
     },
     async addGamesToFavorites() {
+      //hundle the button add to favorite- add the game to the user favorite games
+      //send post request to the server to add the game to user fav. games
       try {
         this.$root.toast(
           "Games Page",
@@ -105,6 +106,7 @@ export default {
     },
   },
   created() {
+    //slicing the date and hour format to make it more readable
     if ((this.date.length > 15) & (this.hour.length > 15)) {
       this.date = this.date.slice(0, 10);
       this.hour = this.hour.slice(11, 19);

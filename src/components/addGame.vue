@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     async AddGame() {
+      //the function add game emit to the parent component the game adding
       this.$root.toast(
         "Add Game",
         "Adding game to system, please wait....",
@@ -82,7 +83,8 @@ export default {
         );
         console.log(response);
         this.axios.defaults.withCredentials = false;
-        this.$emit('dataChaneged');
+        //emit the game to parent component
+        this.$emit("dataChaneged");
         this.$root.toast("add Game", response.data, "success");
       } catch (err) {
         console.log(response);

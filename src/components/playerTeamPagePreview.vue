@@ -2,31 +2,12 @@
   <div class="player-in-team-preview">
     <div :title="PlayerID" class="player-in-team-title"></div>
     <ul class="player-in-team-content">
-      <!-- <li>Full Name: {{ fullname }}</li> -->
-      <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
-      <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
-      <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li> -->
-      <!-- <li @click="showPlayerCard()">
-        <b>{{ name }}</b>
-      </li> -->
       <router-link :to="`/PlayerPage/:${this.PlayerID}`">{{
         name
       }}</router-link>
       <li><b-img :src="image"></b-img></li>
-      <!-- <li>PositionID: {{ PositionID }}</li> -->
       <li>nationality: {{ nationality }}</li>
       <li>Birthdate: {{ birthdate }}</li>
-      <!-- <div v-if="showMore == true">
-        <li>birthdate: {{ birthdate }}</li>
-        <li v-if="birthplace != null">birthplace: {{ birthplace }}</li>
-        <li v-if="height != null">height: {{ height }}</li>
-        <li v-if="weight != null">weight: {{ weight }}</li>
-        <li>playerPosition: {{ playerPosition }}</li>
-        <li>common_name: {{ common_name }}</li>
-      </div> -->
-      <!-- <b-button id="b" @click="showMoreFunc()" variant="success"
-        >show More</b-button
-      > -->
     </ul>
   </div>
 </template>
@@ -42,7 +23,7 @@ export default {
     common_name: {
       type: String,
       required: false,
-      default: () => "no Data"
+      default: () => "no Data",
     },
     name: {
       type: String,
@@ -59,11 +40,13 @@ export default {
     image: {
       type: String,
       required: false,
-      default: () => "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhe.wikipedia.org%2Fwiki%2F%25D7%25A7%25D7%2595%25D7%2591%25D7%25A5%3ASoccerball.svg&psig=AOvVaw3cK-bXeqYjd14Q7pFVZy7u&ust=1625954416359000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCLDc7a3-1vECFQAAAAAdAAAAABAD"
+      default: () =>
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhe.wikipedia.org%2Fwiki%2F%25D7%25A7%25D7%2595%25D7%2591%25D7%25A5%3ASoccerball.svg&psig=AOvVaw3cK-bXeqYjd14Q7pFVZy7u&ust=1625954416359000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCLDc7a3-1vECFQAAAAAdAAAAABAD",
     },
   },
   methods: {
     showPlayerCard() {
+      //move to the player page after pressing player name
       console.log("click on player name");
       this.$router.push(`/PlayerPage/:${this.PlayerID}`);
     },

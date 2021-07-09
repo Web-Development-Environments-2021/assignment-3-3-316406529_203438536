@@ -42,7 +42,7 @@
               >⛹️‍♂️ My Players</b-dropdown-item
             >
             <b-dropdown-item @click="showUserDetails()"
-              >⛹️‍♂️ My Details</b-dropdown-item
+              >📸 My Details</b-dropdown-item
             >
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -53,15 +53,13 @@
 </template>
 
 <script>
-// import { component } from './components';
-// import { component } from 'vue/types/umd';
-
 import LoginPage from "./pages/LoginPage";
 
 export default {
   name: "App",
   methods: {
     async Logout() {
+      //send post request to the server to logout the current user and clear the user data the stored
       try {
         console.log("log out method");
         this.axios.defaults.withCredentials = true;
@@ -123,11 +121,10 @@ export default {
   },
   mounted() {
     this.setSearchAutoCompleteData(); //occur once when building the app. (keep in comment)
-    // this.$root.store.setStoredData("", "", "", [], []);
     this.$root.store.setItem("favGames", []);
-    localStorage.setItem("searchQuery", JSON.stringify(""))
-    localStorage.setItem("searchTeam", JSON.stringify(""))
-    localStorage.setItem("searchLocation", JSON.stringify(""))
+    localStorage.setItem("searchQuery", JSON.stringify(""));
+    localStorage.setItem("searchTeam", JSON.stringify(""));
+    localStorage.setItem("searchLocation", JSON.stringify(""));
   },
 };
 </script>
