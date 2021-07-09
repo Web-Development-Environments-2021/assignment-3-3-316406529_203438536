@@ -83,9 +83,9 @@ export default {
   },
   mounted() {
     console.log("favorite games mounted");
-    console.log(this.$root.store.favGames.length);
-    console.log(this.$root.store.favGames);
-    if (this.$root.store.favGames.length == 0) {
+    // console.log(this.$root.store.favGames.length);
+    // console.log(this.$root.store.favGames);
+    if (!this.$root.store.favGames || this.$root.store.favGames.length == 0) {
       this.$root.store.setItem("favGames", []);
       this.updateGames();
     } else {

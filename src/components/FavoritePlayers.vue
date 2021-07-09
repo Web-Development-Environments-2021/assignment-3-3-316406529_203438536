@@ -85,7 +85,7 @@ export default {
   },
   async mounted() {
     console.log("favorite players mounted");
-    if (this.$root.store.favPlayers.length == 0) {
+    if (this.$root.store.favPlayers || this.$root.store.favPlayers.length == 0) {
       await this.$root.store.setItem("favPlayers", []);
       this.updatePlayers();
     } else {
