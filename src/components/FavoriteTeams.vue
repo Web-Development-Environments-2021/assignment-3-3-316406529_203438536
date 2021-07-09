@@ -16,7 +16,7 @@
           :key="t.teamID"
         ></TeamPreview>
       </div>
-      <h1 v-else>There is No Favorite Players</h1>
+      <h3 v-else>There is No Favorite Players</h3>
     </div>
     <h1 v-else>Loading data, please wait</h1>
   </div>
