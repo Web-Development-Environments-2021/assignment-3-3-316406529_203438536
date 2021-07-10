@@ -1,11 +1,6 @@
 <template>
   <div class="container">
-    <div
-      :title="info.team_name"
-      class="team-title"
-      v-if="info.team_details[0].logo_path"
-    >
-    </div>
+    <div :title="info.team_name" class="team-title"></div>
     <ul class="team-content">
       <li>
         <b-button
@@ -19,7 +14,6 @@
         </b-button>
         <TeamPreview
           :county_name="info.team_details[0].county_name"
-          :national_team="info.team_details[0].national_team"
           :founded="info.team_details[0].founded"
           :team_photo="info.team_details[0].logo_path"
           :team_name="info.team_details[0].name"
@@ -124,7 +118,6 @@ export default {
           logo_path: "",
           county_name: "",
           founded: 0,
-          national_team: false,
           leagueID: 0,
           coach_name: "",
         },
@@ -192,7 +185,6 @@ export default {
     const d = await this.teamDetails(TeamIdParam);
     console.log(d);
     this.info = d.data;
-    // this.props.id = this.$route.params.id;
   },
 };
 </script>
