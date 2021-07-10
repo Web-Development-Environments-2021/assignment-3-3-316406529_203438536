@@ -83,7 +83,7 @@ export default {
     console.log("favorite players mounted");
     //if the user favorite players empty- set and update
     if (
-      this.$root.store.favPlayers ||
+      !this.$root.store.favPlayers ||
       this.$root.store.favPlayers.length == 0
     ) {
       await this.$root.store.setItem("favPlayers", []);
