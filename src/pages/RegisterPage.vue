@@ -164,14 +164,12 @@
         label="Image url:"
         label-for="image"
       >
-        <b-form-file
-          accept="image/*"
+        <b-form-input
           id="image"
           v-model="$v.form.image.$model"
           :state="validateState('image')"
-          placeholder="Choose a image url or drop it here..."
-          drop-placeholder="Drop here..."
-        ></b-form-file>
+          placeholder="Enter image url here..."
+        ></b-form-input>
       </b-form-group>
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
@@ -207,6 +205,7 @@ import {
   alpha,
   sameAs,
   email,
+  url,
 } from "vuelidate/lib/validators";
 
 export default {
@@ -266,7 +265,9 @@ export default {
         required,
         email,
       },
-      image: {},
+      image: {
+        url,
+      },
     },
   },
   mounted() {
