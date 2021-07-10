@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     teams() {
-      console.log(this.$root.store.favTeams[0].teamID);
+      // console.log(this.$root.store.favTeams[0].teamID);
       return this.$root.store.favTeams;
     },
     isLoading() {
@@ -71,7 +71,7 @@ export default {
   },
   mounted() {
     console.log("favorite teams mounted");
-    if (this.$root.store.favTeams.length == 0) {
+    if (!this.$root.store.favTeams || this.$root.store.favTeams.length == 0) {
       this.$root.store.setItem("favTeams", []);
       this.updateTeams();
     } else {
