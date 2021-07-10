@@ -3,7 +3,6 @@
     <div :title="team_id" class="team-title"></div>
     <ul class="team-content">
       <li v-if="team_photo"><b-img :src="team_photo"></b-img></li>
-      <!-- <router-link :to="`/TeamPage/:${this.teamID}`"> -->
       <router-link :to="`/TeamPage/:${this.team_id}`">
         Team Name: {{ team_name }}
       </router-link>

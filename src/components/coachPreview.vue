@@ -6,28 +6,10 @@
       >
     </div>
     <ul class="coach-content">
-      <li v-if="image != null">Image : {{ image }}</li>
+      <li v-if="image != null">
+        <b-img :src="image"></b-img>
+      </li>
       <li>Full Name: {{ coach_name }}</li>
-
-      <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
-      <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
-      <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li> -->
-
-      <!-- <li>Photo: {{ image }}</li> -->
-      <!-- <li>PositionID: {{ PositionID }}</li> -->
-      <!-- <li>nationality: {{ nationality }}</li>
-      <li>Birthdate: {{ birthdate }}</li> -->
-      <!-- <div v-if="showMore == true">
-        <li>birthdate: {{ birthdate }}</li>
-        <li v-if="birthplace != null">birthplace: {{ birthplace }}</li>
-        <li v-if="height != null">height: {{ height }}</li>
-        <li v-if="weight != null">weight: {{ weight }}</li>
-        <li>playerPosition: {{ playerPosition }}</li>
-        <li>common_name: {{ common_name }}</li>
-      </div> -->
-      <!-- <b-button id="b" @click="showMoreFunc()" variant="success"
-        >show More</b-button
-      > -->
     </ul>
   </div>
 </template>

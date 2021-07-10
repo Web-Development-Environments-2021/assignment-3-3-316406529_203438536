@@ -5,14 +5,11 @@
     </div>
     <ul class="player-content">
       <li><b-img :src="image_path"></b-img></li>
-      <!-- <li @click="ClickPlayer()">Full Name: {{ fullname }}</li> -->
       <router-link :to="`/PlayerPage/:${this.PlayerID}`"
         >Full name: {{ fullname }}</router-link
       >
       <br />
-      <!-- <li f :to="{name:'PlayerPage', params:{id:84658 }}"> Team Name: {{ teamName }}</li> -->
-      <!-- <b-click herf="PlayerPage/84658"> Team Name: {{ teamName }}</li> -->
-      <!-- <li @click="ClickTeam()" style="Bold">Team Name: {{ teamName }}</li> -->
+
       <router-link :to="`/TeamPage/:${this.teamID}`"
         >Team Name: {{ teamName }}</router-link
       >
@@ -44,7 +41,7 @@ export default {
     common_name: {
       type: String,
       required: false,
-      default: () => "Boaz"
+      default: () => "Boaz",
     },
     fullname: {
       type: String,
@@ -73,28 +70,28 @@ export default {
     birthplace: {
       type: String,
       required: false,
-      default: () => "no Data"
+      default: () => "no Data",
     },
     height: {
       type: String,
       required: false,
-      default: () => "no Data"
+      default: () => "no Data",
     },
     weight: {
       type: String,
       required: false,
-      default: () => "no Data"
+      default: () => "no Data",
     },
     playerPosition: {
       type: String,
       required: false,
-      default: () => "no Data"
+      default: () => "no Data",
     },
     image_path: {
       type: String,
       required: false,
-      default: () => "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhe.wikipedia.org%2Fwiki%2F%25D7%25A7%25D7%2595%25D7%2591%25D7%25A5%3ASoccerball.svg&psig=AOvVaw3cK-bXeqYjd14Q7pFVZy7u&ust=1625954416359000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCLDc7a3-1vECFQAAAAAdAAAAABAD"
-
+      default: () =>
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhe.wikipedia.org%2Fwiki%2F%25D7%25A7%25D7%2595%25D7%2591%25D7%25A5%3ASoccerball.svg&psig=AOvVaw3cK-bXeqYjd14Q7pFVZy7u&ust=1625954416359000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCLDc7a3-1vECFQAAAAAdAAAAABAD",
     },
   },
   data() {
