@@ -101,11 +101,4 @@ export default {
 .container {
   position: relative;
 }
-/* .container-fav-games {
-  background-color: rgba(215, 237, 241, 0.616);
-  position: relative;
-  width: 90%;
-  top: 10%;
-  left: 5%;
-} */
 </style>
