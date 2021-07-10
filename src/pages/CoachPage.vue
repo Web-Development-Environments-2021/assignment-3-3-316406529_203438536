@@ -4,9 +4,14 @@
     <div class="coach_preview">
       <ul>
         <li>
-          <b-img height="20px" width="20px" fluid :src="info.image_url"></b-img>
+          <b-img
+            fluid
+            height="150px"
+            width="150px"
+            :src="this.info.image_url"
+          ></b-img>
         </li>
-        <li>Current team: {{ info.currentTeamName }}</li>
+        <l>Current team: {{ info.currentTeamName }}</l>
         <li>Common name: {{ info.commonName }}</li>
         <li>Birthdate: {{ info.birthdate }}</li>
         <li>Birth country: {{ info.birthcountry }}</li>
@@ -35,6 +40,11 @@ export default {
     );
     console.log(result);
     this.info = result.data;
+    //set default image for coach
+    if (result.data.image_url === null) {
+      this.info.image_url =
+        "https://sc04.alicdn.com/kf/U821fdbb2bbdc42fa92cbb62d4b74d612h.jpg";
+    }
   },
 };
 </script>

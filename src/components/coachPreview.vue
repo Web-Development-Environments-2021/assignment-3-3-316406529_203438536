@@ -7,7 +7,7 @@
     </div>
     <ul class="coach-content">
       <li v-if="image != null">
-        <b-img :src="image"></b-img>
+        <b-img fluid height="150px" width="150px" :src="image"></b-img>
       </li>
       <li>Full Name: {{ coach_name }}</li>
     </ul>
