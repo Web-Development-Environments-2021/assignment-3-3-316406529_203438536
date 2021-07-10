@@ -2,7 +2,6 @@
   <div class="container" v-if="info">
     <h1>{{ info.lastname }}</h1>
     <div class="user_preview">
-      <b-img v-if="info.picture != null" fluid :src="info.picture"></b-img>
       <ul>
         <li>User ID: {{ info.user_id }}</li>
         <li>User Name: {{ info.username }}</li>

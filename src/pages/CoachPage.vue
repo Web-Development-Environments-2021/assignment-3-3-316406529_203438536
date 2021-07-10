@@ -2,8 +2,10 @@
   <div class="container">
     <h1>{{ info.fullname }}</h1>
     <div class="coach_preview">
-      <b-img v-if="info.image_url != null" fluid :src="info.image_url"></b-img>
       <ul>
+        <li>
+          <b-img height="20px" width="20px" fluid :src="info.image_url"></b-img>
+        </li>
         <li>Current team: {{ info.currentTeamName }}</li>
         <li>Common name: {{ info.commonName }}</li>
         <li>Birthdate: {{ info.birthdate }}</li>
