@@ -158,7 +158,7 @@
           Country is required
         </b-form-invalid-feedback>
       </b-form-group>
-      <!-- <b-form-group
+      <b-form-group
         id="input-group-image"
         label-cols-sm="3"
         label="Image url:"
@@ -172,7 +172,7 @@
           placeholder="Choose a image url or drop it here..."
           drop-placeholder="Drop here..."
         ></b-form-file>
-      </b-form-group> -->
+      </b-form-group>
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
